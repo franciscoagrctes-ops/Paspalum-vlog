@@ -2,15 +2,11 @@
 
 Hacé esto:
 
-1. Entrá al repositorio en GitHub.
-2. Andá a **Settings**.
-3. Menú izquierdo: **Pages**.
-4. En **Source**, elegí **Deploy from a branch**.
-5. En **Branch**, elegí **main** y carpeta **/(root)**.
-6. Tocá **Save**.
-7. Esperá 1 minuto.
-8. Volvé a **Settings → Pages**.
-9. Ahí aparece el link de tu página.
+1. Subí tu dibujito del personaje al repo.
+2. Renombralo exacto: `avatar.png`.
+3. La foto del fondo queda como `palmar.png`.
+4. Para publicar: **Settings → Pages → Deploy from a branch → main → /(root) → Save**.
+5. Esperá 1 minuto.
+6. El link aparece en **Settings → Pages**.
 
-Tu página es `index.html`.
-La foto de fondo es `palmar.png`.
+La página es `index.html`.
