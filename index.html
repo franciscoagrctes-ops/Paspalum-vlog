@@ -63,7 +63,7 @@
       text-transform: uppercase;
       font-size: .75rem;
       font-weight: 600;
-      color: var(--texto-mutated);
+      color: var(--texto-mutado);
     }
 
     /* Título modificado: Letra más chica y en color negro */
@@ -129,6 +129,62 @@
     .button:hover {
       background: #1e4d35;
     }
+
+    /* --- ESTILOS DEL AVATAR INTERACTIVO INTEGRADO --- */
+    .avatar-bot {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 20;
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      transform: translate(var(--look-x, 0), var(--look-y, 0));
+      transition: transform .12s ease-out;
+    }
+
+    .avatar-bot:active {
+      cursor: grabbing;
+    }
+
+    .avatar-bot img,
+    .avatar-fallback {
+      width: clamp(96px, 14vw, 160px);
+      height: clamp(96px, 14vw, 160px);
+      object-fit: contain;
+      filter: drop-shadow(0 18px 24px rgba(0, 0, 0, .35));
+      animation: saludar 1.8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .avatar-fallback {
+      display: none;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(255, 247, 223, .85);
+      font-size: 4rem;
+    }
+
+    .avatar-bubble {
+      max-width: 190px;
+      padding: 10px 12px;
+      border-radius: 18px 18px 4px 18px;
+      color: var(--verde-oscuro);
+      background: rgba(255, 247, 223, .94);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, .18);
+      font-size: .9rem;
+      font-weight: 800;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    @keyframes saludar {
+      from { rotate: -2deg; }
+      to { rotate: 4deg; }
+    }
   </style>
 </head>
 <body>
@@ -158,6 +214,61 @@
     </section>
 
   </main>
+
+  <!-- Elemento del Avatar Bot recuperado -->
+  <div class="avatar-bot" id="avatarBot" aria-label="Avatar de Paspalum saludando">
+    <div class="avatar-bubble">¡Hola! Soy Paspalum 🌱</div>
+    <img src="avatar.png" alt="Avatar de Paspalum" id="avatarImg">
+    <div class="avatar-fallback" id="avatarFallback">🌿</div>
+  </div>
+
+  <!-- Lógica del Avatar recuperada y funcional -->
+  <script>
+    const avatar = document.querySelector('#avatarBot');
+    const avatarImg = document.querySelector('#avatarImg');
+    const fallback = document.querySelector('#avatarFallback');
+    let dragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    avatarImg.addEventListener('error', () => {
+      avatarImg.style.display = 'none';
+      fallback.style.display = 'grid';
+    });
+
+    document.addEventListener('pointermove', (event) => {
+      if (dragging) {
+        avatar.style.left = `${event.clientX - offsetX}px`;
+        avatar.style.top = `${event.clientY - offsetY}px`;
+        avatar.style.right = 'auto';
+        avatar.style.bottom = 'auto';
+      }
+
+      const box = avatar.getBoundingClientRect();
+      const centerX = box.left + box.width / 2;
+      const centerY = box.top + box.height / 2;
+      const lookX = Math.max(-10, Math.min(10, (event.clientX - centerX) / 28));
+      const lookY = Math.max(-8, Math.min(8, (event.clientY - centerY) / 36));
+      avatar.style.setProperty('--look-x', `${lookX}px`);
+      avatar.style.setProperty('--look-y', `${lookY}px`);
+    });
+
+    avatar.addEventListener('pointerdown', (event) => {
+      dragging = true;
+      const box = avatar.getBoundingClientRect();
+      offsetX = event.clientX - box.left;
+      offsetY = event.clientY - box.top;
+      avatar.setPointerCapture(event.pointerId);
+    });
+
+    avatar.addEventListener('pointerup', () => {
+      dragging = false;
+    });
+
+    avatar.addEventListener('pointercancel', () => {
+      dragging = false;
+    });
+  </script>
 
 </body>
 </html>
