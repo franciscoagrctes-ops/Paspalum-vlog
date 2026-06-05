@@ -1,8 +1,16 @@
-# Mapas y especies
+# Dónde veo la página
 
-Pasos cortos:
+Hacé esto:
 
-1. La foto ya está bien subida como `palmar.png`.
-2. La página usa esa foto de fondo.
-3. Para cambiar textos: editá `index.html`.
-4. Para publicar: Settings → Pages → Deploy from branch → `main` → Save.
+1. Entrá al repositorio en GitHub.
+2. Andá a **Settings**.
+3. Menú izquierdo: **Pages**.
+4. En **Source**, elegí **Deploy from a branch**.
+5. En **Branch**, elegí **main** y carpeta **/(root)**.
+6. Tocá **Save**.
+7. Esperá 1 minuto.
+8. Volvé a **Settings → Pages**.
+9. Ahí aparece el link de tu página.
+
+Tu página es `index.html`.
+La foto de fondo es `palmar.png`.
