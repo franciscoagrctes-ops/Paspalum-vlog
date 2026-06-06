@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mapas de Distribución - Paspalum</title>
+  <style>
+    :root {
+      --verde: #2e6930;
+      --verde-oscuro: #143323;
+      --blanco-cuadro: rgba(255, 255, 255, 0.85);
+      --texto-oscuro: #1a1a1a;
+      --texto-mutado: #4a4a4a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      /* Mantiene la misma coherencia visual de fondo */
+      background:
+        linear-gradient(90deg, rgba(20, 51, 35, .4), rgba(20, 51, 35, .2)),
+        url("palmar.png") center / cover fixed,
+        linear-gradient(135deg, #39234a, #e46f3d 45%, #f5bd58);
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .contenedor-principal {
+      max-width: 1000px;
+      width: 100%;
+      background: var(--blanco-cuadro);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 32px;
+      padding: 48px;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.15);
+      color: var(--texto-oscuro);
+    }
+
+    .header-seccion {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+    }
+
+    h1 em {
+      font-style: italic;
+    }
+
+    .btn-volver {
+      display: inline-flex;
+      padding: 10px 20px;
+      border-radius: 999px;
+      color: var(--texto-oscuro);
+      background: rgba(0, 0, 0, 0.06);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-volver:hover {
+      background: rgba(0, 0, 0, 0.1);
+      transform: translateX(-2px);
+    }
+
+    /* Caja contenedora donde irá el mapa o visor interactivo posteriormente */
+    .visor-mapa {
+      background: rgba(255, 255, 255, 0.5);
+      border: 2px dashed rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      min-height: 400px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 40px;
+      color: var(--texto-mutado);
+    }
+
+    .visor-mapa em {
+      font-style: italic;
+    }
+
+    /* --- AVATAR INTERACTIVO --- */
+    .avatar-bot {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 20;
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+      transform: translate(var(--look-x, 0), var(--look-y, 0));
+      transition: transform .12s ease-out;
+    }
+
+    .avatar-bot:active {
+      cursor: grabbing;
+    }
+
+    .avatar-bot img,
+    .avatar-fallback {
+      width: clamp(120px, 18vw, 220px);
+      height: clamp(120px, 18vw, 220px);
+      object-fit: contain;
+      filter: drop-shadow(0 18px 24px rgba(0, 0, 0, .35));
+      animation: saludar 1.8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .avatar-fallback {
+      display: none;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(255, 247, 223, .85);
+      font-size: 5.5rem;
+    }
+
+    .avatar-bubble {
+      max-width: 190px;
+      padding: 10px 12px;
+      border-radius: 18px 18px 4px 18px;
+      color: var(--verde-oscuro);
+      background: rgba(255, 247, 223, .94);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, .18);
+      font-size: .9rem;
+      font-weight: 800;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    @keyframes saludar {
+      from { rotate: -2deg; }
+      to { rotate: 4deg; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="contenedor-principal">
+    
+    <header class="header-seccion">
+      <h1>Distribution Maps</h1>
+      <a href="index.html" class="btn-volver">← Volver al Inicio</a>
+    </header>
+
+    <!-- Espacio preparado para renderizar tus mapas próximamente -->
+    <section class="visor-mapa">
+      <div>
+        <p style="font-size: 1.5rem; margin-bottom: 10px;">📍 Próximamente: Visor de mapas</p>
+        <p>Aquí se desplegarán las coordenadas de distribución geográfica para los géneros de <em>Paspalum</em>.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Se conserva el simpático robot asistente en la nueva vista interna -->
+  <div class="avatar-bot" id="avatarBot">
+    <div class="avatar-bubble">¡Estás en Mapas! 🗺️</div>
+    <img src="avatar.png" alt="Avatar de Paspalum" id="avatarImg">
+    <div class="avatar-fallback" id="avatarFallback">🌿</div>
+  </div>
+
+  <script>
+    const avatar = document.querySelector('#avatarBot');
+    const avatarImg = document.querySelector('#avatarImg');
+    const fallback = document.querySelector('#avatarFallback');
+    let dragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    avatarImg.addEventListener('error', () => {
+      avatarImg.style.display = 'none';
+      fallback.style.display = 'grid';
+    });
+
+    document.addEventListener('pointermove', (event) => {
+      if (dragging) {
+        avatar.style.left = `${event.clientX - offsetX}px`;
+        avatar.style.top = `${event.clientY - offsetY}px`;
+        avatar.style.right = 'auto';
+        avatar.style.bottom = 'auto';
+      }
+
+      const box = avatar.getBoundingClientRect();
+      const centerX = box.left + box.width / 2;
+      const centerY = box.top + box.height / 2;
+      const lookX = Math.max(-10, Math.min(10, (event.clientX - centerX) / 28));
+      const lookY = Math.max(-8, Math.min(8, (event.clientY - centerY) / 36));
+      avatar.style.setProperty('--look-x', `${lookX}px`);
+      avatar.style.setProperty('--look-y', `${lookY}px`);
+    });
+
+    avatar.addEventListener('pointerdown', (event) => {
+      dragging = true;
+      const box = avatar.getBoundingClientRect();
+      offsetX = event.clientX - box.left;
+      offsetY = event.clientY - box.top;
+      avatar.setPointerCapture(event.pointerId);
+    });
+
+    avatar.addEventListener('pointerup', () => {
+      dragging = false;
+    });
+
+    avatar.addEventListener('pointercancel', () => {
+      dragging = false;
+    });
+  </script>
+
+</body>
+</html>
