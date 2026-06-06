@@ -76,6 +76,10 @@
       font-weight: 800;
     }
 
+    h1 em, .intro em {
+      font-style: italic;
+    }
+
     /* Subtítulos e intros en gris oscuro/negro */
     .intro {
       max-width: 660px;
@@ -97,6 +101,18 @@
       border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    /* Efecto de respuesta visual al pasar el mouse por encima en tarjetas interactivas */
+    .card-link:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      cursor: pointer;
     }
 
     .card strong {
@@ -111,6 +127,10 @@
       color: var(--texto-mutado);
       font-size: 0.95rem;
       line-height: 1.4;
+    }
+
+    .card p em {
+      font-style: italic;
     }
 
     .button {
@@ -193,21 +213,26 @@
   <main class="contenedor-principal">
     
     <section class="hero" aria-label="Presentación">
-      <span class="tag">Paspalum vlog</span>
-      <h1>Discover the biogeography, environmental preferences, and agronomic characteristics of Paspalum species.</h1>
+      <span class="tag"><em>Paspalum</em> vlog</span>
+      <h1>Discover the biogeography, environmental preferences, and agronomic characteristics of <em>Paspalum</em> species.</h1>
       <p class="intro">Explore occurrence records, distribution maps and photographs.</p>
       <a class="button" href="#contenido">View content</a>
     </section>
 
     <section id="contenido" class="cards" aria-label="Contenido del sitio">
-      <article class="card">
-        <strong>Maps</strong>
-        <p>Public maps.</p>
-      </article>
+      <!-- Se convierte la tarjeta en un enlace cliqueable con estilos específicos -->
+      <a href="mapas.html" class="card card-link">
+        <article>
+          <strong>Maps</strong>
+          <p>Public maps.</p>
+        </article>
+      </a>
+      
       <article class="card">
         <strong>Species</strong>
-        <p>P. notatum, P. guenoarum and P. simplex.</p>
+        <p><em>P. notatum</em>, <em>P. guenoarum</em> and <em>P. simplex</em>.</p>
       </article>
+      
       <article class="card">
         <strong>Photographs</strong>
         <p>View new photographs.</p>
@@ -217,7 +242,7 @@
   </main>
 
   <div class="avatar-bot" id="avatarBot" aria-label="Avatar de Paspalum saludando">
-    <div class="avatar-bubble">¡Hola! Soy Paspalum 🌱</div>
+    <div class="avatar-bubble">¡Hola! Soy <em>Paspalum</em> 🌱</div>
     <img src="avatar.png" alt="Avatar de Paspalum" id="avatarImg">
     <div class="avatar-fallback" id="avatarFallback">🌿</div>
   </div>
