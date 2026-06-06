@@ -6,12 +6,17 @@
   <title>Biogeografía de Paspalum</title>
   <meta name="description" content="Explora mapas y características de especies de Paspalum.">
   <style>
+    /* ==========================================================================
+       VARIABLES Y REGLAS BASE (Cyber-Botánica)
+       ========================================================================== */
     :root {
-      --verde: #2e6930;
-      --verde-oscuro: #143323;
-      --blanco-translucido: rgba(255, 255, 255, 0.65);
-      --texto-oscuro: #1a1a1a;
-      --texto-mutado: #4a4a4a;
+      --neon-verde: #00ff66;
+      --neon-oro: #ffb700;
+      --cyber-oscuro: #091a10;
+      --blanco-holografico: rgba(255, 255, 255, 0.05);
+      --borde-holografico: rgba(0, 255, 102, 0.2);
+      --texto-lucido: #f0fff5;
+      --texto-mutado: #a3c2b0;
     }
 
     * {
@@ -20,183 +25,252 @@
 
     html {
       scroll-behavior: smooth;
+      background-color: var(--cyber-oscuro);
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+      /* Fondo cyber fusionado con palmar.png */
       background:
-        linear-gradient(90deg, rgba(20, 51, 35, .3), rgba(20, 51, 35, .1)),
-        url("palmar.png") center / cover fixed,
-        linear-gradient(135deg, #39234a, #e46f3d 45%, #f5bd58);
+        radial-gradient(circle at 50% 30%, rgba(0, 255, 102, 0.08), transparent 60%),
+        linear-gradient(180deg, rgba(9, 26, 16, 0.55), rgba(5, 13, 8, 0.85)),
+        url("palmar.png") center / cover fixed;
+      color: var(--texto-lucido);
+      font-size: 14px;
       display: grid;
       align-items: center;
       justify-content: center;
       padding: 30px 15px;
-      font-size: 14px;
+      overflow-x: hidden;
     }
 
-    /* Mismo diseño adaptado de tu app/globals.css */
+    /* ==========================================================================
+       CONTENEDOR PRINCIPAL: Laboratorio Cuántico / Interfaz Holográfica
+       ========================================================================== */
     .contenedor-principal {
-      max-width: 1400px;
-      width: calc(100% - 30px);
-      margin: 30px auto;
-      background: var(--blanco-translucido);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border-radius: 24px;
-      padding: 65px 80px;
-      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.1);
-      color: var(--texto-oscuro);
+      max-width: 1450px;
+      width: calc(100% - 40px);
+      margin: 40px auto;
+      
+      /* Glassmorphism de alta densidad para fundirse con el palmar */
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(0, 255, 102, 0.02));
+      backdrop-filter: blur(35px) saturate(160%);
+      -webkit-backdrop-filter: blur(35px) saturate(160%);
+      
+      border: 1px solid var(--borde-holografico);
+      border-radius: 30px;
+      padding: 70px 90px;
+      box-shadow: 
+        0 0 50px rgba(0, 0, 0, 0.6),
+        inset 0 0 30px rgba(0, 255, 102, 0.05);
+      position: relative;
+    }
+
+    /* Esquina militar/tecnológica */
+    .contenedor-principal::before {
+      content: "";
+      position: absolute;
+      top: -1px; left: -1px; width: 30px; height: 30px;
+      border-top: 3px solid var(--neon-verde);
+      border-left: 3px solid var(--neon-verde);
+      border-radius: 30px 0 0 0;
     }
 
     .hero {
       display: grid;
-      gap: 14px;
-      margin-bottom: 45px;
+      gap: 16px;
+      margin-bottom: 55px;
     }
 
+    /* CHIP DE NOTIFICACIÓN DEL NÚCLEO */
     .tag {
       width: fit-content;
-      padding: 4px 10px;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.03);
-      font-size: .65rem;
-      font-weight: 500;
-      color: var(--texto-mutado);
-      text-transform: lowercase;
+      padding: 5px 14px;
+      border: 1px solid var(--neon-verde);
+      border-radius: 6px;
+      background: rgba(0, 255, 102, 0.06);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--neon-verde);
+      text-transform: lowercase; /* Forzar minúsculas */
+      letter-spacing: 0.05em;
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.15);
     }
-    .tag em { font-style: italic; }
+    .tag em { font-style: normal; text-shadow: 0 0 5px var(--neon-verde); }
 
+    /* TÍTULO CON MÁSCARA DE BRILLO */
     h1 {
-      max-width: 900px;
+      max-width: 950px;
       margin: 0;
-      font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
       line-height: 1.2;
-      color: var(--texto-oscuro);
-      font-weight: 800;
-      letter-spacing: -0.01em;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      background: linear-gradient(120deg, #ffffff 40%, var(--neon-verde) 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    h1 em { font-style: italic; }
+    h1 em {
+      font-style: italic;
+      text-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
+    }
 
     .intro {
-      max-width: 700px;
+      max-width: 750px;
       margin: 0;
       color: var(--texto-mutado);
-      font-size: 0.95rem;
-      line-height: 1.5;
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
-    /* --- NUEVOS ESTILOS DE ESTADÍSTICAS (Mapeando tu globals.css) --- */
+    /* BOTÓN CUÁNTICO */
+    .button {
+      display: inline-flex;
+      width: fit-content;
+      margin-top: 12px;
+      padding: 12px 26px;
+      border-radius: 12px;
+      color: #000000;
+      background: var(--neon-verde);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      box-shadow: 0 0 20px rgba(0, 255, 102, 0.3);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      border: 1px solid transparent;
+    }
+    .button:hover {
+      background: transparent;
+      color: var(--neon-verde);
+      border-color: var(--neon-verde);
+      box-shadow: 0 0 35px rgba(0, 255, 102, 0.6);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       STATS: Módulos de Datos Inteligentes con Escaneo Láser
+       ========================================================================== */
     .stats {
       display: flex;
       flex-wrap: wrap;
-      gap: 22px;
-      margin-top: 30px;
+      gap: 25px;
+      margin-top: 35px;
     }
 
     .stat {
-      min-width: 120px;
-      padding: 14px 18px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.35);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      min-width: 140px;
+      padding: 18px 22px;
+      border-radius: 16px;
+      background: rgba(9, 26, 16, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 255, 102, 0.15);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .stat:hover {
+      border-color: var(--neon-verde);
+      box-shadow: 0 0 20px rgba(0, 255, 102, 0.15);
+      transform: scale(1.03);
+    }
+    .stat::after {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-verde), transparent);
+      animation: escaneo-laser 3s infinite linear;
     }
 
     .stat span {
       display: block;
-      font-size: 1.2rem;
-      margin-bottom: 4px;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
     }
-
     .stat strong {
       display: block;
-      font-size: 1.2rem;
-      color: var(--verde-oscuro);
+      font-size: 1.4rem;
+      color: #ffffff;
+      font-family: monospace;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     }
-
     .stat small {
-      color: #4a4a4a;
-      display: block;
+      color: var(--texto-mutado);
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      font-weight: 600;
     }
 
-    /* --- TARJETAS CONTENEDORAS --- */
+    /* ==========================================================================
+       CARDS: Nodos de Red Neuronal
+       ========================================================================== */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+      gap: 26px;
     }
 
     .card {
-      padding: 22px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.55);
+      padding: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.02);
       text-decoration: none;
       color: inherit;
       display: block;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-
+    .card-link::before {
+      content: "LINK //";
+      position: absolute;
+      top: 12px; right: 16px;
+      font-size: 0.6rem;
+      color: var(--neon-verde);
+      opacity: 0.3;
+      font-family: monospace;
+    }
     .card-link:hover {
-      transform: translateY(-4px);
-      background: rgba(255, 255, 255, 0.85);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+      transform: translateY(-5px) scale(1.01);
+      background: rgba(0, 255, 102, 0.03);
+      border-color: var(--neon-verde);
+      box-shadow: 
+        0 15px 30px rgba(0, 0, 0, 0.4),
+        0 0 20px rgba(0, 255, 102, 0.1);
     }
 
     .card strong {
       display: block;
-      color: var(--verde);
-      font-size: 1rem;
-      margin-bottom: 6px;
+      color: var(--neon-verde);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
     }
-
     .card p {
       margin: 0;
       color: var(--texto-mutado);
-      font-size: 0.85rem;
-      line-height: 1.4;
+      font-size: 0.88rem;
+      line-height: 1.5;
     }
-    .card p em { font-style: italic; }
+    .card p em { font-style: italic; color: #ffffff; }
 
-    .button {
-      display: inline-flex;
-      width: fit-content;
-      margin-top: 8px;
-      padding: 10px 20px;
-      border-radius: 999px;
-      color: white;
-      background: var(--verde-oscuro);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.85rem;
-      transition: background 0.2s ease;
-    }
-    .button:hover { background: #1e4d35; }
-
-    /* --- MEDIA QUERIES (Responsividad idéntica a tu globals.css) --- */
-    @media (max-width: 768px) {
-      .contenedor-principal {
-        padding: 42px 24px;
-      }
-      .cards {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* --- SE CONSERVA EL ASISTENTE INTERACTIVO AVATAR --- */
+    /* ==========================================================================
+       AVATAR: ASISTENTE INTERACTIVO HOLOGRÁFICO
+       ========================================================================== */
     .avatar-bot {
       position: fixed;
-      right: 25px;
-      bottom: 25px;
-      z-index: 20;
+      right: 35px;
+      bottom: 35px;
+      z-index: 100;
       display: grid;
       justify-items: center;
-      gap: 6px;
+      gap: 10px;
       cursor: grab;
       user-select: none;
       touch-action: none;
@@ -204,32 +278,73 @@
       transition: transform .1s ease-out;
     }
     .avatar-bot:active { cursor: grabbing; }
+    .avatar-bot::before {
+      content: "";
+      position: absolute;
+      width: 140px; height: 140px;
+      bottom: 20px;
+      background: radial-gradient(circle, rgba(0, 255, 102, 0.25) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: -1;
+      animation: pulso-cuantico 2.5s infinite alternate ease-in-out;
+      pointer-events: none;
+    }
 
     .avatar-bot img {
-      width: clamp(100px, 14vw, 160px);
-      height: clamp(100px, 14vw, 160px);
+      width: clamp(110px, 15vw, 170px);
+      height: clamp(110px, 15vw, 170px);
       object-fit: contain;
-      filter: drop-shadow(0 15px 20px rgba(0, 0, 0, .25));
-      animation: saludar 2s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 15px rgba(0, 255, 102, 0.4)) saturate(130%) contrast(110%);
+      animation: flotar-holograma 3.5s ease-in-out infinite alternate;
       pointer-events: none;
     }
 
     .avatar-bubble {
-      max-width: 170px;
-      padding: 8px 12px;
-      border-radius: 16px 16px 4px 16px;
-      color: var(--verde-oscuro);
-      background: rgba(255, 247, 223, .9);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+      max-width: 190px;
+      padding: 10px 14px;
+      border-radius: 12px 12px 4px 12px;
+      color: #ffffff;
+      background: rgba(9, 26, 16, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--neon-verde);
+      box-shadow: 0 10px 30px rgba(0, 255, 102, 0.2);
       font-size: .8rem;
       font-weight: 700;
+      font-family: monospace;
       text-align: center;
       pointer-events: none;
     }
+    .avatar-bubble::before {
+      content: "AI_SYSTEM // ";
+      display: block;
+      font-size: 0.55rem;
+      color: var(--neon-verde);
+      margin-bottom: 4px;
+      letter-spacing: 0.1em;
+    }
 
-    @keyframes saludar {
-      from { rotate: -1.5deg; }
-      to { rotate: 3.5deg; }
+    /* ==========================================================================
+       ANIMACIONES
+       ========================================================================== */
+    @keyframes flotar-holograma {
+      0% { transform: translateY(0px) rotate(-1deg); filter: drop-shadow(0 0 10px rgba(0, 255, 102, 0.3)) saturate(120%); }
+      50% { filter: drop-shadow(0 0 18px rgba(0, 255, 102, 0.5)) saturate(150%) hue-rotate(5deg); }
+      100% { transform: translateY(-12px) rotate(2deg); filter: drop-shadow(0 0 25px rgba(0, 255, 102, 0.4)) saturate(130%); }
+    }
+    @keyframes pulso-cuantico {
+      from { transform: scale(0.8); opacity: 0.4; }
+      to { transform: scale(1.3); opacity: 0.8; }
+    }
+    @keyframes escaneo-laser {
+      0% { left: -100%; }
+      50%, 100% { left: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .contenedor-principal { padding: 45px 25px; width: calc(100% - 20px); margin: 20px auto; }
+      .cards { grid-template-columns: 1fr; }
+      .avatar-bot { right: 20px; bottom: 20px; }
     }
   </style>
 </head>
@@ -244,7 +359,6 @@
       
       <a class="button" href="#contenido">View content</a>
 
-      <!-- NUEVA SECCIÓN: Mapeada dinámicamente de tu array 'stats' de page.tsx -->
       <div class="stats" aria-label="Scientific database statistics">
         <div class="stat">
           <span>📍</span>
@@ -264,66 +378,4 @@
       </div>
     </section>
 
-    <section id="contenido" class="cards" aria-label="Contenido del sitio">
-      <!-- Cambiado el enlace al ruteo de tu Next.js (/catalog) -->
-      <a href="/catalog" class="card card-link">
-        <article>
-          <strong>Maps</strong>
-          <p>Public maps.</p>
-        </article>
-      </a>
-      
-      <article class="card">
-        <strong>Species</strong>
-        <p><em>P. notatum</em>, <em>P. guenoarum</em> and <em>P. simplex</em>.</p>
-      </article>
-      
-      <article class="card">
-        <strong>Photographs</strong>
-        <p>View new photographs.</p>
-      </article>
-    </section>
-
-  </main>
-
-  <div class="avatar-bot" id="avatarBot">
-    <div class="avatar-bubble">¡Hola! Soy <em>Paspalum</em> 🌱</div>
-    <img src="avatar.png" alt="Avatar interactivo" id="avatarImg">
-  </div>
-
-  <script>
-    const avatar = document.querySelector('#avatarBot');
-    let dragging = false;
-    let offsetX = 0;
-    let offsetY = 0;
-
-    document.addEventListener('pointermove', (event) => {
-      if (dragging) {
-        avatar.style.left = `${event.clientX - offsetX}px`;
-        avatar.style.top = `${event.clientY - offsetY}px`;
-        avatar.style.right = 'auto';
-        avatar.style.bottom = 'auto';
-      }
-      const box = avatar.getBoundingClientRect();
-      const centerX = box.left + box.width / 2;
-      const centerY = box.top + box.height / 2;
-      const lookX = Math.max(-10, Math.min(10, (event.clientX - centerX) / 30));
-      const lookY = Math.max(-8, Math.min(8, (event.clientY - centerY) / 38));
-      avatar.style.setProperty('--look-x', `${lookX}px`);
-      avatar.style.setProperty('--look-y', `${lookY}px`);
-    });
-
-    avatar.addEventListener('pointerdown', (event) => {
-      dragging = true;
-      const box = avatar.getBoundingClientRect();
-      offsetX = event.clientX - box.left;
-      offsetY = event.clientY - box.top;
-      avatar.setPointerCapture(event.pointerId);
-    });
-
-    avatar.addEventListener('pointerup', () => dragging = false);
-    avatar.addEventListener('pointercancel', () => dragging = false);
-  </script>
-
-</body>
-</html>
+    <section id="contenido" class
