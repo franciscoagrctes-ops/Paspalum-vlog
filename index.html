@@ -9,13 +9,17 @@
     :root {
       --verde: #2e6930;
       --verde-oscuro: #143323;
-      --blanco-translucido: rgba(255, 255, 255, 0.65); /* Más translúcido para fundirse mejor */
+      --blanco-translucido: rgba(255, 255, 255, 0.65);
       --texto-oscuro: #1a1a1a;
       --texto-mutado: #4a4a4a;
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -30,18 +34,19 @@
       align-items: center;
       justify-content: center;
       padding: 30px 15px;
-      font-size: 14px; /* Letra general un punto más chica */
+      font-size: 14px;
     }
 
-    /* CUADRO MUCHO MÁS ANCHO Y CON DIFUMINADO ULTRA SUAVE HACIA EL PALMAR */
+    /* Mismo diseño adaptado de tu app/globals.css */
     .contenedor-principal {
-      max-width: 1400px; /* Súper ancho, cubre mucho más espacio de la pantalla */
-      width: 100%;
+      max-width: 1400px;
+      width: calc(100% - 30px);
+      margin: 30px auto;
       background: var(--blanco-translucido);
-      backdrop-filter: blur(25px); /* Difuminado más intenso (efecto esmerilado avanzado) */
+      backdrop-filter: blur(25px);
       -webkit-backdrop-filter: blur(25px);
       border-radius: 24px;
-      padding: 65px 80px; /* Más ancho hacia los costados internos */
+      padding: 65px 80px;
       box-shadow: 0 30px 70px rgba(0, 0, 0, 0.1);
       color: var(--texto-oscuro);
     }
@@ -52,25 +57,23 @@
       margin-bottom: 45px;
     }
 
-    /* Tag corregido: minúsculas y diseño refinado */
     .tag {
       width: fit-content;
       padding: 4px 10px;
       border: 1px solid rgba(0, 0, 0, 0.08);
       border-radius: 999px;
       background: rgba(0, 0, 0, 0.03);
-      font-size: .65rem; /* Más chica */
+      font-size: .65rem;
       font-weight: 500;
       color: var(--texto-mutado);
       text-transform: lowercase;
     }
     .tag em { font-style: italic; }
 
-    /* Título principal MÁS CHICO */
     h1 {
       max-width: 900px;
       margin: 0;
-      font-size: clamp(1.6rem, 3.5vw, 2.3rem); /* Tamaño reducido y más prudente */
+      font-size: clamp(1.6rem, 3.5vw, 2.3rem);
       line-height: 1.2;
       color: var(--texto-oscuro);
       font-weight: 800;
@@ -78,15 +81,50 @@
     }
     h1 em { font-style: italic; }
 
-    /* Introducción más chica */
     .intro {
       max-width: 700px;
       margin: 0;
       color: var(--texto-mutado);
-      font-size: 0.95rem; /* Más chica */
+      font-size: 0.95rem;
       line-height: 1.5;
     }
 
+    /* --- NUEVOS ESTILOS DE ESTADÍSTICAS (Mapeando tu globals.css) --- */
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      margin-top: 30px;
+    }
+
+    .stat {
+      min-width: 120px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .stat span {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      color: var(--verde-oscuro);
+    }
+
+    .stat small {
+      color: #4a4a4a;
+      display: block;
+    }
+
+    /* --- TARJETAS CONTENEDORAS --- */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -113,14 +151,14 @@
     .card strong {
       display: block;
       color: var(--verde);
-      font-size: 1rem; /* Más chica */
+      font-size: 1rem;
       margin-bottom: 6px;
     }
 
     .card p {
       margin: 0;
       color: var(--texto-mutado);
-      font-size: 0.85rem; /* Más chica */
+      font-size: 0.85rem;
       line-height: 1.4;
     }
     .card p em { font-style: italic; }
@@ -135,12 +173,22 @@
       background: var(--verde-oscuro);
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.85rem; /* Más chica */
+      font-size: 0.85rem;
       transition: background 0.2s ease;
     }
     .button:hover { background: #1e4d35; }
 
-    /* --- ESTILOS DEL AVATAR --- */
+    /* --- MEDIA QUERIES (Responsividad idéntica a tu globals.css) --- */
+    @media (max-width: 768px) {
+      .contenedor-principal {
+        padding: 42px 24px;
+      }
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* --- SE CONSERVA EL ASISTENTE INTERACTIVO AVATAR --- */
     .avatar-bot {
       position: fixed;
       right: 25px;
@@ -158,7 +206,7 @@
     .avatar-bot:active { cursor: grabbing; }
 
     .avatar-bot img {
-      width: clamp(100px, 14vw, 160px); /* Ajuste de escala para acompañar la delicadeza del texto */
+      width: clamp(100px, 14vw, 160px);
       height: clamp(100px, 14vw, 160px);
       object-fit: contain;
       filter: drop-shadow(0 15px 20px rgba(0, 0, 0, .25));
@@ -193,11 +241,32 @@
       <span class="tag">bienvenido al blog de <em>paspalum</em></span> 
       <h1>Discover the biogeography, environmental preferences, and agronomic characteristics of <em>Paspalum</em> species.</h1>
       <p class="intro">Explore occurrence records, distribution maps and photographs.</p>
+      
       <a class="button" href="#contenido">View content</a>
+
+      <!-- NUEVA SECCIÓN: Mapeada dinámicamente de tu array 'stats' de page.tsx -->
+      <div class="stats" aria-label="Scientific database statistics">
+        <div class="stat">
+          <span>📍</span>
+          <strong>4,200+</strong>
+          <small>Records</small>
+        </div>
+        <div class="stat">
+          <span>📷</span>
+          <strong>1,300+</strong>
+          <small>Photos</small>
+        </div>
+        <div class="stat">
+          <span>🧬</span>
+          <strong>25+</strong>
+          <small>Traits</small>
+        </div>
+      </div>
     </section>
 
     <section id="contenido" class="cards" aria-label="Contenido del sitio">
-      <a href="mapas.html" class="card card-link">
+      <!-- Cambiado el enlace al ruteo de tu Next.js (/catalog) -->
+      <a href="/catalog" class="card card-link">
         <article>
           <strong>Maps</strong>
           <p>Public maps.</p>
