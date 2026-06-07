@@ -97,11 +97,9 @@
       font-size: 0.7rem;
       font-weight: 700;
       color: #008f37; /* Verde oscuro para contraste sobre el cristal blanco */
-      text-transform: lowercase;
       letter-spacing: 0.05em;
       box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
     }
-    .tag em { font-style: italic; font-weight: 800; }
 
     /* TÍTULO PRINCIPAL CON MÁSCARA NEGRA CIBERNÉTICA */
     h1 {
@@ -112,11 +110,6 @@
       font-weight: 900;
       letter-spacing: -0.02em;
       color: var(--text-dark);
-    }
-    h1 em {
-      font-style: italic;
-      color: #00aa44;
-      text-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
     }
 
     .intro {
@@ -265,12 +258,12 @@
     .card p em { font-style: italic; color: #000000; font-weight: 600; }
 
     /* ==========================================================================
-       AVATAR: Asistente Cuántico Inteligente
+       AVATAR: Asistente Cuántico Inteligente (Buscando discreción inferior)
        ========================================================================== */
     .avatar-bot {
       position: fixed;
       right: 35px;
-      bottom: 35px;
+      bottom: 15px; /* Bajamos la posición general del elemento */
       z-index: 100;
       display: grid;
       justify-items: center;
@@ -319,14 +312,6 @@
       text-align: center;
       pointer-events: none;
     }
-    .avatar-bubble::before {
-      content: "AI_SYSTEM // ";
-      display: block;
-      font-size: 0.55rem;
-      color: var(--neon-green);
-      margin-bottom: 4px;
-      letter-spacing: 0.1em;
-    }
 
     /* ANIMACIONES */
     @keyframes flotar-holograma {
@@ -346,7 +331,7 @@
     @media (max-width: 768px) {
       .contenedor-principal { padding: 60px 25px; }
       .cards { grid-template-columns: 1fr; }
-      .avatar-bot { right: 20px; bottom: 20px; }
+      .avatar-bot { right: 20px; bottom: 15px; }
     }
   </style>
 </head>
@@ -355,90 +340,6 @@
   <main class="contenedor-principal">
     
     <section class="hero" aria-label="Presentation">
-      <span class="tag">welcome to the blog of <em>paspalum</em></span> 
-      <h1>Discover the biogeography, environmental preferences, and agronomic characteristics of <em>Paspalum</em> species.</h1>
-      <p class="intro">Explore occurrence records, distribution maps and photographs.</p>
-      
-      <a class="button" href="#content">View content</a>
-
-      <div class="stats" aria-label="Scientific database statistics">
-        <div class="stat">
-          <span>📍</span>
-          <strong>4,200+</strong>
-          <small>Records</small>
-        </div>
-        <div class="stat">
-          <span>📷</span>
-          <strong>1,300+</strong>
-          <small>Photos</small>
-        </div>
-        <div class="stat">
-          <span>🧬</span>
-          <strong>25+</strong>
-          <small>Traits</small>
-        </div>
-      </div>
-    </section>
-
-    <section id="content" class="cards" aria-label="Site content">
-      <a href="mapas.html" class="card card-link">
-        <article>
-          <strong>Maps</strong>
-          <p>Public maps and geographic models.</p>
-        </article>
-      </a>
-      
-      <article class="card">
-        <strong>Species</strong>
-        <p>Analysis of <em>P. notatum</em>, <em>P. guenoarum</em> and <em>P. simplex</em>.</p>
-      </article>
-      
-      <article class="card">
-        <strong>Photographs</strong>
-        <p>View high-resolution habitat photographs.</p>
-      </article>
-    </section>
-
-  </main>
-
-  <div class="avatar-bot" id="avatarBot">
-    <div class="avatar-bubble">Hello! I am <em>Paspalum</em> 🌱</div>
-    <img src="avatar.png" alt="Interactive AI Assistant" id="avatarImg">
-  </div>
-
-  <script>
-    const avatar = document.querySelector('#avatarBot');
-    let dragging = false;
-    let offsetX = 0;
-    let offsetY = 0;
-
-    document.addEventListener('pointermove', (event) => {
-      if (dragging) {
-        avatar.style.left = `${event.clientX - offsetX}px`;
-        avatar.style.top = `${event.clientY - offsetY}px`;
-        avatar.style.right = 'auto';
-        avatar.style.bottom = 'auto';
-      }
-      const box = avatar.getBoundingClientRect();
-      const centerX = box.left + box.width / 2;
-      const centerY = box.top + box.height / 2;
-      const lookX = Math.max(-10, Math.min(10, (event.clientX - centerX) / 30));
-      const lookY = Math.max(-8, Math.min(8, (event.clientY - centerY) / 38));
-      avatar.style.setProperty('--look-x', `${lookX}px`);
-      avatar.style.setProperty('--look-y', `${lookY}px`);
-    });
-
-    avatar.addEventListener('pointerdown', (event) => {
-      dragging = true;
-      const box = avatar.getBoundingClientRect();
-      offsetX = event.clientX - box.left;
-      offsetY = event.clientY - box.top;
-      avatar.setPointerCapture(event.pointerId);
-    });
-
-    avatar.addEventListener('pointerup', () => dragging = false);
-    avatar.addEventListener('pointercancel', () => dragging = false);
-  </script>
-
-</body>
-</html>
+      <span class="tag">Bienvenido al blog de Paspalum</span> 
+      <h1>Descubre la biogeografía, las preferencias ambientales y las características agronómicas de las especies de Paspalum.</h1>
+      <p class="intro">
