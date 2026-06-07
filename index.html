@@ -4,24 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Descubre Nuestras Semillas Disponibles</title>
-  <meta name="description" content="Catálogo y buscador de semillas de alta calidad para cultivos.">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       VARIABLES Y REGLAS BASE (Agro Premium Design)
+       VARIABLES Y RESET AESTHETIC AGRO
        ========================================================================== */
     :root {
-      --agro-green: #2b613e;
-      --agro-light-green: #41925d;
-      --agro-gold: #c29b38;
-      --text-dark: #1c2b21;
+      --primary-agro: #1e4620;
+      --accent-gold: #f4c430;
+      --bright-green: #3cd070;
+      --text-dark: #0f1a12;
       --text-light: #ffffff;
-      --bg-cream: #f4f7f4;
-      --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+      --bg-gradient: linear-gradient(135deg, #f5f9f6 0%, #eef5ef 100%);
+      --card-shadow: 0 20px 40px rgba(15, 26, 18, 0.06);
     }
 
     * {
@@ -32,76 +31,103 @@
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: var(--bg-cream);
+      background: var(--bg-gradient);
       color: var(--text-dark);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      overflow-x: hidden;
     }
 
     /* ==========================================================================
-       HERO SECTION (Fondo de campo con overlay suave)
+       HERO SECTION: Vibrante y Comercial
        ========================================================================== */
     .hero-section {
       position: relative;
-      min-height: 75vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      /* Cambia 'campo-agro.jpg' por la URL de tu imagen principal de campo/cultivos */
-      background: linear-gradient(180deg, rgba(28, 43, 33, 0.65) 0%, rgba(28, 43, 33, 0.85) 100%), 
-                  url('campo-agro.jpg') center / cover no-repeat fixed;
+      padding: 100px 20px 140px 20px;
+      background: 
+        radial-gradient(circle at 80% 20%, rgba(60, 208, 112, 0.15), transparent 50%),
+        linear-gradient(135deg, #143216 0%, #224f25 100%);
       text-align: center;
       color: var(--text-light);
+      border-bottom-left-radius: 60px;
+      border-bottom-right-radius: 60px;
+      box-shadow: 0 15px 30px rgba(20, 50, 22, 0.15);
+    }
+
+    /* Patrón decorativo orgánico de fondo */
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px);
+      background-size: 30px 30px;
+      pointer-events: none;
     }
 
     .hero-content {
-      max-width: 800px;
-      width: 100%;
+      max-width: 850px;
+      margin: 0 auto;
+      position: relative;
       z-index: 2;
     }
 
     .hero-content h1 {
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
       font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 30px;
-      letter-spacing: -0.02em;
-      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      line-height: 1.15;
+      margin-bottom: 35px;
+      letter-spacing: -0.03em;
+    }
+
+    /* Resaltado dorado comercial */
+    .hero-content h1 span {
+      color: var(--accent-gold);
+      position: relative;
+      display: inline-block;
     }
 
     /* ==========================================================================
-       BUSCADOR RENOVADO
+       BUSCADOR CON ONDA ANIMADA
        ========================================================================== */
     .search-wrapper {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 10px;
-      border-radius: 20px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-      max-width: 650px;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 12px;
+      border-radius: 30px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+      max-width: 700px;
       margin: 0 auto;
+      transition: transform 0.3s ease;
+    }
+
+    .search-wrapper:focus-within {
+      transform: scale(1.02);
     }
 
     .search-box {
       display: flex;
       background: var(--text-light);
-      border-radius: 14px;
+      border-radius: 22px;
       overflow: hidden;
-      padding: 6px;
+      padding: 8px;
+      align-items: center;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .search-icon-left {
+      padding-left: 20px;
+      font-size: 1.3rem;
     }
 
     .search-input {
       flex: 1;
       border: none;
-      padding: 16px 20px;
-      font-size: 1.05rem;
+      padding: 16px 15px;
+      font-size: 1.1rem;
       font-family: inherit;
       color: var(--text-dark);
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .search-input:focus {
@@ -109,134 +135,170 @@
     }
 
     .search-button {
-      background: var(--agro-green);
+      background: linear-gradient(135deg, #2e6932 0%, #1e4620 100%);
       color: var(--text-light);
       border: none;
-      padding: 0 28px;
-      font-size: 1rem;
+      padding: 16px 35px;
+      font-size: 1.05rem;
       font-weight: 700;
-      border-radius: 10px;
+      border-radius: 16px;
       cursor: pointer;
-      transition: background 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      box-shadow: 0 8px 20px rgba(30, 70, 32, 0.3);
+      transition: all 0.3s ease;
     }
 
     .search-button:hover {
-      background: var(--agro-light-green);
+      background: linear-gradient(135deg, #3cd070 0%, #2e6932 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(60, 208, 112, 0.4);
     }
 
     /* ==========================================================================
-       SECCIÓN DE CATEGORÍAS / STOCK (Muestra de imágenes de agro)
+       GRILLA DE PRODUCTOS COMERCIALES
        ========================================================================== */
     .main-content {
-      max-width: 1200px;
+      max-width: 1240px;
       width: 100%;
-      margin: -60px auto 60px auto;
-      padding: 0 20px;
+      margin: -70px auto 80px auto;
+      padding: 0 24px;
+      position: relative;
       z-index: 3;
     }
 
     .grid-categorias {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
     }
 
     .card-cultivo {
       background: var(--text-light);
-      border-radius: 20px;
+      border-radius: 32px;
       overflow: hidden;
       box-shadow: var(--card-shadow);
       text-decoration: none;
       color: inherit;
-      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
+      border: 1px solid rgba(255, 255, 255, 0.8);
     }
 
     .card-cultivo:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 50px rgba(43, 97, 62, 0.15);
+      transform: translateY(-12px);
+      box-shadow: 0 30px 60px rgba(30, 70, 32, 0.12);
+      border-color: rgba(60, 208, 112, 0.3);
     }
 
+    /* Contenedor de imagen premium */
     .card-image {
-      height: 220px;
+      height: 250px;
       position: relative;
       overflow: hidden;
+      background-color: #e2ebe4;
     }
 
     .card-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .card-cultivo:hover .card-image img {
-      transform: scale(1.06);
+      transform: scale(1.08) rotate(1deg);
     }
 
+    /* Badges llamativos */
     .card-badge {
       position: absolute;
-      top: 15px;
-      right: 15px;
-      background: rgba(255, 255, 255, 0.9);
-      padding: 6px 14px;
-      border-radius: 30px;
-      font-size: 0.75rem;
+      top: 20px;
+      right: 20px;
+      background: var(--text-light);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.8rem;
       font-weight: 700;
-      color: var(--agro-green);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      color: #1e4620;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
+    /* Detalles de texto */
     .card-info {
-      padding: 25px;
+      padding: 30px;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
 
     .card-info h3 {
-      font-size: 1.3rem;
+      font-size: 1.45rem;
       color: var(--text-dark);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .card-info p {
+      font-size: 0.98rem;
+      color: #55665a;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* Flecha interactiva comercial abajo a la derecha */
+    .card-footer-action {
+      margin-top: auto;
+      color: var(--bright-green);
+      font-weight: 700;
       font-size: 0.95rem;
-      color: #5c6e61;
-      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s ease;
+    }
+
+    .card-cultivo:hover .card-footer-action {
+      gap: 12px;
     }
 
     /* ==========================================================================
-       RESPONSIVE
+       RESPONSIVE MODERNO
        ========================================================================== */
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       .hero-section {
-        min-height: 60vh;
+        padding: 70px 16px 110px 16px;
+        border-radius: 0 0 40px 40px;
       }
       .search-box {
         flex-direction: column;
-        gap: 10px;
+        gap: 8px;
         background: transparent;
         padding: 0;
       }
+      .search-icon-left {
+        display: none;
+      }
       .search-input {
-        border-radius: 12px;
+        background: var(--text-light);
+        border-radius: 16px;
         width: 100%;
+        text-align: center;
       }
       .search-button {
-        padding: 16px;
-        justify-content: center;
-        border-radius: 12px;
         width: 100%;
+        padding: 18px;
+        border-radius: 16px;
       }
       .main-content {
-        margin-top: -30px;
+        margin-top: -50px;
+        padding: 0 16px;
       }
     }
   </style>
@@ -245,18 +307,19 @@
 
   <header class="hero-section">
     <div class="hero-content">
-      <h1>Descubre nuestras semillas disponibles</h1>
+      <h1>Descubre nuestras <span>semillas disponibles</span> 🌾</h1>
       
       <div class="search-wrapper">
         <form action="#" method="GET" class="search-box">
+          <span class="search-icon-left">🔍</span>
           <input 
             type="text" 
             class="search-input" 
             placeholder="Busca por variedad o cultivo..." 
-            aria-label="Buscar semillas"
+            aria-label="Buscar cultivos"
           >
           <button type="submit" class="search-button">
-            <span>Buscar</span>
+            Buscar Cultivo
           </button>
         </form>
       </div>
@@ -268,34 +331,37 @@
       
       <a href="#" class="card-cultivo">
         <div class="card-image">
-          <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80" alt="Pasturas y Forrajeras">
-          <span class="card-badge">En Stock</span>
+          <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=700&q=80" alt="Pasturas y Forrajeras">
+          <span class="card-badge">🟢 En Stock</span>
         </div>
         <div class="card-info">
-          <h3>Pasturas y Forrajeras</h3>
-          <p>Variedades de alta resiliencia climática y óptimo rendimiento nutricional para ganado.</p>
+          <h3>Pasturas y Forrajeras 🌱</h3>
+          <p>Variedades seleccionadas de alta resiliencia climática y óptimo rendimiento nutricional para planteos ganaderos exigentes.</p>
+          <div class="card-footer-action">Ver variedades disponibles →</div>
         </div>
       </a>
 
       <a href="#" class="card-cultivo">
         <div class="card-image">
-          <img src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=600&q=80" alt="Cereales de Estación">
-          <span class="card-badge">Alta Pureza</span>
+          <img src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=700&q=80" alt="Cereales de Estación">
+          <span class="card-badge">⚡ Alta Pureza</span>
         </div>
         <div class="card-info">
-          <h3>Cereales de Estación</h3>
-          <p>Semillas seleccionadas bajo estrictos controles de germinación para campañas eficientes.</p>
+          <h3>Cereales de Estación 🌽</h3>
+          <p>Semillas fiscalizadas de máximo poder germinativo, listas para potenciar los rindes de tus campañas de invierno y verano.</p>
+          <div class="card-footer-action">Explorar catálogo →</div>
         </div>
       </a>
 
       <a href="#" class="card-cultivo">
         <div class="card-image">
-          <img src="https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80" alt="Oleaginosas">
-          <span class="card-badge">Certificadas</span>
+          <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=700&q=80" alt="Oleaginosas Certificadas">
+          <span class="card-badge">⭐ Certificadas</span>
         </div>
         <div class="card-info">
-          <h3>Oleaginosas</h3>
-          <p>Tecnología aplicada en semillas para maximizar el potencial de aceite y sanidad en lote.</p>
+          <h3>Oleaginosas 🌻</h3>
+          <p>Biotecnología avanzada aplicada en lotes para garantizar la máxima sanidad vegetal, rendimiento en aceite y protección integral.</p>
+          <div class="card-footer-action">Ver fichas técnicas →</div>
         </div>
       </a>
 
