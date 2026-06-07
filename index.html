@@ -1,386 +1,305 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Biogeography of Paspalum</title>
-  <meta name="description" content="Explore maps and characteristics of Paspalum species.">
+  <title>Descubre Nuestras Semillas Disponibles</title>
+  <meta name="description" content="Catálogo y buscador de semillas de alta calidad para cultivos.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+
   <style>
     /* ==========================================================================
-       VARIABLES Y REGLAS BASE (Sci-Fi Light Cyber-Botanical)
+       VARIABLES Y REGLAS BASE (Agro Premium Design)
        ========================================================================== */
     :root {
-      --neon-green: #00ff66;
-      --cyber-dark: #050d08;
-      /* Cristal mucho más claro tirando a blanco y con alta translucidez */
-      --crystal-white: rgba(255, 255, 255, 0.75); 
-      --border-holographic: rgba(0, 255, 102, 0.25);
-      --text-dark: #0a140e;
-      --text-muted: #3a5243;
+      --agro-green: #2b613e;
+      --agro-light-green: #41925d;
+      --agro-gold: #c29b38;
+      --text-dark: #1c2b21;
+      --text-light: #ffffff;
+      --bg-cream: #f4f7f4;
+      --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
     }
 
     * {
       box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      background-color: var(--cyber-dark);
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
-      /* Imagen nítida de fondo con un filtro sutil de laboratorio */
-      background:
-        radial-gradient(circle at 50% 30%, rgba(0, 255, 102, 0.04), transparent 60%),
-        linear-gradient(180deg, rgba(5, 13, 8, 0.2), rgba(5, 13, 8, 0.5)),
-        url("palmar.png") center / cover fixed;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-cream);
       color: var(--text-dark);
-      font-size: 14px;
-      display: grid;
-      align-items: center;
-      justify-content: center;
-      padding: 0; /* Eliminamos el espacio exterior para hacerlo completo */
-      overflow-x: hidden;
-    }
-
-    /* ==========================================================================
-       CONTENEDOR PRINCIPAL: Cristal esmerilado gigante a pantalla completa
-       ========================================================================== */
-    .contenedor-principal {
-      width: 100vw; /* Ocupa el 100% del ancho de la pantalla */
-      min-height: 100vh; /* Ocupa el 100% del alto de la pantalla */
-      margin: 0;
-      
-      /* Base ultraclara tirando a blanco con desenfoque de alta fidelidad */
-      background: linear-gradient(135deg, var(--crystal-white), rgba(255, 255, 255, 0.6));
-      backdrop-filter: blur(40px) saturate(140%);
-      -webkit-backdrop-filter: blur(40px) saturate(140%);
-      
-      border-left: none;
-      border-right: none;
-      border-top: 1px solid var(--border-holographic);
-      border-bottom: 1px solid var(--border-holographic);
-      
-      padding: 80px 10%; /* Espaciado dinámico y elegante */
-      box-shadow: inset 0 0 60px rgba(255, 255, 255, 0.4);
-      position: relative;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-    }
-
-    /* Esquina de interfaz cuántica activa */
-    .contenedor-principal::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; width: 40px; height: 40px;
-      border-top: 4px solid var(--neon-green);
-      border-left: 4px solid var(--neon-green);
-    }
-
-    .hero {
-      display: grid;
-      gap: 16px;
-      margin-bottom: 55px;
-    }
-
-    /* CHIP DE SISTEMA */
-    .tag {
-      width: fit-content;
-      padding: 6px 14px;
-      border: 1px solid var(--neon-green);
-      border-radius: 6px;
-      background: rgba(0, 255, 102, 0.08);
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: #008f37; /* Verde oscuro para contraste sobre el cristal blanco */
-      letter-spacing: 0.05em;
-      box-shadow: 0 0 15px rgba(0, 255, 102, 0.2);
-    }
-
-    /* TÍTULO PRINCIPAL CON MÁSCARA NEGRA CIBERNÉTICA */
-    h1 {
-      max-width: 950px;
-      margin: 0;
-      font-size: clamp(1.8rem, 4.5vw, 3rem);
-      line-height: 1.15;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      color: var(--text-dark);
     }
 
     /* ==========================================================================
-       BARRA DE BÚSQUEDA PERSONALIZADA
+       HERO SECTION (Fondo de campo con overlay suave)
        ========================================================================== */
-    .search-container {
-      max-width: 600px;
-      width: 100%;
-      margin-top: 10px;
+    .hero-section {
       position: relative;
+      min-height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      /* Cambia 'campo-agro.jpg' por la URL de tu imagen principal de campo/cultivos */
+      background: linear-gradient(180deg, rgba(28, 43, 33, 0.65) 0%, rgba(28, 43, 33, 0.85) 100%), 
+                  url('campo-agro.jpg') center / cover no-repeat fixed;
+      text-align: center;
+      color: var(--text-light);
+    }
+
+    .hero-content {
+      max-width: 800px;
+      width: 100%;
+      z-index: 2;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 30px;
+      letter-spacing: -0.02em;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* ==========================================================================
+       BUSCADOR RENOVADO
+       ========================================================================== */
+    .search-wrapper {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 10px;
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .search-box {
+      display: flex;
+      background: var(--text-light);
+      border-radius: 14px;
+      overflow: hidden;
+      padding: 6px;
     }
 
     .search-input {
-      width: 100%;
-      padding: 16px 50px 16px 20px;
-      font-size: 1rem;
+      flex: 1;
+      border: none;
+      padding: 16px 20px;
+      font-size: 1.05rem;
       font-family: inherit;
-      font-weight: 500;
       color: var(--text-dark);
-      background: rgba(255, 255, 255, 0.5);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 14px;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+      font-weight: 500;
     }
 
     .search-input:focus {
       outline: none;
-      border-color: var(--neon-green);
-      background: rgba(255, 255, 255, 0.85);
-      box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
     }
 
-    .search-icon {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-muted);
-      pointer-events: none;
-    }
-
-    /* BOTÓN INTERACTIVO */
-    .button {
-      display: inline-flex;
-      width: fit-content;
-      margin-top: 12px;
-      padding: 14px 30px;
-      border-radius: 12px;
-      color: #ffffff;
-      background: #113c20;
-      text-decoration: none;
-      font-weight: 800;
-      font-size: 0.88rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      box-shadow: 0 10px 25px rgba(17, 60, 32, 0.2);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      border: 1px solid transparent;
-    }
-    .button:hover {
-      background: var(--neon-green);
-      color: #000000;
-      box-shadow: 0 0 30px rgba(0, 255, 102, 0.5);
-      transform: translateY(-2px);
-    }
-
-    /* ==========================================================================
-       STATS: Cuadros de información con pulso láser
-       ========================================================================== */
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 25px;
-      margin-top: 35px;
-    }
-
-    .stat {
-      min-width: 140px;
-      padding: 18px 22px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(0, 255, 102, 0.2);
-      position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
-    }
-    .stat:hover {
-      border-color: var(--neon-green);
-      box-shadow: 0 0 25px rgba(0, 255, 102, 0.25);
-      transform: scale(1.03);
-    }
-    .stat::after {
-      content: "";
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
-      animation: escaneo-laser 3s infinite linear;
-    }
-
-    .stat span {
-      display: block;
-      font-size: 1.4rem;
-      margin-bottom: 6px;
-    }
-    .stat strong {
-      display: block;
-      font-size: 1.4rem;
-      color: var(--text-dark);
-      font-family: monospace;
-    }
-    .stat small {
-      color: var(--text-muted);
-      text-transform: uppercase;
-      font-size: 0.7rem;
-      letter-spacing: 0.05em;
+    .search-button {
+      background: var(--agro-green);
+      color: var(--text-light);
+      border: none;
+      padding: 0 28px;
+      font-size: 1rem;
       font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-button:hover {
+      background: var(--agro-light-green);
     }
 
     /* ==========================================================================
-       CARDS: Nodos de información
+       SECCIÓN DE CATEGORÍAS / STOCK (Muestra de imágenes de agro)
        ========================================================================== */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 26px;
+    .main-content {
+      max-width: 1200px;
+      width: 100%;
+      margin: -60px auto 60px auto;
+      padding: 0 20px;
+      z-index: 3;
     }
 
-    .card {
-      padding: 26px;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.4);
+    .grid-categorias {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .card-cultivo {
+      background: var(--text-light);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
       text-decoration: none;
       color: inherit;
-      display: block;
-      position: relative;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
     }
-    .card-link::before {
-      content: "OPEN //";
+
+    .card-cultivo:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(43, 97, 62, 0.15);
+    }
+
+    .card-image {
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card-cultivo:hover .card-image img {
+      transform: scale(1.06);
+    }
+
+    .card-badge {
       position: absolute;
-      top: 12px; right: 16px;
-      font-size: 0.6rem;
-      color: #00aa44;
-      opacity: 0.5;
-      font-family: monospace;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--agro-green);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-info {
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-info h3 {
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      margin-bottom: 10px;
       font-weight: 700;
     }
-    .card-link:hover {
-      transform: translateY(-5px) scale(1.01);
-      background: rgba(255, 255, 255, 0.9);
-      border-color: var(--neon-green);
-      box-shadow: 
-        0 15px 30px rgba(0, 0, 0, 0.08),
-        0 0 20px rgba(0, 255, 102, 0.15);
-    }
 
-    .card strong {
-      display: block;
-      color: #113c20;
-      font-size: 1.1rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 0.88rem;
+    .card-info p {
+      font-size: 0.95rem;
+      color: #5c6e61;
       line-height: 1.5;
     }
-    .card p em { font-style: italic; color: #000000; font-weight: 600; }
 
     /* ==========================================================================
-       AVATAR: Asistente Cuántico Inteligente (Buscando discreción inferior)
+       RESPONSIVE
        ========================================================================== */
-    .avatar-bot {
-      position: fixed;
-      right: 35px;
-      bottom: 15px; /* Bajamos la posición general del elemento */
-      z-index: 100;
-      display: grid;
-      justify-items: center;
-      gap: 10px;
-      cursor: grab;
-      user-select: none;
-      touch-action: none;
-      transform: translate(var(--look-x, 0), var(--look-y, 0));
-      transition: transform .1s ease-out;
-    }
-    .avatar-bot:active { cursor: grabbing; }
-    .avatar-bot::before {
-      content: "";
-      position: absolute;
-      width: 140px; height: 140px;
-      bottom: 20px;
-      background: radial-gradient(circle, rgba(0, 255, 102, 0.3) 0%, transparent 70%);
-      border-radius: 50%;
-      z-index: -1;
-      animation: pulso-cuantico 2.5s infinite alternate ease-in-out;
-      pointer-events: none;
-    }
-
-    .avatar-bot img {
-      width: clamp(110px, 15vw, 170px);
-      height: clamp(110px, 15vw, 170px);
-      object-fit: contain;
-      filter: drop-shadow(0 0 15px rgba(0, 255, 102, 0.3)) saturate(120%);
-      animation: flotar-holograma 3.5s ease-in-out infinite alternate;
-      pointer-events: none;
-    }
-
-    .avatar-bubble {
-      max-width: 190px;
-      padding: 10px 14px;
-      border-radius: 12px 12px 4px 12px;
-      color: #ffffff;
-      background: rgba(5, 13, 8, 0.9);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--neon-green);
-      box-shadow: 0 10px 30px rgba(0, 255, 102, 0.25);
-      font-size: .8rem;
-      font-weight: 700;
-      font-family: monospace;
-      text-align: center;
-      pointer-events: none;
-    }
-
-    /* ANIMACIONES */
-    @keyframes flotar-holograma {
-      0% { transform: translateY(0px) rotate(-1deg); filter: drop-shadow(0 0 10px rgba(0, 255, 102, 0.2)); }
-      50% { filter: drop-shadow(0 0 18px rgba(0, 255, 102, 0.4)) hue-rotate(3deg); }
-      100% { transform: translateY(-12px) rotate(2deg); filter: drop-shadow(0 0 25px rgba(0, 255, 102, 0.3)); }
-    }
-    @keyframes pulso-cuantico {
-      from { transform: scale(0.8); opacity: 0.4; }
-      to { transform: scale(1.3); opacity: 0.7; }
-    }
-    @keyframes escaneo-laser {
-      0% { left: -100%; }
-      50%, 100% { left: 100%; }
-    }
-
-    @media (max-width: 768px) {
-      .contenedor-principal { padding: 60px 25px; }
-      .cards { grid-template-columns: 1fr; }
-      .avatar-bot { right: 20px; bottom: 15px; }
+    @media (max-width: 600px) {
+      .hero-section {
+        min-height: 60vh;
+      }
+      .search-box {
+        flex-direction: column;
+        gap: 10px;
+        background: transparent;
+        padding: 0;
+      }
+      .search-input {
+        border-radius: 12px;
+        width: 100%;
+      }
+      .search-button {
+        padding: 16px;
+        justify-content: center;
+        border-radius: 12px;
+        width: 100%;
+      }
+      .main-content {
+        margin-top: -30px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <main class="contenedor-principal">
-    
-    <section class="hero" aria-label="Presentation">
-      <span class="tag">Comerciales de semillas</span> 
-      <h1>Conoce nuestro stock disponible de semillas.</h1>
+  <header class="hero-section">
+    <div class="hero-content">
+      <h1>Descubre nuestras semillas disponibles</h1>
       
-      <div class="search-container">
-        <input type="text" class="search-input" placeholder="Buscar por variedad o cultivo...">
-        <span class="search-icon">🔍</span>
+      <div class="search-wrapper">
+        <form action="#" method="GET" class="search-box">
+          <input 
+            type="text" 
+            class="search-input" 
+            placeholder="Busca por variedad o cultivo..." 
+            aria-label="Buscar semillas"
+          >
+          <button type="submit" class="search-button">
+            <span>Buscar</span>
+          </button>
+        </form>
       </div>
-    </section>
+    </div>
+  </header>
 
+  <main class="main-content">
+    <div class="grid-categorias">
+      
+      <a href="#" class="card-cultivo">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80" alt="Pasturas y Forrajeras">
+          <span class="card-badge">En Stock</span>
+        </div>
+        <div class="card-info">
+          <h3>Pasturas y Forrajeras</h3>
+          <p>Variedades de alta resiliencia climática y óptimo rendimiento nutricional para ganado.</p>
+        </div>
+      </a>
+
+      <a href="#" class="card-cultivo">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=600&q=80" alt="Cereales de Estación">
+          <span class="card-badge">Alta Pureza</span>
+        </div>
+        <div class="card-info">
+          <h3>Cereales de Estación</h3>
+          <p>Semillas seleccionadas bajo estrictos controles de germinación para campañas eficientes.</p>
+        </div>
+      </a>
+
+      <a href="#" class="card-cultivo">
+        <div class="card-image">
+          <img src="https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=600&q=80" alt="Oleaginosas">
+          <span class="card-badge">Certificadas</span>
+        </div>
+        <div class="card-info">
+          <h3>Oleaginosas</h3>
+          <p>Tecnología aplicada en semillas para maximizar el potencial de aceite y sanidad en lote.</p>
+        </div>
+      </a>
+
+    </div>
   </main>
 
 </body>
