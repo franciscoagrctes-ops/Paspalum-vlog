@@ -3,24 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Descubre Nuestras Semillas Disponibles</title>
+  <title>Paspalum Vlog - Biogeografía y Ecología</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+  <!-- Usando tipografías similares a la imagen: una serif orgánica y una sans-serif limpia -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ==========================================================================
-       VARIABLES Y RESET AESTHETIC AGRO
+       VARIABLES Y RESET AESTHETIC AGRO - ADAPTADO DE TERRA
        ========================================================================== */
     :root {
-      --primary-agro: #1e4620;
-      --accent-gold: #f4c430;
-      --bright-green: #3cd070;
-      --text-dark: #0f1a12;
-      --text-light: #ffffff;
-      --bg-gradient: linear-gradient(135deg, #f5f9f6 0%, #eef5ef 100%);
-      --card-shadow: 0 20px 40px rgba(15, 26, 18, 0.06);
+      --primary-agro: #1e4620; /* Verde oscuro original */
+      --accent-gold: #f4c430; /* Dorado original */
+      --bright-green: #3cd070; /* Verde brillante original */
+      --text-dark: #0f1a12; /* Texto oscuro original */
+      --text-light: #ffffff; /* Texto claro original */
+      /* Paleta de colores inspirada en la imagen de TERRA */
+      --bg-cream: #f8f5f0; 
+      --bg-sage: #e8ede8;
+      --text-main: #333333;
+      --text-muted: #666666;
+      --serif-font: 'Cormorant Garamond', serif;
+      --sans-font: 'Montserrat', sans-serif;
+      --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
     }
 
     * {
@@ -30,338 +37,323 @@
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text-dark);
+      font-family: var(--sans-font);
+      background-color: var(--bg-cream);
+      color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    em {
+      font-style: italic;
     }
 
     /* ==========================================================================
-       HERO SECTION: Vibrante y Comercial
+       HEADER (Barra de Navegación)
+       ========================================================================== */
+    .site-header {
+      width: 100%;
+      background-color: var(--bg-cream);
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--serif-font);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      color: var(--primary-agro);
+    }
+
+    .main-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-family: var(--sans-font);
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+
+    .main-nav a:hover {
+      color: var(--primary-agro);
+    }
+
+    /* ==========================================================================
+       HERO SECTION: Imagen de fondo y Título Principal
        ========================================================================== */
     .hero-section {
       position: relative;
-      padding: 100px 20px 140px 20px;
-      background: 
-        radial-gradient(circle at 80% 20%, rgba(60, 208, 112, 0.15), transparent 50%),
-        linear-gradient(135deg, #143216 0%, #224f25 100%);
+      width: 100%;
+      height: 70vh; /* Ocupa buena parte de la pantalla */
+      background-image: url('https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1600&q=80'); /* Imagen de palmar.png (oleaginosas) */
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
       color: var(--text-light);
-      border-bottom-left-radius: 60px;
-      border-bottom-right-radius: 60px;
-      box-shadow: 0 15px 30px rgba(20, 50, 22, 0.15);
     }
 
-    /* Patrón decorativo orgánico de fondo */
+    /* Capa de superposición para legibilidad */
     .hero-section::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px);
-      background-size: 30px 30px;
-      pointer-events: none;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
     }
 
     .hero-content {
-      max-width: 850px;
-      margin: 0 auto;
+      max-width: 900px;
+      padding: 20px;
       position: relative;
       z-index: 2;
     }
 
+    .welcome-text {
+      font-family: var(--sans-font);
+      font-weight: 500;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+      display: block;
+    }
+
     .hero-content h1 {
-      font-size: clamp(2.4rem, 6vw, 4.2rem);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 35px;
-      letter-spacing: -0.03em;
-    }
-
-    /* Resaltado dorado comercial */
-    .hero-content h1 span {
-      color: var(--accent-gold);
-      position: relative;
-      display: inline-block;
-    }
-
-    /* ==========================================================================
-       BUSCADOR CON ONDA ANIMADA
-       ========================================================================== */
-    .search-wrapper {
-      background: rgba(255, 255, 255, 0.12);
-      padding: 12px;
-      border-radius: 30px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
-      max-width: 700px;
-      margin: 0 auto;
-      transition: transform 0.3s ease;
-    }
-
-    .search-wrapper:focus-within {
-      transform: scale(1.02);
-    }
-
-    .search-box {
-      display: flex;
-      background: var(--text-light);
-      border-radius: 22px;
-      overflow: hidden;
-      padding: 8px;
-      align-items: center;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    .search-icon-left {
-      padding-left: 20px;
-      font-size: 1.3rem;
-    }
-
-    .search-input {
-      flex: 1;
-      border: none;
-      padding: 16px 15px;
-      font-size: 1.1rem;
-      font-family: inherit;
-      color: var(--text-dark);
-      font-weight: 600;
-    }
-
-    .search-input:focus {
-      outline: none;
-    }
-
-    .search-button {
-      background: linear-gradient(135deg, #2e6932 0%, #1e4620 100%);
-      color: var(--text-light);
-      border: none;
-      padding: 16px 35px;
-      font-size: 1.05rem;
+      font-family: var(--serif-font);
+      font-size: clamp(2rem, 5vw, 3.5rem);
       font-weight: 700;
-      border-radius: 16px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(30, 70, 32, 0.3);
-      transition: all 0.3s ease;
+      line-height: 1.2;
+      margin-bottom: 30px;
     }
 
-    .search-button:hover {
-      background: linear-gradient(135deg, #3cd070 0%, #2e6932 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 25px rgba(60, 208, 112, 0.4);
+    .cta-button {
+      background-color: var(--text-light);
+      color: var(--primary-agro);
+      border: none;
+      padding: 12px 30px;
+      font-family: var(--sans-font);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .cta-button:hover {
+      background-color: var(--bg-sage);
     }
 
     /* ==========================================================================
-       GRILLA DE PRODUCTOS COMERCIALES
+       MAIN CONTENT: Grilla de tres cuadros (Estilo TERRA)
        ========================================================================== */
     .main-content {
-      max-width: 1240px;
-      width: 100%;
-      margin: -70px auto 80px auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 3;
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 40px;
+    }
+
+    .section-title {
+      font-family: var(--serif-font);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-align: center;
+      margin-bottom: 50px;
     }
 
     .grid-categorias {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 35px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
     }
 
     .card-cultivo {
-      background: var(--text-light);
-      border-radius: 32px;
+      background-color: var(--bg-sage);
+      border-radius: 10px;
       overflow: hidden;
       box-shadow: var(--card-shadow);
       text-decoration: none;
       color: inherit;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      transition: transform 0.3s;
     }
 
     .card-cultivo:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 30px 60px rgba(30, 70, 32, 0.12);
-      border-color: rgba(60, 208, 112, 0.3);
+      transform: translateY(-5px);
     }
 
-    /* Contenedor de imagen premium */
+    /* Contenedor de imagen */
     .card-image {
-      height: 250px;
-      position: relative;
+      height: 200px;
       overflow: hidden;
-      background-color: #e2ebe4;
     }
 
     .card-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .card-cultivo:hover .card-image img {
-      transform: scale(1.08) rotate(1deg);
-    }
-
-    /* Badges llamativos */
-    .card-badge {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: var(--text-light);
-      padding: 8px 16px;
-      border-radius: 50px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #1e4620;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     /* Detalles de texto */
     .card-info {
-      padding: 30px;
+      padding: 25px;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
-      position: relative;
     }
 
     .card-info h3 {
-      font-size: 1.45rem;
-      color: var(--text-dark);
-      margin-bottom: 12px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-family: var(--serif-font);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 10px;
     }
 
     .card-info p {
-      font-size: 0.98rem;
-      color: #55665a;
-      line-height: 1.6;
+      font-family: var(--sans-font);
+      font-size: 0.9rem;
+      color: var(--text-muted);
       margin-bottom: 20px;
+      line-height: 1.5;
     }
 
-    /* Flecha interactiva comercial abajo a la derecha */
     .card-footer-action {
+      font-family: var(--sans-font);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary-agro);
       margin-top: auto;
-      color: var(--bright-green);
-      font-weight: 700;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: gap 0.2s ease;
-    }
-
-    .card-cultivo:hover .card-footer-action {
-      gap: 12px;
     }
 
     /* ==========================================================================
        RESPONSIVE MODERNO
        ========================================================================== */
+    @media (max-width: 900px) {
+      .main-nav ul {
+        gap: 15px;
+      }
+      .grid-categorias {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
     @media (max-width: 650px) {
-      .hero-section {
-        padding: 70px 16px 110px 16px;
-        border-radius: 0 0 40px 40px;
-      }
-      .search-box {
+      .site-header {
         flex-direction: column;
-        gap: 8px;
-        background: transparent;
-        padding: 0;
+        padding: 20px;
       }
-      .search-icon-left {
-        display: none;
+      .main-nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
       }
-      .search-input {
-        background: var(--text-light);
-        border-radius: 16px;
-        width: 100%;
-        text-align: center;
+      .hero-section {
+        height: 60vh;
       }
-      .search-button {
-        width: 100%;
-        padding: 18px;
-        border-radius: 16px;
-      }
-      .main-content {
-        margin-top: -50px;
-        padding: 0 16px;
+      .grid-categorias {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
 
-  <header class="hero-section">
-    <div class="hero-content">
-      <h1>Descubre nuestras <span>semillas disponibles</span> 🌾</h1>
-      
-      <div class="search-wrapper">
-        <form action="#" method="GET" class="search-box">
-          <span class="search-icon-left">🔍</span>
-          <input 
-            type="text" 
-            class="search-input" 
-            placeholder="Busca por variedad o cultivo..." 
-            aria-label="Buscar cultivos"
-          >
-          <button type="submit" class="search-button">
-            Buscar Cultivo
-          </button>
-        </form>
-      </div>
-    </div>
+  <!-- Encabezado y Navegación -->
+  <header class="site-header">
+    <a href="#" class="logo-area">
+      <span class="logo-icon">🌿</span> TERRA | Paspalum vlog
+    </a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#">Journal</a></li>
+        <li><a href="#">Shop</a></li>
+        <li><a href="#">Spaces</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
+  <!-- Sección Hero con Imagen de palmar.png y Título -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <span class="welcome-text">Welcome to Paspalum vlog</span>
+      <h1>Descubre la biogeografía y preferencias ambientales de las especies de <em>Paspalum</em></h1>
+      <a href="#" class="cta-button">Explore the Journal</a>
+    </div>
+  </section>
+
+  <!-- Contenido Principal con la Grilla de 3 Secciones -->
   <main class="main-content">
+    <h2 class="section-title">Nuestras Secciones</h2>
+    
     <div class="grid-categorias">
       
+      <!-- Cuadro 1: Maps -->
       <a href="#" class="card-cultivo">
         <div class="card-image">
-          <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=700&q=80" alt="Pasturas y Forrajeras">
-          <span class="card-badge">🟢 En Stock</span>
+          <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=700&q=80" alt="Mapa de Distribución">
         </div>
         <div class="card-info">
-          <h3>Pasturas y Forrajeras 🌱</h3>
-          <p>Variedades seleccionadas de alta resiliencia climática y óptimo rendimiento nutricional para planteos ganaderos exigentes.</p>
-          <div class="card-footer-action">Ver variedades disponibles →</div>
+          <h3>Maps 🗺️</h3>
+          <p>Explora mapas interactivos de distribución global y regional para diferentes especies de <em>Paspalum</em>, basados en datos de herbario y observaciones de campo.</p>
+          <div class="card-footer-action">Ver mapas →</div>
         </div>
       </a>
 
+      <!-- Cuadro 2: Environmental Preferences -->
       <a href="#" class="card-cultivo">
         <div class="card-image">
-          <img src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=700&q=80" alt="Cereales de Estación">
-          <span class="card-badge">⚡ Alta Pureza</span>
+          <img src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=700&q=80" alt="Preferencias Ambientales">
         </div>
         <div class="card-info">
-          <h3>Cereales de Estación 🌽</h3>
-          <p>Semillas fiscalizadas de máximo poder germinativo, listas para potenciar los rindes de tus campañas de invierno y verano.</p>
-          <div class="card-footer-action">Explorar catálogo →</div>
+          <h3>Environmental Preferences 🌱</h3>
+          <p>Analiza los requerimientos de suelo, clima, altitud y otros factores ecológicos que determinan el hábitat ideal para las diversas especies del género <em>Paspalum</em>.</p>
+          <div class="card-footer-action">Explorar datos ecólogicos →</div>
         </div>
       </a>
 
+      <!-- Cuadro 3: Photographs -->
       <a href="#" class="card-cultivo">
         <div class="card-image">
-          <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=700&q=80" alt="Oleaginosas Certificadas">
-          <span class="card-badge">⭐ Certificadas</span>
+          <!-- He reutilizado la imagen de Oleaginosas para representar las palmeras en las fotografías -->
+          <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=700&q=80" alt="Galería de Fotos">
         </div>
         <div class="card-info">
-          <h3>Oleaginosas 🌻</h3>
-          <p>Biotecnología avanzada aplicada en lotes para garantizar la máxima sanidad vegetal, rendimiento en aceite y protección integral.</p>
-          <div class="card-footer-action">Ver fichas técnicas →</div>
+          <h3>Photographs 📸</h3>
+          <p>Accede a una galería visual de alta calidad que muestra la morfología, hábito de crecimiento y hábitats naturales de especies clave de <em>Paspalum</em>, incluyendo imágenes detalladas.</p>
+          <div class="card-footer-action">Ver galería de fotos →</div>
         </div>
       </a>
 
@@ -370,3 +362,4 @@
 
 </body>
 </html>
+```http://googleusercontent.com/image_generation_content/245
