@@ -3,232 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERRA | Paspalum vlog</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Paspalum Blog</title>
+    
+    <!-- Fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
-        body, html {
+        /* Reset básico y tipografía general */
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', sans-serif;
             box-sizing: border-box;
-            background-color: #f6efe9; /* Color de fondo base de la página, visible al final */
         }
 
-        /* --- Header --- */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f5f0;
+            color: #222;
+        }
+
+        /* --- Header y Navegación --- */
         header {
-            background-color: white;
-            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 20px 40px;
+            background-color: #ffffff;
             border-bottom: 1px solid #eee;
-            position: relative; /* Para el logo absoluto si fuera necesario, pero flex es mejor */
         }
 
         .header-logo {
+            font-size: 1.8rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: #222;
             display: flex;
             align-items: center;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1em;
-            color: #1a1a1a;
-            font-weight: 500;
         }
 
         .logo-icon {
-            color: #d1b899; /* Color beige/dorado para el icono de la hoja */
             margin-right: 10px;
-            font-size: 1.3em;
         }
 
         nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
             display: flex;
             gap: 25px;
+            list-style: none;
         }
 
         nav a {
             text-decoration: none;
-            color: #1a1a1a;
-            text-transform: uppercase;
-            font-size: 0.85em;
+            color: #222;
             font-weight: 500;
+            font-size: 0.9rem;
             letter-spacing: 0.05em;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
-            color: #d1b899;
+            color: #6f8a71; /* Un tono verde sutil para el hover */
         }
 
         /* --- Hero Section --- */
         .hero {
             position: relative;
             width: 100%;
-            height: 75vh; /* Ajuste para un efecto dramático y para ver el final del texto inferior */
-            min-height: 400px;
+            height: 85vh;
             overflow: hidden;
-            background-color: #333; /* Color de fondo por defecto */
         }
 
-        /* Esta es la regla clave que carga palmar.png */
         .hero-background-image {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('palmar.png'); /* Ruta a la imagen cargada */
-            background-size: cover; /* Cubre todo el contenedor */
-            background-position: center center; /* Centrada */
+            background-image: url('palmar.png');
+            background-size: cover;
+            background-position: center center;
             background-repeat: no-repeat;
-            opacity: 1; /* Opacidad completa */
-            filter: contrast(1.1) saturate(1.1); /* Ligeros ajustes de contraste y saturación si se desea */
+            z-index: 1;
         }
 
-        /* Capa oscura superpuesta opcional para mejorar legibilidad */
         .hero-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.15); /* Muy sutil, para no oscurecer el palmar */
+            background: rgba(0, 0, 0, 0.20);
+            z-index: 2;
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100%;
             text-align: center;
-            color: white;
             padding: 0 20px;
         }
 
-        .welcome-text {
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            font-size: 0.8em;
-            font-weight: 500;
-            letter-spacing: 0.25em;
-            margin-bottom: 20px;
-        }
-
         .main-title {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(1.8em, 4vw, 3em);
-            font-weight: 700;
-            margin-top: 0;
-            margin-bottom: 40px;
-            max-width: 800px;
-            line-height: 1.3;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            font-weight: 500;
+            line-height: 1.15;
+            max-width: 950px;
+            color: white;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.25);
         }
 
         .paspalum-italics {
             font-style: italic;
         }
 
-        .hero-button {
-            background-color: white;
-            color: #212121;
-            border: none;
-            padding: 12px 30px;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            font-size: 0.85em;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
+        /* Elementos ocultados según tus indicaciones */
+        .hero-button,
+        .welcome-text {
+            display: none;
         }
 
-        .hero-button:hover {
-            background-color: #d1b899;
-            color: white;
-        }
-
-        /* --- Sección Inferior --- */
-        .sections {
-            background-color: #f6efe9;
-            padding: 60px 40px;
-            text-align: center;
-        }
-
-        .sections-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.8em;
-            color: #212121;
-            margin: 0;
-            margin-bottom: 20px;
-        }
-
-        /* --- Media Queries --- */
+        /* Ajuste responsive básico */
         @media (max-width: 768px) {
             header {
-                padding: 15px 20px;
                 flex-direction: column;
-                gap: 10px;
-            }
-            
-            nav ul {
                 gap: 15px;
-                font-size: 0.8em;
-            }
-            
-            .hero {
-                height: 60vh;
-            }
-            
-            .main-title {
-                font-size: clamp(1.5em, 3.5vw, 2.2em);
+                padding: 15px 20px;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- Encabezado -->
     <header>
         <div class="header-logo">
-            <span class="logo-icon">&#127811;</span> <!-- Leaf Icon (approx.) -->
-            TERRA | Paspalum vlog
+            <span class="logo-icon">🌿</span>
+            Paspalum blog
         </div>
+
         <nav>
             <ul>
-                <li><a href="#journal">JOURNAL</a></li>
-                <li><a href="#shop">SHOP</a></li>
-                <li><a href="#spaces">SPACES</a></li>
+                <li><a href="#home">HOME</a></li>
                 <li><a href="#about">ABOUT</a></li>
-                <li><a href="#contact">CONTACT</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Sección Principal -->
     <main>
         <section class="hero">
-            <!-- Capas de fondo -->
             <div class="hero-background-image"></div>
             <div class="hero-overlay"></div>
-            
-            <!-- Contenido de texto -->
-            <div class="hero-content">
-                <div class="welcome-text">WELCOME TO PASPALUM VLOG</div>
-                <h1 class="main-title">
-                    Descubre la biogeografía y preferencias ambientales de las especies de <span class="paspalum-italics">Paspalum</span>
-                </h1>
-                <button class="hero-button">EXPLORE THE JOURNAL</button>
-            </div>
-        </section>
 
-        <section class="sections">
-            <h2 class="sections-title">Nuestras Secciones</h2>
-            <!-- El resto de las secciones irían aquí -->
+            <div class="hero-content">
+                <h1 class="main-title">
+                    Explore the biogeography and environmental preferences of
+                    <span class="paspalum-italics">Paspalum</span> species
+                </h1>
+            </div>
         </section>
     </main>
 
