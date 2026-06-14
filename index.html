@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paspalum Blog</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
         :root {
             /* Capa brumosa oscura ultra-premium */
             --bg-overlay: linear-gradient(180deg,rgba(15,25,18,.35) 0%,rgba(10,18,12,.55) 100%);
             /* Cristal translúcido ahumado oscuro */
-            --card-glass: rgba(255,255,255,0.08); 
             --card-glass-bottom: rgba(13, 16, 14, 0.8);
             --text-main: #ffffff;
             --text-muted: #9fa8a0;
@@ -107,20 +106,20 @@
             gap: 24px;
         }
 
-        /* Tarjeta Central del Hero */
+        /* Tarjeta Central del Hero (Estilo "revista botánica" flotante) */
         .hero-card {
             grid-column: span 3;
-            background-color: var(--card-glass);
+            background: rgba(0, 0, 0, 0.03);
             border-radius: 28px;
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: none;
+            box-shadow: none;
             padding: 60px 40px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
         }
 
         /* Detalles Ornamentales */
@@ -139,18 +138,22 @@
             margin: 15px 0;
         }
 
-        /* Tipografía del Título Editorial */
-       h1 {
-            font-size: clamp(2.8rem, 4vw, 4.8rem);
-            line-height: 1.45;
-            max-width: 700px;
-            font-weight: 300;
+        /* Tipografía del Título Editorial (Rediseñado) */
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.6rem, 5vw, 6rem);
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -0.04em;
+            max-width: 900px;
+            color: rgba(255, 255, 255, .95);
+            text-shadow: 0 10px 40px rgba(0, 0, 0, .35);
         }
 
         .italics-species {
             font-style: italic;
-            color: var(--accent-sage);
-            font-weight: 400;
+            color: rgba(255, 255, 255, .95);
+            font-weight: inherit;
         }
 
         /* Botón Ovalado Minimalista */
