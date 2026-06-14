@@ -5,23 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paspalum Blog</title>
     
-    <!-- Fuentes premium: Inter para datos y Montserrat/Cormorant para el toque editorial -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <!-- Fuentes premium unificadas para máxima fluidez -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-overlay: linear-gradient(180deg, rgba(10, 18, 12, 0.85) 0%, rgba(15, 15, 15, 0.92) 100%);
-            --card-glass: rgba(25, 30, 26, 0.8);
+            /* Capa nublada / brumosa sobre la imagen para suavizarla sin taparla */
+            --bg-overlay: linear-gradient(180deg, rgba(34, 43, 36, 0.45) 0%, rgba(24, 28, 25, 0.6) 100%);
+            /* Tarjetas tipo niebla traslúcida (efecto sutil de cristal empavonado) */
+            --card-glass: rgba(28, 33, 29, 0.45); 
             --text-main: #ffffff;
-            --text-muted: #9ba89c;
-            --accent-sage: #a8b99a;
+            --text-muted: #cbd7cc;
+            --accent-sage: #c2d6b4; /* Verde salvia más iluminado para ambiente nublado */
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         body {
@@ -33,14 +35,14 @@
             align-items: center;
             justify-content: center;
             
-            /* Tu foto palmar.png de fondo global */
+            /* Tu foto palmar.png de fondo completamente integrada */
             background-image: var(--bg-overlay), url('palmar.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
 
-        /* --- Header Minimalista --- */
+        /* --- Header integrado --- */
         header {
             position: absolute;
             top: 0;
@@ -59,18 +61,19 @@
             color: var(--text-main);
             display: flex;
             align-items: center;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         .logo-italics {
             font-style: italic;
-            font-weight: 600;
+            font-weight: 500;
             margin-right: 6px;
         }
 
         .logo-icon {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin-left: 10px;
-            opacity: 0.9;
+            opacity: 0.8;
         }
 
         nav ul {
@@ -83,7 +86,7 @@
             text-decoration: none;
             color: var(--text-muted);
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 0.15em;
         }
 
@@ -91,164 +94,164 @@
             color: var(--accent-sage);
         }
 
-        /* --- Estructura Bento Grid (Actualizada de image_6f3884.jpg) --- */
+        /* --- Contenedor Bento Grid --- */
         .container {
             width: 100%;
-            max-width: 1200px;
-            margin-top: 100px;
+            max-width: 1140px;
+            margin-top: 90px;
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 columnas perfectas */
+            grid-template-columns: repeat(3, 1fr);
             gap: 24px;
         }
 
-        /* Bloques base estilo cristal premium */
+        /* Cajas modificadas: Cristal nublado de alta definición */
         .card {
             background-color: var(--card-glass);
-            padding: 40px;
-            border-radius: 28px;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            padding: 45px;
+            border-radius: 32px;
+            backdrop-filter: blur(25px); /* Desenfoque profundo tipo niebla */
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: 0 30px 60px rgba(15, 24, 18, 0.15); /* Sombra orgánica suave */
         }
 
-        /* Bloque del título expandido (Cubre todo el ancho) */
+        /* Bloque superior */
         .hero-block-full {
             grid-column: span 3;
-            padding: 70px 60px;
+            padding: 80px 60px;
             text-align: center;
         }
 
-        /* Título modificado: Mayúsculas, extra grueso y gigante */
+        /* Rediseño del título: Letra fluida, suave y elegante (Cormorant Garamond) */
         h1 {
-            font-family: 'Inter', sans-serif;
-            font-size: clamp(2.2rem, 3.8vw, 4.2rem);
-            font-weight: 800; /* Extra grueso */
-            text-transform: uppercase; /* Todo en mayúsculas */
-            line-height: 1.2;
-            letter-spacing: 0.02em;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 4.2vw, 4.4rem);
+            font-weight: 500; /* Peso elegante, no tosco */
+            text-transform: uppercase;
+            line-height: 1.3;
+            letter-spacing: 0.05em; /* Mayor soltura entre letras */
             color: var(--text-main);
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
         }
 
+        /* Integración perfecta de Paspalum dentro del flujo del texto */
         .title-paspalum-italics {
             font-style: italic;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-            text-transform: none; /* Mantiene la elegancia natural de la especie */
+            font-weight: 500;
+            text-transform: none; /* Mantiene la naturaleza orgánica de la cursiva */
             color: var(--accent-sage);
-            padding: 0 8px;
+            font-family: 'Cormorant Garamond', serif;
+            padding: 0 6px;
         }
 
-        /* --- Fila inferior de 3 bloques --- */
+        /* --- Bloques Inferiores Modulares --- */
         .feature-box {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 220px;
+            min-height: 230px;
             cursor: pointer;
         }
 
         .feature-box:hover {
-            transform: translateY(-5px);
-            background-color: rgba(35, 43, 37, 0.9);
-            border-color: rgba(168, 185, 154, 0.2);
+            transform: translateY(-4px);
+            background-color: rgba(40, 48, 42, 0.55);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
-        /* Elementos visuales dentro de los bloques */
         .box-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .box-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
             color: var(--text-main);
         }
 
         .box-icon {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             opacity: 0.8;
         }
 
-        /* Representación del mapa moderno y nicho ecológico sin agregar texto */
+        /* Gráficos sutiles traslúcidos dentro de las cajas */
         .visual-mockup {
             width: 100%;
             height: 90px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 14px;
-            border: 1px dashed rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 16px;
+            border: 1px dashed rgba(255, 255, 255, 0.08);
             position: relative;
             overflow: hidden;
         }
 
-        /* Mockup gráfico abstracto de mapa */
+        /* Líneas minimalistas de mapas */
         .map-line {
             position: absolute;
             width: 140%;
-            height: 2px;
+            height: 1px;
             background: linear-gradient(90deg, transparent, var(--accent-sage), transparent);
-            top: 40%;
+            top: 45%;
             left: -20%;
-            transform: rotate(-15deg);
+            transform: rotate(-12deg);
         }
         .map-dot {
             position: absolute;
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background-color: #ffffff;
             border-radius: 50%;
-            top: 35%;
-            left: 50%;
-            box-shadow: 0 0 12px #fff;
+            top: 39%;
+            left: 55%;
+            box-shadow: 0 0 10px var(--accent-sage);
         }
 
-        /* Mockup gráfico abstracto de nicho ecológico / curvas complejas */
+        /* Curvas suaves del nicho ecológico */
         .niche-curve {
             position: absolute;
-            width: 80%;
-            height: 80%;
-            border: 2px solid rgba(168, 185, 154, 0.3);
+            width: 90%;
+            height: 90%;
+            border: 1px solid rgba(194, 214, 180, 0.25);
             border-radius: 50%;
-            bottom: -30%;
-            left: 10%;
+            bottom: -35%;
+            left: 5%;
         }
         .niche-curve-2 {
             position: absolute;
-            width: 60%;
-            height: 60%;
-            border: 1px dashed rgba(255, 255, 255, 0.2);
+            width: 70%;
+            height: 70%;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            bottom: -10%;
-            left: 25%;
+            bottom: -15%;
+            left: 15%;
         }
 
-        /* Mosaico minimalista para simular fotos */
+        /* Mosaico de fotos difuminadas */
         .photo-grid-mockup {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             height: 100%;
         }
         .photo-dash {
             flex: 1;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
         }
 
-        /* Responsive */
         @media (max-width: 900px) {
-            header { padding: 20px; }
+            header { padding: 20px 30px; }
             .container { grid-template-columns: 1fr; }
-            .hero-block-full { grid-column: span 1; padding: 40px 25px; }
+            .hero-block-full { grid-column: span 1; padding: 50px 30px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Encabezado con Logo estilizado -->
+    <!-- Menú Superior Armonizado -->
     <header>
         <div class="header-logo">
             <span class="logo-italics">Paspalum</span> blog <span class="logo-icon">🌿</span>
@@ -262,7 +265,7 @@
     </header>
 
     <div class="container">
-        <!-- Bloque de Título Principal Expandido -->
+        <!-- Bloque de Título Principal con Tipografía Editorial Fluida -->
         <section class="card hero-block-full">
             <h1>
                 Explore the biogeography and environmental preferences of 
@@ -302,7 +305,7 @@
             </div>
             <div class="visual-mockup" style="border: none;">
                 <div class="photo-grid-mockup">
-                    <div class="photo-dash" style="background: rgba(168, 185, 154, 0.2);"></div>
+                    <div class="photo-dash" style="background: rgba(194, 214, 180, 0.12);"></div>
                     <div class="photo-dash"></div>
                     <div class="photo-dash"></div>
                 </div>
