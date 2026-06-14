@@ -5,18 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paspalum Blog</title>
     
-    <!-- Fuentes premium unificadas para máxima fluidez -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Cormorant Garamond (Editorial) e Inter (Navegación) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Capa nublada / brumosa sobre la imagen para suavizarla sin taparla */
-            --bg-overlay: linear-gradient(180deg, rgba(34, 43, 36, 0.45) 0%, rgba(24, 28, 25, 0.6) 100%);
-            /* Tarjetas tipo niebla traslúcida (efecto sutil de cristal empavonado) */
-            --card-glass: rgba(28, 33, 29, 0.45); 
+            /* Capa brumosa oscura ultra-premium */
+            --bg-overlay: linear-gradient(180deg, rgba(10, 14, 11, 0.7) 0%, rgba(5, 7, 6, 0.85) 100%);
+            /* Cristal translúcido ahumado oscuro */
+            --card-glass: rgba(18, 22, 19, 0.65); 
+            --card-glass-bottom: rgba(13, 16, 14, 0.8);
             --text-main: #ffffff;
-            --text-muted: #cbd7cc;
-            --accent-sage: #c2d6b4; /* Verde salvia más iluminado para ambiente nublado */
+            --text-muted: #9fa8a0;
+            --accent-sage: #8fa382; /* Verde salvia orgánico apagado */
+            --border-subtle: rgba(143, 163, 130, 0.25);
         }
 
         * {
@@ -28,21 +30,22 @@
 
         body {
             color: var(--text-main);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Cormorant Garamond', serif;
             min-height: 100vh;
             padding: 40px 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             
-            /* Tu foto palmar.png de fondo completamente integrada */
+            /* Tu fondo palmar.png integrado de forma mística y oscura */
             background-image: var(--bg-overlay), url('palmar.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            background-color: #050706;
         }
 
-        /* --- Header integrado --- */
+        /* --- Header Superior --- */
         header {
             position: absolute;
             top: 0;
@@ -51,266 +54,248 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 60px;
+            padding: 35px 80px;
             z-index: 10;
         }
 
         .header-logo {
             font-size: 1.8rem;
-            font-family: 'Cormorant Garamond', serif;
             color: var(--text-main);
             display: flex;
             align-items: center;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            letter-spacing: 0.02em;
         }
 
-        .logo-italics {
-            font-style: italic;
-            font-weight: 500;
-            margin-right: 6px;
-        }
-
-        .logo-icon {
-            font-size: 1.2rem;
-            margin-left: 10px;
-            opacity: 0.8;
+        .header-logo svg {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            fill: var(--accent-sage);
         }
 
         nav ul {
             display: flex;
-            gap: 45px;
+            gap: 40px;
             list-style: none;
         }
 
         nav a {
             text-decoration: none;
             color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
             font-weight: 500;
-            font-size: 0.85rem;
-            letter-spacing: 0.15em;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
         }
 
-        nav a:hover {
-            color: var(--accent-sage);
+        nav a.active, nav a:hover {
+            color: var(--text-main);
+            border-bottom: 1px solid var(--accent-sage);
+            padding-bottom: 4px;
         }
 
-        /* --- Contenedor Bento Grid --- */
+        /* --- Contenedor Principal (Bento Grid) --- */
         .container {
             width: 100%;
-            max-width: 1140px;
-            margin-top: 90px;
+            max-width: 1100px;
+            margin-top: 80px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
         }
 
-        /* Cajas modificadas: Cristal nublado de alta definición */
-        .card {
-            background-color: var(--card-glass);
-            padding: 45px;
-            border-radius: 32px;
-            backdrop-filter: blur(25px); /* Desenfoque profundo tipo niebla */
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            box-shadow: 0 30px 60px rgba(15, 24, 18, 0.15); /* Sombra orgánica suave */
-        }
-
-        /* Bloque superior */
-        .hero-block-full {
+        /* Tarjeta Central del Hero */
+        .hero-card {
             grid-column: span 3;
-            padding: 80px 60px;
+            background-color: var(--card-glass);
+            border-radius: 28px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 60px 40px;
             text-align: center;
-        }
-
-        /* Rediseño del título: Letra fluida, suave y elegante (Cormorant Garamond) */
-        h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.4rem, 4.2vw, 4.4rem);
-            font-weight: 500; /* Peso elegante, no tosco */
-            text-transform: uppercase;
-            line-height: 1.3;
-            letter-spacing: 0.05em; /* Mayor soltura entre letras */
-            color: var(--text-main);
-            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Integración perfecta de Paspalum dentro del flujo del texto */
-        .title-paspalum-italics {
-            font-style: italic;
-            font-weight: 500;
-            text-transform: none; /* Mantiene la naturaleza orgánica de la cursiva */
-            color: var(--accent-sage);
-            font-family: 'Cormorant Garamond', serif;
-            padding: 0 6px;
-        }
-
-        /* --- Bloques Inferiores Modulares --- */
-        .feature-box {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            min-height: 230px;
-            cursor: pointer;
-        }
-
-        .feature-box:hover {
-            transform: translateY(-4px);
-            background-color: rgba(40, 48, 42, 0.55);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .box-header {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
         }
 
-        .box-title {
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 0.06em;
-            color: var(--text-main);
-        }
-
-        .box-icon {
-            font-size: 1.3rem;
+        /* Detalles Ornamentales */
+        .decor-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--accent-sage);
+            margin: 10px 0;
             opacity: 0.8;
         }
 
-        /* Gráficos sutiles traslúcidos dentro de las cajas */
-        .visual-mockup {
-            width: 100%;
-            height: 90px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 16px;
-            border: 1px dashed rgba(255, 255, 255, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Líneas minimalistas de mapas */
-        .map-line {
-            position: absolute;
-            width: 140%;
+        .divider-line {
+            width: 120px;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-sage), transparent);
-            top: 45%;
-            left: -20%;
-            transform: rotate(-12deg);
-        }
-        .map-dot {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background-color: #ffffff;
-            border-radius: 50%;
-            top: 39%;
-            left: 55%;
-            box-shadow: 0 0 10px var(--accent-sage);
+            background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+            margin: 15px 0;
         }
 
-        /* Curvas suaves del nicho ecológico */
-        .niche-curve {
-            position: absolute;
-            width: 90%;
-            height: 90%;
-            border: 1px solid rgba(194, 214, 180, 0.25);
-            border-radius: 50%;
-            bottom: -35%;
-            left: 5%;
-        }
-        .niche-curve-2 {
-            position: absolute;
-            width: 70%;
-            height: 70%;
-            border: 1px dashed rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            bottom: -15%;
-            left: 15%;
+        /* Tipografía del Título Editorial */
+        h1 {
+            font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+            font-weight: 300;
+            line-height: 1.3;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 850px;
+            margin: 15px 0;
+            letter-spacing: 0.01em;
         }
 
-        /* Mosaico de fotos difuminadas */
-        .photo-grid-mockup {
+        .italics-species {
+            font-style: italic;
+            color: var(--accent-sage);
+            font-weight: 400;
+        }
+
+        /* Botón Ovalado Minimalista */
+        .cta-button {
+            background-blank: transparent;
+            background-color: rgba(255, 255, 255, 0.02);
+            color: rgba(255, 255, 255, 0.85);
+            border: 1px solid var(--border-subtle);
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
             display: flex;
+            align-items: center;
             gap: 10px;
-            height: 100%;
-        }
-        .photo-dash {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 10px;
+            margin-top: 15px;
         }
 
-        @media (max-width: 900px) {
-            header { padding: 20px 30px; }
+        .cta-button svg {
+            width: 14px;
+            height: 14px;
+            fill: var(--accent-sage);
+        }
+
+        .cta-button:hover {
+            background-color: rgba(143, 163, 130, 0.15);
+            border-color: var(--accent-sage);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        /* --- Bloques Inferiores Simétricos --- */
+        .feature-box {
+            background-color: var(--card-glass-bottom);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 35px 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 190px;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+            background-color: rgba(24, 30, 26, 0.85);
+            border-color: var(--border-subtle);
+        }
+
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            fill: var(--accent-sage);
+            margin-bottom: 18px;
+        }
+
+        .feature-title {
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: 0.02em;
+        }
+
+        .feature-line {
+            width: 18px;
+            height: 1px;
+            background-color: var(--accent-sage);
+            margin-top: 12px;
+            opacity: 0.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 850px) {
+            header { padding: 25px 40px; }
             .container { grid-template-columns: 1fr; }
-            .hero-block-full { grid-column: span 1; padding: 50px 30px; }
+            .hero-card { grid-column: span 1; padding: 40px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Menú Superior Armonizado -->
+    <!-- Header / Navbar -->
     <header>
         <div class="header-logo">
-            <span class="logo-italics">Paspalum</span> blog <span class="logo-icon">🌿</span>
+            <!-- Icono de brote/rama izquierdo -->
+            <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A1,1 0 0,1 13,5C13,5.8 12,7 12,7C12,7 11,5.8 11,5A1,1 0 0,1 12,4M12,18C12,18 9.5,15.5 9.5,13.5A2.5,2.5 0 0,1 12,11A2.5,2.5 0 0,1 14.5,13.5C14.5,15.5 12,18 12,18M12,9C10.34,9 9,10.34 9,12C9,13.1 9.6,14.07 10.5,14.57C10.2,13.24 10.82,11.85 12,11.15C13.18,11.85 13.8,13.24 13.5,14.57C14.4,14.07 15,13.1 15,12C15,10.34 13.66,9 12,9Z"/></svg>
+            Paspalum blog
         </div>
         <nav>
             <ul>
-                <li><a href="#home">HOME</a></li>
+                <li><a href="#home" class="active">HOME</a></li>
                 <li><a href="#about">ABOUT</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Contenedor Principal Bento -->
     <div class="container">
-        <!-- Bloque de Título Principal con Tipografía Editorial Fluida -->
-        <section class="card hero-block-full">
-            <h1>
-                Explore the biogeography and environmental preferences of 
-                <span class="title-paspalum-italics">Paspalum</span> species
-            </h1>
+        
+        <!-- Módulo del Hero Principal -->
+        <section class="hero-card">
+            <!-- Detalle ornamental superior -->
+            <svg class="decor-icon" viewBox="0 0 24 24"><path d="M12,2C11.33,3.27 10.66,4.54 10,5.82C10.9,6.5 12,7 12,7C12,7 13.1,6.5 14,5.82C13.34,4.54 12.67,3.27 12,2M12,8C10,9.5 7,12 7,15A5,5 0 0,0 12,20A5,5 0 0,0 17,15C17,12 14,9.5 12,8M12,11A3,3 0 0,1 15,14C15,15.5 13.5,17 12,18.5C10.5,17 9,15.5 9,14A3,3 0 0,1 12,11Z"/></svg>
+            <div class="divider-line"></div>
+            
+            <h1>Explore the Biogeography and Environmental Preferences of <span class="italics-species">Paspalum</span> Species</h1>
+            
+            <div class="divider-line"></div>
+            
+            <!-- Botón con mini brote -->
+            <button class="cta-button">
+                Explore Details 
+                <svg viewBox="0 0 24 24"><path d="M12,2C12,2 14.5,6.5 14.5,9.5A2.5,2.5 0 0,1 12,12A2.5,2.5 0 0,1 9.5,9.5C9.5,6.5 12,2 12,2M12,13C14.67,13 20,14.33 20,17V19H4V17C4,14.33 9.33,13 12,13Z"/></svg>
+            </button>
         </section>
 
         <!-- Bloque 1: Maps -->
-        <div class="card feature-box">
-            <div class="box-header">
-                <span class="box-title">Maps</span>
-                <span class="box-icon">🗺️</span>
-            </div>
-            <div class="visual-mockup">
-                <div class="map-line"></div>
-                <div class="map-dot"></div>
-            </div>
+        <div class="feature-box">
+            <!-- Icono Vectorial: Pin con hoja botánica adentro -->
+            <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2M12,4A5,5 0 0,1 17,9C17,11.72 14.23,15.93 12,18.72C9.74,15.91 7,11.7 7,9A5,5 0 0,1 12,4M12,6A3,3 0 0,0 9,9C9,10.1 9.6,11.07 10.5,11.57C10.2,10.24 10.82,8.85 12,8.15C13.18,8.85 13.8,10.24 13.5,11.57C14.4,11.07 15,10.1 15,9A3,3 0 0,0 12,6Z"/></svg>
+            <span class="feature-title">Maps</span>
+            <div class="feature-line"></div>
         </div>
 
         <!-- Bloque 2: Environmental Preferences -->
-        <div class="card feature-box">
-            <div class="box-header">
-                <span class="box-title">Environmental Preferences</span>
-                <span class="box-icon">📊</span>
-            </div>
-            <div class="visual-mockup">
-                <div class="niche-curve"></div>
-                <div class="niche-curve-2"></div>
-            </div>
+        <div class="feature-box">
+            <!-- Icono Vectorial: Planta de tres hojas en crecimiento -->
+            <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12,3C11.24,5 10.47,7 9.71,9C10.74,10 12,10.8 12,10.8C12,10.8 13.26,10 14.29,9C13.53,7 12.76,5 12,3M12,11.5C9.33,13 5,15.5 5,18.5A3.5,3.5 0 0,0 8.5,22A3.5,3.5 0 0,0 12,18.5A3.5,3.5 0 0,0 15.5,22A3.5,3.5 0 0,0 19,18.5C19,15.5 14.67,13 12,11.5M12,14C13.66,14 15,15.34 15,17C15,18.66 13.66,20 12,20C10.34,20 9,18.66 9,17C9,15.34 10.34,14 12,14Z"/></svg>
+            <span class="feature-title">Environmental Preferences</span>
+            <div class="feature-line"></div>
         </div>
 
         <!-- Bloque 3: Photos -->
-        <div class="card feature-box">
-            <div class="box-header">
-                <span class="box-title">Photos</span>
-                <span class="box-icon">🖼️</span>
-            </div>
-            <div class="visual-mockup" style="border: none;">
-                <div class="photo-grid-mockup">
-                    <div class="photo-dash" style="background: rgba(194, 214, 180, 0.12);"></div>
-                    <div class="photo-dash"></div>
-                    <div class="photo-dash"></div>
-                </div>
-            </div>
+        <div class="feature-box">
+            <!-- Icono Vectorial: Cámara fotográfica minimalista -->
+            <svg class="feature-icon" viewBox="0 0 24 24"><path d="M4,4H7L9,2H15L17,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9Z"/></svg>
+            <span class="feature-title">Photos</span>
+            <div class="feature-line"></div>
         </div>
+
     </div>
 
 </body>
