@@ -13,10 +13,16 @@
             --bg-overlay: linear-gradient(180deg,rgba(15,25,18,.35) 0%,rgba(10,18,12,.55) 100%);
             /* Cristal translúcido ahumado oscuro */
             --card-glass-bottom: rgba(13, 16, 14, 0.8);
+            --bg-overlay: radial-gradient(circle at 50% 18%, rgba(156, 177, 129, 0.18), transparent 34%), linear-gradient(180deg, rgba(7, 15, 9, 0.50) 0%, rgba(4, 9, 6, 0.82) 100%);
+            --card-glass-bottom: rgba(13, 16, 14, 0.74);
             --text-main: #ffffff;
             --text-muted: #9fa8a0;
             --accent-sage: #8fa382; /* Verde salvia orgánico apagado */
             --border-subtle: rgba(143, 163, 130, 0.25);
+            --text-muted: #c3cdbd;
+            --accent-sage: #a8bf8d;
+            --accent-warm: #e8dcc0;
+            --border-subtle: rgba(168, 191, 141, 0.32);
         }
 
         * {
@@ -24,6 +30,7 @@
             padding: 0;
             box-sizing: border-box;
             transition: all 0.4s ease;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -31,6 +38,7 @@
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
             padding: 40px 20px;
+            padding: 32px 20px 56px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -43,9 +51,20 @@
             background-color: #050706;
         }
 
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(115deg, rgba(255,255,255,0.10), transparent 22%, transparent 72%, rgba(168,191,141,0.12));
+            mix-blend-mode: screen;
+            opacity: .55;
+        }
+
         /* --- Header Superior --- */
         header {
             position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -53,6 +72,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 35px 80px;
+            padding: 24px clamp(24px, 6vw, 80px);
+            background: linear-gradient(180deg, rgba(5, 10, 7, .62), transparent);
+            backdrop-filter: blur(2px);
             z-index: 10;
         }
 
@@ -102,9 +124,11 @@
             width: 100%;
             max-width: 1100px;
             margin-top: 80px;
+            margin-top: 92px;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
+            gap: 22px;
         }
 
         /* Tarjeta Central del Hero (Ajustada y estilizada) */
@@ -114,17 +138,23 @@
             width: 100%;
             margin: 0 auto; /* Centra el bloque dentro del contenedor bento */
             background: rgba(0, 0, 0, 0.03);
+            background: linear-gradient(145deg, rgba(7, 21, 12, 0.66), rgba(7, 13, 9, 0.42));
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.55);
             border-radius: 0px;
             padding: 60px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 28px;
+            padding: clamp(44px, 7vw, 76px) clamp(24px, 6vw, 64px);
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             box-shadow: none;
             outline: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 90px rgba(0, 0, 0, .42), inset 0 1px 0 rgba(255,255,255,.14);
+            outline: 1px solid rgba(255, 255, 255, 0.12);
             outline-offset: 10px;
         }
 
@@ -151,8 +181,11 @@
             font-weight: 200;
             line-height: 1.3;
             letter-spacing: -0.02em;
+            letter-spacing: 0.015em;
             text-transform: uppercase;
             color: rgba(255, 255, 255, .95);
+            color: rgba(255, 255, 255, .94);
+            text-shadow: 0 8px 36px rgba(0,0,0,.48);
             max-width: 1000px;
         }
 
@@ -162,6 +195,7 @@
             font-style: normal;
             font-weight: 600;
             color: rgba(255, 255, 255, 1);
+            color: var(--accent-warm);
         }
 
         /* Botón Ovalado Minimalista */
@@ -173,6 +207,7 @@
             border-radius: 50px;
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
+            font-size: 0.78rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             cursor: pointer;
@@ -180,6 +215,9 @@
             align-items: center;
             gap: 10px;
             margin-top: 30px;
+            margin-top: 32px;
+            text-decoration: none;
+            transition: transform .3s ease, background-color .3s ease, border-color .3s ease;
         }
 
         .cta-button svg {
@@ -199,6 +237,10 @@
         .feature-box {
             background-color: var(--card-glass-bottom);
             border-radius: 20px;
+            background: linear-gradient(180deg, rgba(19, 29, 21, .78), rgba(10, 14, 11, .78));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 22px;
             border: 1px solid rgba(255, 255, 255, 0.04);
             padding: 35px 20px;
             text-align: center;
@@ -207,8 +249,13 @@
             align-items: center;
             justify-content: center;
             min-height: 190px;
+            min-height: 156px;
             cursor: pointer;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.34);
+            transition: transform .3s ease, background-color .3s ease, border-color .3s ease;
+            text-decoration: none;
+            color: inherit;
         }
 
         .feature-box:hover {
@@ -245,6 +292,15 @@
             .container { grid-template-columns: 1fr; }
             .hero-card { grid-column: span 1; padding: 40px 20px; }
         }
+
+        @media (max-width: 620px) {
+            body { padding: 20px 14px 40px; }
+            header { position: static; padding: 10px 6px 24px; flex-direction: column; gap: 18px; background: transparent; }
+            .header-logo { font-size: 1.35rem; }
+            nav ul { gap: 24px; }
+            .container { margin-top: 0; }
+            h1 { font-size: clamp(1.7rem, 9vw, 2.4rem); }
+        }
     </style>
 </head>
 <body>
@@ -278,16 +334,20 @@
             <div class="divider-line"></div>
             
             <button class="cta-button">
+            <a class="cta-button" href="mapas.html">
                 Explore Details 
                 <svg viewBox="0 0 24 24"><path d="M12,2C12,2 14.5,6.5 14.5,9.5A2.5,2.5 0 0,1 12,12A2.5,2.5 0 0,1 9.5,9.5C9.5,6.5 12,2 12,2M12,13C14.67,13 20,14.33 20,17V19H4V17C4,14.33 9.33,13 12,13Z"/></svg>
             </button>
+            </a>
         </section>
 
         <div class="feature-box">
+        <a class="feature-box" href="mapas.html" aria-label="Open maps">
             <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2M12,4A5,5 0 0,1 17,9C17,11.72 14.23,15.93 12,18.72C9.74,15.91 7,11.7 7,9A5,5 0 0,1 12,4M12,6A3,3 0 0,0 9,9C9,10.1 9.6,11.07 10.5,11.57C10.2,10.24 10.82,8.85 12,8.15C13.18,8.85 13.8,10.24 13.5,11.57C14.4,11.07 15,10.1 15,9A3,3 0 0,0 12,6Z"/></svg>
             <span class="feature-title">Maps</span>
             <div class="feature-line"></div>
         </div>
+        </a>
 
         <div class="feature-box">
             <svg class="feature-icon" viewBox="0 0 24 24"><path d="M12,3C11.24,5 10.47,7 9.71,9C10.74,10 12,10.8 12,10.8C12,10.8 13.26,10 14.29,9C13.53,7 12.76,5 12,3M12,11.5C9.33,13 5,15.5 5,18.5A3.5,3.5 0 0,0 8.5,22A3.5,3.5 0 0,0 12,18.5A3.5,3.5 0 0,0 15.5,22A3.5,3.5 0 0,0 19,18.5C19,15.5 14.67,13 12,11.5M12,14C13.66,14 15,15.34 15,17C15,18.66 13.66,20 12,20C10.34,20 9,18.66 9,17C9,15.34 10.34,14 12,14Z"/></svg>
