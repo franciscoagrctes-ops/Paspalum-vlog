@@ -11,8 +11,7 @@
         :root {
             --bg-overlay: linear-gradient(180deg, rgba(5, 12, 7, 0.58) 0%, rgba(5, 12, 7, 0.78) 48%, rgba(3, 7, 4, 0.94) 100%);
             --nav-bg: rgba(35, 35, 35, 0.92);
-            --panel-bg: rgba(8, 19, 11, 0.68);
-            --panel-border: rgba(237, 229, 204, 0.22);
+            --panel-border: rgba(237, 229, 204, 0.15);
             --text-main: #ffffff;
             --text-muted: #d7ddcf;
             --text-soft: rgba(255, 255, 255, 0.74);
@@ -56,7 +55,7 @@
             position: fixed;
             inset: 0;
             pointer-events: none;
-            background: radial-gradient(circle at 50% 22%, rgba(240, 228, 197, 0.15), transparent 24%);
+            background: radial-gradient(circle at 50% 22%, rgba(240, 228, 197, 0.12), transparent 28%);
             z-index: 0;
         }
 
@@ -154,44 +153,47 @@
 
         .hero {
             width: 100%;
-            padding: 40px 0 80px;
+            padding: 20px 0 60px;
             display: flex;
             justify-content: center;
         }
 
+        /* NUEVO CONFIGURADO MÁS GRANDE Y CON MÁS BLUR DE FONDO */
         .hero-panel {
-            width: min(760px, 100%);
-            min-height: 550px;
-            padding: clamp(42px, 7vw, 78px) clamp(24px, 6vw, 68px);
+            width: min(950px, 100%);
+            min-height: 640px;
+            padding: clamp(50px, 8vw, 90px) clamp(30px, 7vw, 80px);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: var(--panel-bg);
+            
+            /* Súper difuminado con el fondo (opacidad baja, blur alto) */
+            background: rgba(8, 19, 11, 0.35); 
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            
             border: 1px solid var(--panel-border);
             border-radius: 28px;
-            box-shadow: var(--shadow-strong), inset 0 1px 0 rgba(255, 255, 255, 0.10);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            outline: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: var(--shadow-strong), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            outline: 1px solid rgba(255, 255, 255, 0.1);
             outline-offset: 10px;
         }
 
         .hero-emblem {
-            width: 110px;
-            height: 110px;
+            width: 100px;
+            height: 100px;
             margin-bottom: 24px;
-            border: 2px solid rgba(255, 255, 255, 0.4);
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
             border-radius: 50%;
             display: grid;
             place-items: center;
-            position: relative;
         }
 
         .hero-emblem svg {
-            width: 48px;
-            height: 48px;
+            width: 42px;
+            height: 42px;
             fill: #fff;
         }
 
@@ -206,9 +208,9 @@
 
         h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(3rem, 7vw, 5.5rem);
             font-weight: 800;
-            line-height: 1.1;
+            line-height: 1.05;
             letter-spacing: -0.04em;
             text-transform: uppercase;
             color: #fff;
@@ -216,29 +218,29 @@
         }
 
         .subtitle {
-            margin-top: 12px;
+            margin-top: 14px;
             color: var(--accent-cream);
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+            font-size: clamp(0.9rem, 1.8vw, 1.28rem);
             font-weight: 400;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.28em;
             text-transform: uppercase;
         }
 
         .intro-copy {
-            max-width: 580px;
-            margin-top: 24px;
+            max-width: 600px;
+            margin-top: 26px;
             color: var(--text-soft);
-            font-size: 0.95rem;
-            line-height: 1.7;
+            font-size: 0.98rem;
+            line-height: 1.75;
         }
 
         .actions {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 14px;
-            margin-top: 30px;
+            gap: 16px;
+            margin-top: 34px;
         }
 
         .cta-button {
@@ -246,14 +248,14 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            min-width: 178px;
-            min-height: 48px;
-            padding: 13px 24px;
+            min-width: 185px;
+            min-height: 50px;
+            padding: 13px 26px;
             border-radius: 999px;
             text-decoration: none;
             text-transform: uppercase;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.74rem;
+            font-size: 0.76rem;
             font-weight: 700;
             letter-spacing: 0.1em;
         }
@@ -281,7 +283,7 @@
             transform: translateY(-3px);
         }
 
-        /* --- Opciones Inferiores (Bento) --- */
+        /* --- Opciones Inferiores (Bento Layout) --- */
         .quick-options {
             width: 100%;
             display: grid;
@@ -296,8 +298,8 @@
             color: var(--text-main);
             text-decoration: none;
             border-radius: 22px;
-            background: rgba(240, 228, 197, 0.05);
-            border: 1px solid rgba(240, 228, 197, 0.15);
+            background: rgba(240, 228, 197, 0.04);
+            border: 1px solid rgba(240, 228, 197, 0.12);
             box-shadow: 0 20px 54px rgba(0, 0, 0, 0.30);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
