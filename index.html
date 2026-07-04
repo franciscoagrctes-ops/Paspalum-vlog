@@ -358,6 +358,309 @@
             }
         }
     </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paspalum Blog</title>
+  <meta name="description" content="Blog botánico sobre distribución, ambiente y registros visuales del género Paspalum.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-overlay: radial-gradient(circle at 50% 0%, rgba(183, 201, 154, 0.12), transparent 34%), linear-gradient(180deg, rgba(5, 12, 7, 0.50) 0%, rgba(5, 12, 7, 0.72) 48%, rgba(3, 7, 4, 0.94) 100%);
+      --nav-bg: rgba(24, 25, 22, 0.92);
+      --panel-bg: rgba(5, 12, 7, 0.38);
+      --panel-border: rgba(240, 228, 197, 0.14);
+      --text-main: #ffffff;
+      --text-muted: #d7ddcf;
+      --text-soft: rgba(255, 255, 255, 0.84);
+      --accent-sage: #b7c99a;
+      --accent-cream: #f0e4c5;
+      --accent-deep: #112416;
+      --shadow-strong: 0 40px 100px rgba(0, 0, 0, 0.52);
+      --radius-xl: 28px;
+      --radius-md: 20px;
+      --content-width: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      padding: 104px 0 56px;
+      background-image: var(--bg-overlay), url('palmar.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-color: #050906;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+    em { font-style: italic; }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-height: 72px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 12px clamp(20px, 5vw, 64px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.26);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      z-index: 100;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1rem, 1.6vw, 1.28rem);
+      letter-spacing: -0.02em;
+    }
+
+    .brand svg { width: 21px; height: 21px; fill: var(--accent-sage); }
+    .brand strong { font-weight: 800; }
+
+    .main-nav ul {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(16px, 3.4vw, 46px);
+      list-style: none;
+    }
+
+    .main-nav a,
+    .utility-link,
+    .cta-button {
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .main-nav a {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding-bottom: 5px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.25s ease, border-color 0.25s ease;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      color: var(--accent-cream);
+      border-bottom-color: var(--accent-cream);
+    }
+
+    .utility-link {
+      justify-self: end;
+      border: 1px solid rgba(240, 228, 197, 0.42);
+      border-radius: 999px;
+      padding: 10px 18px;
+      color: var(--accent-cream);
+      font-size: 0.78rem;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .utility-link:hover { background: rgba(240, 228, 197, 0.12); transform: translateY(-2px); }
+
+    main {
+      width: min(var(--content-width), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero-panel,
+    .feature-card,
+    .workflow-panel,
+    .field-note {
+      border: 1px solid var(--panel-border);
+      background: var(--panel-bg);
+      box-shadow: var(--shadow-strong);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+    }
+
+    .hero-panel {
+      position: relative;
+      min-height: min(68vh, 680px);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: clamp(64px, 8vw, 110px) clamp(20px, 6vw, 76px);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: '';
+      position: absolute;
+      inset: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 22px;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 780px; }
+    .hero-emblem {
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 26px;
+      border: 1px solid rgba(240, 228, 197, 0.24);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .hero-emblem svg { width: 36px; height: 36px; fill: var(--accent-cream); }
+    .eyebrow {
+      color: var(--accent-sage);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(3.8rem, 10vw, 7.6rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      text-shadow: 0 10px 34px rgba(0, 0, 0, 0.52);
+    }
+
+    .subtitle {
+      margin-top: 18px;
+      color: var(--accent-cream);
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.95rem, 2vw, 1.28rem);
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+    }
+
+    .intro-copy {
+      max-width: 670px;
+      margin: 28px auto 0;
+      color: var(--text-soft);
+      font-size: clamp(1rem, 1.5vw, 1.1rem);
+      line-height: 1.78;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.52);
+    }
+
+    .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 40px; }
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 188px;
+      min-height: 52px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .cta-button.primary { background: var(--accent-cream); border: 1px solid var(--accent-cream); color: var(--accent-deep); }
+    .cta-button.secondary { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(240, 228, 197, 0.52); color: var(--accent-cream); }
+    .cta-button:hover { transform: translateY(-3px); }
+    .cta-button.primary:hover { background: #fff4d7; }
+    .cta-button.secondary:hover { background: rgba(240, 228, 197, 0.11); border-color: var(--accent-cream); }
+
+    .quick-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin: 24px 0;
+    }
+
+    .feature-card {
+      min-height: 178px;
+      padding: 28px;
+      color: var(--text-main);
+      text-decoration: none;
+      border-radius: var(--radius-md);
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .feature-card:hover { transform: translateY(-6px); background: rgba(240, 228, 197, 0.08); border-color: rgba(240, 228, 197, 0.3); }
+    .feature-card span { display: block; margin-bottom: 14px; color: var(--accent-sage); font-size: 0.76rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; }
+    .feature-card h2 { font-family: 'Montserrat', sans-serif; font-size: 1.34rem; margin-bottom: 10px; }
+    .feature-card p { color: var(--text-soft); line-height: 1.65; font-size: 0.94rem; }
+
+    .workflow-panel {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 30px;
+      align-items: center;
+      margin-top: 24px;
+      padding: clamp(28px, 5vw, 46px);
+      border-radius: var(--radius-xl);
+    }
+
+    .workflow-panel h2,
+    .field-note h2 {
+      color: var(--accent-cream);
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3.1rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .workflow-panel p,
+    .field-note p { margin-top: 18px; color: var(--text-soft); line-height: 1.75; }
+    .steps { display: grid; gap: 14px; list-style: none; }
+    .steps li { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; color: var(--text-soft); line-height: 1.55; }
+    .steps strong { color: var(--accent-cream); }
+    .step-number { min-width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: rgba(183, 201, 154, 0.14); color: var(--accent-sage); font: 800 0.8rem 'Montserrat', sans-serif; }
+
+    .field-note {
+      margin-top: 24px;
+      padding: clamp(28px, 5vw, 46px);
+      border-radius: var(--radius-xl);
+    }
+
+    .species-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+      list-style: none;
+    }
+
+    .species-list li {
+      border: 1px solid rgba(240, 228, 197, 0.22);
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: var(--accent-cream);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    @media (max-width: 900px) {
+      body { padding-top: 234px; background-attachment: scroll; }
+      .site-header { grid-template-columns: 1fr; gap: 16px; position: absolute; }
+      .brand, .utility-link { justify-self: center; }
+      .main-nav ul { flex-wrap: wrap; gap: 12px 20px; }
+      .quick-options, .workflow-panel { grid-template-columns: 1fr; }
+      .hero-panel { min-height: auto; }
+    }
+  </style>
 </head>
 <body>
 
@@ -418,5 +721,81 @@
         </section>
     </main>
 
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Inicio de Paspalum blog">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A1,1 0 0,1 13,5C13,5.8 12,7 12,7C12,7 11,5.8 11,5A1,1 0 0,1 12,4M12,18C12,18 9.5,15.5 9.5,13.5A2.5,2.5 0 0,1 12,11A2.5,2.5 0 0,1 14.5,13.5C14.5,15.5 12,18 12,18M12,9C10.34,9 9,10.34 9,12C9,13.1 9.6,14.07 10.5,14.57C10.2,13.24 10.82,11.85 12,11.15C13.18,11.85 13.8,13.24 13.5,14.57C14.4,14.07 15,13.1 15,12C15,10.34 13.66,9 12,9Z"/></svg>
+      <span><strong>Paspalum</strong> blog</span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <ul>
+        <li><a class="active" href="index.html">Inicio</a></li>
+        <li><a href="mapas.html">Mapas</a></li>
+        <li><a href="#preferencias">Preferencias</a></li>
+        <li><a href="#fotos">Fotos</a></li>
+        <li><a href="#proyecto">Proyecto</a></li>
+      </ul>
+    </nav>
+    <a class="utility-link" href="mapas.html">Explorar mapas</a>
+  </header>
+
+  <main>
+    <section class="hero-panel" id="inicio">
+      <div class="hero-content">
+        <div class="hero-emblem" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12,2C11.33,3.27 10.66,4.54 10,5.82C10.9,6.5 12,7 12,7C12,7 13.1,6.5 14,5.82C13.34,4.54 12.67,3.27 12,2M12,8C10,9.5 7,12 7,15A5,5 0 0,0 12,20A5,5 0 0,0 17,15C17,12 14,9.5 12,8M12,11A3,3 0 0,1 15,14C15,15.5 13.5,17 12,18.5C10.5,17 9,15.5 9,14A3,3 0 0,1 12,11Z"/></svg>
+        </div>
+        <p class="eyebrow">Biogeografía vegetal</p>
+        <h1>Paspalum</h1>
+        <p class="subtitle">exploración ambiental</p>
+        <p class="intro-copy">Un archivo botánico para recorrer mapas, preferencias ambientales y registros visuales del género <em>Paspalum</em> con una identidad limpia, natural y preparada para datos reales.</p>
+        <div class="actions">
+          <a class="cta-button primary" href="mapas.html">Ver mapas</a>
+          <a class="cta-button secondary" href="#proyecto">Ver enfoque</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-options" aria-label="Accesos principales">
+      <a class="feature-card" href="mapas.html">
+        <span>01 / mapas</span>
+        <h2>Distribución</h2>
+        <p>Visualizá ocurrencias por especie y prepará el mapa para datos de campo.</p>
+      </a>
+      <a class="feature-card" href="#preferencias" id="preferencias">
+        <span>02 / ambiente</span>
+        <h2>Preferencias</h2>
+        <p>Compará gradientes, ambientes y condiciones asociadas a cada registro.</p>
+      </a>
+      <a class="feature-card" href="#fotos" id="fotos">
+        <span>03 / archivo</span>
+        <h2>Fotos</h2>
+        <p>Ordená imágenes de campo y material visual para acompañar cada especie.</p>
+      </a>
+    </section>
+
+    <section class="workflow-panel" id="proyecto" aria-labelledby="workflow-title">
+      <div>
+        <p class="eyebrow">Sistema abierto</p>
+        <h2 id="workflow-title">Diseño claro, datos editables.</h2>
+        <p>La página queda pensada como artefacto estático de GitHub Pages: fácil de publicar, simple de modificar y lista para que Open Design use el archivo <code>DESIGN.md</code> como contrato visual.</p>
+      </div>
+      <ol class="steps">
+        <li><span class="step-number">1</span><span><strong>Subir datos.</strong> Convertimos CSV, GeoJSON o KML/KMZ a puntos web.</span></li>
+        <li><span class="step-number">2</span><span><strong>Revisar especies.</strong> Los nombres científicos se escriben en cursiva, por ejemplo <em>Paspalum guenoarum</em>.</span></li>
+        <li><span class="step-number">3</span><span><strong>Publicar.</strong> GitHub Pages sirve el blog sin backend ni dependencias complejas.</span></li>
+      </ol>
+    </section>
+
+    <section class="field-note" aria-labelledby="species-title">
+      <p class="eyebrow">Especies iniciales</p>
+      <h2 id="species-title">Base para ampliar el catálogo.</h2>
+      <p>Estas especies funcionan como punto de partida visual. Cuando me pases tus datos reales, reemplazamos los registros de ejemplo y sumamos fichas por especie.</p>
+      <ul class="species-list">
+        <li><em>Paspalum guenoarum</em></li>
+        <li><em>Paspalum dilatatum</em></li>
+        <li><em>Paspalum notatum</em></li>
+      </ul>
+    </section>
+  </main>
 </body>
 </html>
