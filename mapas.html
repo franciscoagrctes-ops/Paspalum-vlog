@@ -1,4 +1,5 @@
 <!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
@@ -370,6 +371,7 @@
     <a href="index.html" class="logo-area">
       <span class="logo-icon">🌿</span> TERRA | Paspalum vlog
     <a class="brand" href="index.html" aria-label="Paspalum blog home">
+    <a class="brand" href="index.html" aria-label="Inicio de Paspalum blog">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A1,1 0 0,1 13,5C13,5.8 12,7 12,7C12,7 11,5.8 11,5A1,1 0 0,1 12,4M12,18C12,18 9.5,15.5 9.5,13.5A2.5,2.5 0 0,1 12,11A2.5,2.5 0 0,1 14.5,13.5C14.5,15.5 12,18 12,18M12,9C10.34,9 9,10.34 9,12C9,13.1 9.6,14.07 10.5,14.57C10.2,13.24 10.82,11.85 12,11.15C13.18,11.85 13.8,13.24 13.5,14.57C14.4,14.07 15,13.1 15,12C15,10.34 13.66,9 12,9Z"/></svg>
       <span><strong>Paspalum</strong> blog</span>
     </a>
@@ -395,6 +397,7 @@
     </nav>
 
     <a class="utility-link" href="#occurrence-map">Ver mapa</a>
+    <a class="utility-link" href="#occurrence-map">Explorar mapas</a>
   </header>
 
   <!-- Sección de Mapas -->
@@ -476,7 +479,7 @@
             <div class="species-name">_Paspalum simplex_</div>
           </div>
         <p id="species-note" class="species-note">Los nombres científicos se muestran en latín y en cursiva dentro del mapa. Los marcadores actuales son una plantilla visual hasta que subamos tus ocurrencias.</p>
-        <p id="species-note" class="species-note">Los nombres científicos se muestran en latín y en cursiva. Los marcadores actuales son una plantilla visual hasta que subamos tus ocurrencias.</p>
+        <p id="species-note" class="species-note">Los nombres científicos se muestran en cursiva en títulos, notas y ventanas emergentes. Los marcadores actuales son una plantilla visual hasta que subamos tus ocurrencias.</p>
       </div>
 
           <div class="species-item">
@@ -565,11 +568,13 @@
     const occurrenceGroup = L.layerGroup().addTo(map);
     const speciesSelect = document.getElementById('species-select');
 
+    const mapsTitle = document.getElementById('maps-title');
     function renderSpecies(speciesKey) {
       const species = speciesLayers[speciesKey];
       const bounds = [];
       occurrenceGroup.clearLayers();
 
+      mapsTitle.innerHTML = `Ocurrencias de <em>${species.scientificName}</em>`;
       species.occurrences.forEach((occurrence) => {
         const marker = L.circleMarker([occurrence.lat, occurrence.lng], {
           radius: 8,
