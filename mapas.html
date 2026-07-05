@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paspalum guenoarum · Mapa de ocurrencias</title>
-<meta name="description" content="Mapa de ocurrencias de Paspalum guenoarum, con vista satelital y carga de datos propios en CSV.">
+<title>Paspalum guenoarum · Occurrence Map</title>
+<meta name="description" content="Occurrence map for Paspalum guenoarum, with satellite view and your own CSV data upload.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,24 +13,34 @@
 
 <style>
   :root {
-    --paper: #faf8f3;
-    --panel: #ffffff;
-    --ink: #23281f;
-    --ink-soft: #5b6350;
-    --sage: #5b7052;
-    --sage-pale: #e9ede2;
-    --stamp: #9c4b2e;
-    --line: #ded7c4;
+    --bg: #0e130d;
+    --panel: #171d13;
+    --panel-hover: #1f2718;
+    --ink: #eef1e6;
+    --ink-soft: #9caa8b;
+    --moss: #85b25c;
+    --moss-deep: #4c7a34;
+    --line: #2a3323;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--paper);
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(180deg, rgba(10, 14, 9, 0.88), rgba(10, 14, 9, 0.94)),
+      url('palmar.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: var(--ink);
     font-family: 'Inter', sans-serif;
     padding-top: 84px;
+  }
+
+  @media (max-width: 900px) {
+    body { background-attachment: scroll; }
   }
 
   a { color: inherit; }
@@ -38,41 +48,40 @@
 
   .specimen {
     position: relative;
-    background: var(--panel);
+    background: rgba(23, 29, 19, 0.72);
+    backdrop-filter: blur(6px);
     border: 1px solid var(--line);
   }
   .specimen::before, .specimen::after,
   .specimen > .tick-br::before, .specimen > .tick-br::after { content: ''; position: absolute; width: 14px; height: 14px; }
-  .specimen::before { top: -1px; left: -1px; border-top: 2px solid var(--ink); border-left: 2px solid var(--ink); }
-  .specimen::after { top: -1px; right: -1px; border-top: 2px solid var(--ink); border-right: 2px solid var(--ink); }
-  .specimen .tick-br::before { bottom: -1px; left: -1px; border-bottom: 2px solid var(--ink); border-left: 2px solid var(--ink); }
-  .specimen .tick-br::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--ink); border-right: 2px solid var(--ink); }
+  .specimen::before { top: -1px; left: -1px; border-top: 2px solid var(--moss); border-left: 2px solid var(--moss); }
+  .specimen::after { top: -1px; right: -1px; border-top: 2px solid var(--moss); border-right: 2px solid var(--moss); }
+  .specimen .tick-br::before { bottom: -1px; left: -1px; border-bottom: 2px solid var(--moss); border-left: 2px solid var(--moss); }
+  .specimen .tick-br::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--moss); border-right: 2px solid var(--moss); }
 
   .site-header {
     position: fixed; top: 0; left: 0; width: 100%;
     display: grid; grid-template-columns: 1fr auto 1fr;
     align-items: center; gap: 16px;
     padding: 18px clamp(20px, 5vw, 56px);
-    background: rgba(250, 248, 243, 0.92);
-    border-bottom: 1px solid var(--line);
+    background: rgba(10, 14, 9, 0.75);
     backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
     z-index: 1000;
   }
-  .brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; }
-  .brand svg { width: 18px; height: 18px; fill: var(--sage); }
+  .brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font-family: 'Fraunces', serif; font-style: italic; font-size: 1.15rem; font-weight: 600; color: var(--ink); }
+  .brand svg { width: 18px; height: 18px; fill: var(--moss); }
   .main-nav ul { display: flex; justify-content: center; gap: clamp(16px, 3vw, 36px); list-style: none; }
-  .main-nav a { text-decoration: none; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 4px; border-bottom: 1px solid transparent; }
-  .main-nav a:hover, .main-nav a.active { color: var(--stamp); border-bottom-color: var(--stamp); }
-  .utility-link { justify-self: end; text-decoration: none; border: 1px solid var(--ink); padding: 8px 16px; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); }
-  .utility-link:hover { background: var(--ink); color: var(--paper); }
+  .main-nav a { text-decoration: none; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: color .2s ease, border-color .2s ease; }
+  .main-nav a:hover, .main-nav a.active { color: var(--moss); border-bottom-color: var(--moss); }
+  .header-spacer { justify-self: end; }
 
   .maps-page { width: min(1180px, calc(100% - 40px)); margin: 0 auto; padding-bottom: 40px; }
 
   .maps-hero { margin-top: 32px; padding: clamp(40px, 6vw, 64px) clamp(24px, 6vw, 64px); }
-  .accession { display: inline-flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stamp); border: 1px solid var(--stamp); padding: 5px 10px; margin-bottom: 24px; }
-  h1 { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: clamp(2.4rem, 5.5vw, 4rem); line-height: 1.05; }
-  .subtitle { margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); }
-  .hero-rule { margin: 24px 0; border-top: 1px dashed var(--line); max-width: 420px; }
+  h1 { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: clamp(2.4rem, 5.5vw, 4rem); line-height: 1.05; color: var(--ink); }
+  .subtitle { margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--moss); }
+  .hero-rule { margin: 24px 0; border: none; border-top: 1px dashed var(--line); max-width: 420px; }
   .lead { max-width: 640px; color: var(--ink-soft); line-height: 1.75; font-size: 1rem; }
 
   .map-card { margin-top: 20px; overflow: hidden; }
@@ -89,17 +98,18 @@
   .toolbar-title { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
   .toolbar-title strong { color: var(--ink); display: block; font-family: 'Fraunces', serif; font-style: italic; font-size: 1.05rem; font-weight: 500; text-transform: none; letter-spacing: 0; margin-top: 2px; }
 
-  .basemap-toggle { display: inline-flex; border: 1px solid var(--ink); }
+  .basemap-toggle { display: inline-flex; border: 1px solid var(--moss); }
   .basemap-toggle button {
     background: none; border: none; cursor: pointer;
     padding: 9px 16px;
     font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--ink);
+    transition: background .2s ease, color .2s ease;
   }
-  .basemap-toggle button + button { border-left: 1px solid var(--ink); }
-  .basemap-toggle button.active { background: var(--ink); color: var(--paper); }
+  .basemap-toggle button + button { border-left: 1px solid var(--moss); }
+  .basemap-toggle button.active { background: var(--moss); color: #0e130d; }
 
-  #occurrence-map { width: 100%; height: min(64vh, 560px); min-height: 420px; }
+  #occurrence-map { width: 100%; height: min(64vh, 560px); min-height: 420px; background: #10150d; }
 
   .upload-bar {
     display: grid;
@@ -108,32 +118,33 @@
     align-items: center;
     padding: 20px 26px;
     border-top: 1px solid var(--line);
-    background: var(--sage-pale);
+    background: rgba(76, 122, 52, 0.14);
   }
   .upload-copy { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.55; }
   .upload-copy strong { color: var(--ink); }
-  .upload-copy code { font-family: 'IBM Plex Mono', monospace; background: rgba(255,255,255,0.7); padding: 2px 6px; border: 1px solid var(--line); }
+  .upload-copy code { font-family: 'IBM Plex Mono', monospace; background: rgba(0,0,0,0.3); padding: 2px 6px; border: 1px solid var(--line); color: var(--ink); }
 
   .upload-control { display: flex; align-items: center; gap: 10px; }
   .upload-button {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 12px 18px;
-    background: var(--ink); color: var(--paper);
+    background: var(--moss-deep); color: var(--ink);
     font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
-    cursor: pointer; border: 1px solid var(--ink); white-space: nowrap;
+    cursor: pointer; border: 1px solid var(--moss); white-space: nowrap;
+    transition: background .2s ease;
   }
-  .upload-button:hover { background: var(--sage); border-color: var(--sage); }
+  .upload-button:hover { background: var(--moss); color: #0e130d; }
   #csv-input { display: none; }
-  .upload-status { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--stamp); min-width: 140px; }
+  .upload-status { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--moss); min-width: 140px; }
 
   .answer-card { margin-top: 20px; padding: clamp(28px, 4vw, 40px); }
-  .answer-card .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); margin-bottom: 10px; }
-  .answer-card h2 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.5rem; margin-bottom: 12px; }
+  .answer-card .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--moss); margin-bottom: 10px; }
+  .answer-card h2 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.5rem; margin-bottom: 12px; color: var(--ink); }
   .answer-card p { color: var(--ink-soft); line-height: 1.7; margin-bottom: 14px; }
   .csv-sample {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.82rem;
-    background: var(--paper);
+    background: rgba(0,0,0,0.35);
     border: 1px solid var(--line);
     padding: 14px 16px;
     overflow-x: auto;
@@ -142,15 +153,20 @@
   }
 
   .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--panel); color: var(--ink); border-radius: 0; }
+  .leaflet-popup-tip { box-shadow: none; }
   .occurrence-popup { font-family: 'Inter', sans-serif; font-size: 0.86rem; line-height: 1.5; }
-  .occurrence-popup strong { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; }
+  .occurrence-popup strong { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; color: var(--moss); }
+  .leaflet-control-zoom a { background: var(--panel); color: var(--ink); border-color: var(--line) !important; }
+  .leaflet-control-attribution { background: rgba(14,19,13,0.7) !important; color: var(--ink-soft) !important; }
+  .leaflet-control-attribution a { color: var(--moss) !important; }
 
   footer { text-align: center; padding: 30px 0 10px; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; }
 
   @media (max-width: 900px) {
-    body { padding-top: 152px; }
+    body { padding-top: 132px; }
     .site-header { grid-template-columns: 1fr; position: absolute; padding: 16px 20px; }
-    .brand, .utility-link { justify-self: center; }
+    .brand { justify-self: center; }
+    .header-spacer { display: none; }
     .main-nav ul { flex-wrap: wrap; justify-content: center; gap: 10px 18px; }
     .map-toolbar, .upload-bar { grid-template-columns: 1fr; }
     .basemap-toggle { justify-self: start; }
@@ -160,53 +176,51 @@
 <body>
 
   <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Inicio de Paspalum blog">
+    <a class="brand" href="index.html" aria-label="Paspalum blog home">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2C11.33,3.27 10.66,4.54 10,5.82C10.9,6.5 12,7 12,7C12,7 13.1,6.5 14,5.82C13.34,4.54 12.67,3.27 12,2M12,8C10,9.5 7,12 7,15A5,5 0 0,0 12,20A5,5 0 0,0 17,15C17,12 14,9.5 12,8M12,11A3,3 0 0,1 15,14C15,15.5 13.5,17 12,18.5C10.5,17 9,15.5 9,14A3,3 0 0,1 12,11Z"/></svg>
       <span>Paspalum</span>
     </a>
-    <nav class="main-nav" aria-label="Navegación principal">
+    <nav class="main-nav" aria-label="Main navigation">
       <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a class="active" href="mapas.html">Mapas</a></li>
-        <li><a href="index.html#preferencias">Preferencias</a></li>
-        <li><a href="index.html#fotos">Fotos</a></li>
-        <li><a href="index.html#proyecto">Proyecto</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="mapas.html">Maps</a></li>
+        <li><a href="index.html#environmental-preferences">Environmental Preferences</a></li>
+        <li><a href="index.html#photos">Photos</a></li>
       </ul>
     </nav>
-    <a class="utility-link" href="#occurrence-map">Ver mapa</a>
+    <span class="header-spacer" aria-hidden="true"></span>
   </header>
 
   <main class="maps-page">
 
     <section class="maps-hero specimen">
       <span class="tick-br"></span>
-      <span class="accession">N.º 001 — Poaceae</span>
       <h1><em>Paspalum guenoarum</em></h1>
-      <p class="subtitle">Mapa de ocurrencias</p>
+      <p class="subtitle">Occurrence Map</p>
       <hr class="hero-rule">
-      <p class="lead">Vista satelital de referencia y puntos de ocurrencia registrados en campo. Abajo del mapa vas a poder subir tu propio archivo de ocurrencias.</p>
+      <p class="lead">Reference satellite view and field-recorded occurrence points. Scroll to the bar below the map to upload your own occurrence file.</p>
     </section>
 
     <section class="map-card specimen">
       <span class="tick-br"></span>
       <div class="map-toolbar">
         <div class="toolbar-title">
-          Especie en vista
+          Species in view
           <strong>Paspalum guenoarum</strong>
         </div>
-        <div class="basemap-toggle" role="group" aria-label="Tipo de vista del mapa">
-          <button type="button" id="btn-satellite" class="active">Satelital</button>
-          <button type="button" id="btn-street">Mapa</button>
+        <div class="basemap-toggle" role="group" aria-label="Map view type">
+          <button type="button" id="btn-satellite" class="active">Satellite</button>
+          <button type="button" id="btn-street">Map</button>
         </div>
       </div>
 
-      <div id="occurrence-map" role="region" aria-label="Mapa de ocurrencias de Paspalum guenoarum"></div>
+      <div id="occurrence-map" role="region" aria-label="Occurrence map for Paspalum guenoarum"></div>
 
       <div class="upload-bar">
-        <p class="upload-copy">Subí tu planilla de ocurrencias en <strong>CSV</strong> con las columnas <code>scientific_name</code>, <code>longitude</code>, <code>latitude</code>. Los puntos de ejemplo se reemplazan automáticamente por los tuyos.</p>
+        <p class="upload-copy"><strong>Upload your occurrences here.</strong> Use a <strong>CSV</strong> file with the columns <code>scientific_name</code>, <code>longitude</code>, <code>latitude</code>. The sample points below are replaced automatically by yours as soon as the file loads.</p>
         <div class="upload-control">
-          <span class="upload-status" id="upload-status">4 registros de ejemplo</span>
-          <label class="upload-button" for="csv-input">Subir CSV</label>
+          <span class="upload-status" id="upload-status">4 sample records</span>
+          <label class="upload-button" for="csv-input">Upload CSV</label>
           <input type="file" id="csv-input" accept=".csv">
         </div>
       </div>
@@ -214,11 +228,11 @@
 
     <section class="answer-card specimen">
       <span class="tick-br"></span>
-      <p class="eyebrow">Formato del archivo</p>
-      <h2>Cómo tiene que venir el CSV</h2>
-      <p>El mapa lee un archivo separado por comas, con encabezado en la primera fila y una fila por ocurrencia. El orden de las columnas no importa, pero los nombres sí:</p>
+      <p class="eyebrow">File format</p>
+      <h2>How the CSV should look</h2>
+      <p>The map reads a comma-separated file with a header row and one row per occurrence. Column order doesn't matter, but the names do:</p>
       <div class="csv-sample">scientific_name,longitude,latitude<br>Paspalum guenoarum,-57.95,-30.90<br>Paspalum guenoarum,-58.15,-31.75<br>Paspalum guenoarum,-56.35,-32.85</div>
-      <p style="margin-top:14px;">Si tus datos vienen de Google Earth como KML/KMZ, o como shapefile (.shp + .shx + .dbf + .prj comprimidos en .zip), pasámelos y los convierto a este mismo formato antes de subirlos acá.</p>
+      <p style="margin-top:14px;">If your data comes from Google Earth as KML/KMZ, or as a shapefile (.shp + .shx + .dbf + .prj zipped together), send it over and I'll convert it to this same format before you upload it here.</p>
     </section>
 
   </main>
@@ -231,21 +245,24 @@
 
     const exampleOccurrences = [
       { scientific_name: SPECIES, longitude: -57.95, latitude: -30.90, locality: 'Litoral / Uruguay' },
-      { scientific_name: SPECIES, longitude: -58.15, latitude: -31.75, locality: 'Mesopotamia argentina' },
-      { scientific_name: SPECIES, longitude: -56.35, latitude: -32.85, locality: 'Pastizales templados' },
-      { scientific_name: SPECIES, longitude: -55.45, latitude: -29.55, locality: 'Campos del sur de Brasil' }
+      { scientific_name: SPECIES, longitude: -58.15, latitude: -31.75, locality: 'Argentine Mesopotamia' },
+      { scientific_name: SPECIES, longitude: -56.35, latitude: -32.85, locality: 'Temperate grasslands' },
+      { scientific_name: SPECIES, longitude: -55.45, latitude: -29.55, locality: 'Southern Brazil rangelands' }
     ];
 
     const map = L.map('occurrence-map', { scrollWheelZoom: false }).setView([-31.3, -57.1], 6);
 
+    // Lightweight satellite imagery (Esri) — simple raster tiles, no API key, low weight.
     const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       maxZoom: 18,
       attribution: 'Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics'
     });
 
-    const streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // Dark basemap (CartoDB Dark Matter) so the "Map" view matches the site's dark theme instead of a plain bright OSM layer.
+    const streetLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
       maxZoom: 18,
-      attribution: '&copy; OpenStreetMap contributors'
+      subdomains: 'abcd',
+      attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
     });
 
     satelliteLayer.addTo(map);
@@ -277,9 +294,9 @@
       list.forEach((occ) => {
         L.circleMarker([occ.latitude, occ.longitude], {
           radius: 8,
-          color: '#faf8f3',
+          color: '#0e130d',
           weight: 2,
-          fillColor: '#9c4b2e',
+          fillColor: '#85b25c',
           fillOpacity: 0.9
         }).bindPopup(
           `<div class="occurrence-popup"><strong><em>${occ.scientific_name || SPECIES}</em></strong><br>` +
@@ -303,7 +320,7 @@
       const idxLat = headers.indexOf('latitude');
 
       if (idxLon === -1 || idxLat === -1) {
-        throw new Error('El CSV necesita columnas longitude y latitude.');
+        throw new Error('The CSV needs longitude and latitude columns.');
       }
 
       return lines.slice(1).map(line => {
@@ -324,16 +341,16 @@
       reader.onload = () => {
         try {
           const rows = parseCSV(reader.result);
-          if (!rows.length) throw new Error('No se encontraron filas válidas.');
-          renderOccurrences(rows, `${rows.length} registros cargados`);
+          if (!rows.length) throw new Error('No valid rows found.');
+          renderOccurrences(rows, `${rows.length} records loaded`);
         } catch (err) {
-          uploadStatus.textContent = 'Error: revisá el formato del CSV';
+          uploadStatus.textContent = 'Error: check the CSV format';
         }
       };
       reader.readAsText(file);
     });
 
-    renderOccurrences(exampleOccurrences, '4 registros de ejemplo');
+    renderOccurrences(exampleOccurrences, '4 sample records');
   </script>
 </body>
 </html>
