@@ -220,9 +220,9 @@
       <div id="occurrence-map" role="region" aria-label="Occurrence map for Paspalum guenoarum"></div>
 
       <div class="upload-bar">
-        <p class="upload-copy"><strong>Upload your occurrences here.</strong> Use a <strong>CSV</strong> file with the columns <code>scientific_name</code>, <code>longitude</code>, <code>latitude</code>. The sample points below are replaced automatically by yours as soon as the file loads.</p>
+        <p class="upload-copy"><strong>Upload your occurrences here.</strong> Use a <strong>CSV</strong> file with the columns <code>scientific_name</code>, <code>longitude</code>, <code>latitude</code>. The points currently on the map are replaced automatically by yours as soon as the file loads.</p>
         <div class="upload-control">
-          <span class="upload-status" id="upload-status">4 sample records</span>
+          <span class="upload-status" id="upload-status">124 occurrence records</span>
           <label class="upload-button" for="csv-input">Upload CSV</label>
           <input type="file" id="csv-input" accept=".csv">
         </div>
@@ -247,10 +247,130 @@
     const SPECIES = 'Paspalum guenoarum';
 
     const exampleOccurrences = [
-      { scientific_name: SPECIES, longitude: -57.95, latitude: -30.90, locality: 'Litoral / Uruguay' },
-      { scientific_name: SPECIES, longitude: -58.15, latitude: -31.75, locality: 'Argentine Mesopotamia' },
-      { scientific_name: SPECIES, longitude: -56.35, latitude: -32.85, locality: 'Temperate grasslands' },
-      { scientific_name: SPECIES, longitude: -55.45, latitude: -29.55, locality: 'Southern Brazil rangelands' }
+      { scientific_name: SPECIES, longitude: -38.31667, latitude: -6.83333 },
+      { scientific_name: SPECIES, longitude: -49.25944, latitude: -22.79111 },
+      { scientific_name: SPECIES, longitude: -52.07583, latitude: -25.93083 },
+      { scientific_name: SPECIES, longitude: -47.13, latitude: -22.25 },
+      { scientific_name: SPECIES, longitude: -47.97, latitude: -23.58 },
+      { scientific_name: SPECIES, longitude: -49.91361, latitude: -25.235 },
+      { scientific_name: SPECIES, longitude: -47.16472, latitude: -22.2425 },
+      { scientific_name: SPECIES, longitude: -49.33, latitude: -24.13 },
+      { scientific_name: SPECIES, longitude: -41.06167, latitude: -11.05 },
+      { scientific_name: SPECIES, longitude: -47.55361, latitude: -15.43528 },
+      { scientific_name: SPECIES, longitude: -48, latitude: -17 },
+      { scientific_name: SPECIES, longitude: -48.65, latitude: -16.6 },
+      { scientific_name: SPECIES, longitude: -49.20528, latitude: -24.26833 },
+      { scientific_name: SPECIES, longitude: -41.36667, latitude: -13 },
+      { scientific_name: SPECIES, longitude: -47.84167, latitude: -21.96194 },
+      { scientific_name: SPECIES, longitude: -61.9379, latitude: -16.4708 },
+      { scientific_name: SPECIES, longitude: -51.90806, latitude: -26.36917 },
+      { scientific_name: SPECIES, longitude: -49.24215, latitude: -22.81042 },
+      { scientific_name: SPECIES, longitude: -47.11667, latitude: -22.18333 },
+      { scientific_name: SPECIES, longitude: -47.13333, latitude: -22.25 },
+      { scientific_name: SPECIES, longitude: -58.3566, latitude: -18.4199 },
+      { scientific_name: SPECIES, longitude: -47.17736, latitude: -22.24882 },
+      { scientific_name: SPECIES, longitude: -56.71667, latitude: -20.03333 },
+      { scientific_name: SPECIES, longitude: -49.8071, latitude: -25.5527 },
+      { scientific_name: SPECIES, longitude: -54.41972, latitude: -21.56778 },
+      { scientific_name: SPECIES, longitude: -54.84222, latitude: -20.755 },
+      { scientific_name: SPECIES, longitude: -41.77805, latitude: -12.21875 },
+      { scientific_name: SPECIES, longitude: -47.4658, latitude: -14.104 },
+      { scientific_name: SPECIES, longitude: -55.3608, latitude: -27.17127 },
+      { scientific_name: SPECIES, longitude: -62.13, latitude: -16.03 },
+      { scientific_name: SPECIES, longitude: -50.61761, latitude: -27.28734 },
+      { scientific_name: SPECIES, longitude: -44.13, latitude: -17.57 },
+      { scientific_name: SPECIES, longitude: -56.1, latitude: -28.4 },
+      { scientific_name: SPECIES, longitude: -47.142, latitude: -22.242 },
+      { scientific_name: SPECIES, longitude: -49.23694, latitude: -22.79167 },
+      { scientific_name: SPECIES, longitude: -55.13333, latitude: -30.78333 },
+      { scientific_name: SPECIES, longitude: -51.05442, latitude: -28.39204 },
+      { scientific_name: SPECIES, longitude: -62, latitude: -16.41666 },
+      { scientific_name: SPECIES, longitude: -47.00082, latitude: -15.0003 },
+      { scientific_name: SPECIES, longitude: -62.13333, latitude: -16.03333 },
+      { scientific_name: SPECIES, longitude: -56.05, latitude: -22.65 },
+      { scientific_name: SPECIES, longitude: -55.61666, latitude: -27.5 },
+      { scientific_name: SPECIES, longitude: -62.08333, latitude: -16.13333 },
+      { scientific_name: SPECIES, longitude: -55.51666, latitude: -27.35 },
+      { scientific_name: SPECIES, longitude: -54.16666, latitude: -26.76666 },
+      { scientific_name: SPECIES, longitude: -55.58333, latitude: -27.28333 },
+      { scientific_name: SPECIES, longitude: -56, latitude: -28.45 },
+      { scientific_name: SPECIES, longitude: -55.66666, latitude: -27.8 },
+      { scientific_name: SPECIES, longitude: -55.11666, latitude: -26.96666 },
+      { scientific_name: SPECIES, longitude: -55.83333, latitude: -27.53333 },
+      { scientific_name: SPECIES, longitude: -57, latitude: -25.5 },
+      { scientific_name: SPECIES, longitude: -55.51666, latitude: -27.3 },
+      { scientific_name: SPECIES, longitude: -56.1, latitude: -28.18333 },
+      { scientific_name: SPECIES, longitude: -62, latitude: -16.33333 },
+      { scientific_name: SPECIES, longitude: -62, latitude: -16 },
+      { scientific_name: SPECIES, longitude: -47.96667, latitude: -23.58333 },
+      { scientific_name: SPECIES, longitude: -47.11944, latitude: -22.18833 },
+      { scientific_name: SPECIES, longitude: -58.60167, latitude: -18.71083 },
+      { scientific_name: SPECIES, longitude: -51.68694, latitude: -30.09694 },
+      { scientific_name: SPECIES, longitude: -47.7225, latitude: -14.11417 },
+      { scientific_name: SPECIES, longitude: -46.95111, latitude: -14.89722 },
+      { scientific_name: SPECIES, longitude: -47.97278, latitude: -15.73944 },
+      { scientific_name: SPECIES, longitude: -50.73917, latitude: -29.32083 },
+      { scientific_name: SPECIES, longitude: -49.98583, latitude: -25.25833 },
+      { scientific_name: SPECIES, longitude: -50.15722, latitude: -24.76583 },
+      { scientific_name: SPECIES, longitude: -51.065, latitude: -28.67889 },
+      { scientific_name: SPECIES, longitude: -51.53639, latitude: -26.65806 },
+      { scientific_name: SPECIES, longitude: -52.27667, latitude: -28.10194 },
+      { scientific_name: SPECIES, longitude: -49.98917, latitude: -28.20194 },
+      { scientific_name: SPECIES, longitude: -56.38333, latitude: -19.48333 },
+      { scientific_name: SPECIES, longitude: -56.94278, latitude: -23.02417 },
+      { scientific_name: SPECIES, longitude: -37.63333, latitude: -10.91667 },
+      { scientific_name: SPECIES, longitude: -41.06167, latitude: -11.58333 },
+      { scientific_name: SPECIES, longitude: -56.7333, latitude: -27.5667 },
+      { scientific_name: SPECIES, longitude: -47.92667, latitude: -15.73139 },
+      { scientific_name: SPECIES, longitude: -41.72722, latitude: -4.08417 },
+      { scientific_name: SPECIES, longitude: -49.33333, latitude: -24.13333 },
+      { scientific_name: SPECIES, longitude: -49.2375, latitude: -22.81667 },
+      { scientific_name: SPECIES, longitude: -51.40722, latitude: -20.36111 },
+      { scientific_name: SPECIES, longitude: -52.26556, latitude: -20.62417 },
+      { scientific_name: SPECIES, longitude: -47.71583, latitude: -15.89833 },
+      { scientific_name: SPECIES, longitude: -51.5717, latitude: -28.6306 },
+      { scientific_name: SPECIES, longitude: -47.85722, latitude: -16.01111 },
+      { scientific_name: SPECIES, longitude: -47.1525, latitude: -22.28944 },
+      { scientific_name: SPECIES, longitude: -47.5, latitude: -15.5 },
+      { scientific_name: SPECIES, longitude: -52.90417, latitude: -27.97889 },
+      { scientific_name: SPECIES, longitude: -39.25, latitude: -12.9 },
+      { scientific_name: SPECIES, longitude: -53.58139, latitude: -31.73306 },
+      { scientific_name: SPECIES, longitude: -54.67, latitude: -22 },
+      { scientific_name: SPECIES, longitude: -50.33, latitude: -18 },
+      { scientific_name: SPECIES, longitude: -62, latitude: -16.33 },
+      { scientific_name: SPECIES, longitude: -56.14972, latitude: -22.67611 },
+      { scientific_name: SPECIES, longitude: -49.35444, latitude: -24.45361 },
+      { scientific_name: SPECIES, longitude: -47.82, latitude: -22.25 },
+      { scientific_name: SPECIES, longitude: -62, latitude: -16.17 },
+      { scientific_name: SPECIES, longitude: -50.75, latitude: -28.13 },
+      { scientific_name: SPECIES, longitude: -46.34167, latitude: -8.54167 },
+      { scientific_name: SPECIES, longitude: -56.04833, latitude: -28.12556 },
+      { scientific_name: SPECIES, longitude: -53.75833, latitude: -23.375 },
+      { scientific_name: SPECIES, longitude: -56.40167, latitude: -27.61361 },
+      { scientific_name: SPECIES, longitude: -58.04389, latitude: -27.32111 },
+      { scientific_name: SPECIES, longitude: -57.72194, latitude: -27.75861 },
+      { scientific_name: SPECIES, longitude: -58.98611, latitude: -28.44944 },
+      { scientific_name: SPECIES, longitude: -55.72944, latitude: -28.17083 },
+      { scientific_name: SPECIES, longitude: -58.46028, latitude: -28.33389 },
+      { scientific_name: SPECIES, longitude: -63.23, latitude: -17.77778 },
+      { scientific_name: SPECIES, longitude: -63.29139, latitude: -20.68444 },
+      { scientific_name: SPECIES, longitude: -54.34889, latitude: -27.99861 },
+      { scientific_name: SPECIES, longitude: -54.44444, latitude: -28.39667 },
+      { scientific_name: SPECIES, longitude: -52.47528, latitude: -28.31444 },
+      { scientific_name: SPECIES, longitude: -59.3925, latitude: -20.23194 },
+      { scientific_name: SPECIES, longitude: -56.20722, latitude: -25.4775 },
+      { scientific_name: SPECIES, longitude: -55.3175, latitude: -24.97222 },
+      { scientific_name: SPECIES, longitude: -55.68917, latitude: -31.53111 },
+      { scientific_name: SPECIES, longitude: -53.99833, latitude: -25.91222 },
+      { scientific_name: SPECIES, longitude: -54.9175, latitude: -26.87806 },
+      { scientific_name: SPECIES, longitude: -57.93889, latitude: -31.02833 },
+      { scientific_name: SPECIES, longitude: -51.87417, latitude: -26.92944 },
+      { scientific_name: SPECIES, longitude: -55.64333, latitude: -28.18222 },
+      { scientific_name: SPECIES, longitude: -50.3, latitude: -28.33333 },
+      { scientific_name: SPECIES, longitude: -38.32, latitude: -6.83 },
+      { scientific_name: SPECIES, longitude: -59.26555556, latitude: -28.17722222 },
+      { scientific_name: SPECIES, longitude: -54.35527778, latitude: -32.35138889 },
+      { scientific_name: SPECIES, longitude: -58.36888890, latitude: -33.33638890 }
     ];
 
     const map = L.map('occurrence-map', { scrollWheelZoom: false }).setView([-31.3, -57.1], 6);
@@ -301,11 +421,11 @@
 
       list.forEach((occ) => {
         L.circleMarker([occ.latitude, occ.longitude], {
-          radius: 8,
+          radius: 7,
           color: '#0e130d',
-          weight: 2,
-          fillColor: '#85b25c',
-          fillOpacity: 0.9
+          weight: 1.5,
+          fillColor: '#f2c94c',
+          fillOpacity: 0.95
         }).bindPopup(
           `<div class="occurrence-popup"><strong><em>${occ.scientific_name || SPECIES}</em></strong><br>` +
           (occ.locality ? `${occ.locality}<br>` : '') +
@@ -358,7 +478,7 @@
       reader.readAsText(file);
     });
 
-    renderOccurrences(exampleOccurrences, '4 sample records');
+    renderOccurrences(exampleOccurrences, '124 occurrence records');
   </script>
 </body>
 </html>
