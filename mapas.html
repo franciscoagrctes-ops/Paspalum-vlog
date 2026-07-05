@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQzU7G8G6PTlR9b/+cS6Pn1k/0E9I8U=" crossorigin="">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
 <style>
   :root {
@@ -109,7 +109,8 @@
   .basemap-toggle button + button { border-left: 1px solid var(--moss); }
   .basemap-toggle button.active { background: var(--moss); color: #0e130d; }
 
-  #occurrence-map { width: 100%; height: min(64vh, 560px); min-height: 420px; background: #10150d; }
+  #occurrence-map { width: 100%; height: min(64vh, 560px); min-height: 420px; background: #10150d; position: relative; overflow: hidden; z-index: 0; }
+  #occurrence-map .leaflet-container { position: absolute; inset: 0; }
 
   .upload-bar {
     display: grid;
@@ -239,7 +240,7 @@
 
   <footer>Paspalum blog — CONICET / FCA-UNNE</footer>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     const SPECIES = 'Paspalum guenoarum';
 
@@ -266,6 +267,11 @@
     });
 
     satelliteLayer.addTo(map);
+
+    // Guard against any layout shift (fonts, backdrop-filter, late CSS) leaving the map with a stale size.
+    window.addEventListener('load', () => map.invalidateSize());
+    window.addEventListener('resize', () => map.invalidateSize());
+    setTimeout(() => map.invalidateSize(), 300);
 
     const btnSatellite = document.getElementById('btn-satellite');
     const btnStreet = document.getElementById('btn-street');
