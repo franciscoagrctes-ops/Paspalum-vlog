@@ -114,47 +114,6 @@
   #occurrence-map { width: 100%; height: min(64vh, 560px); min-height: 420px; background: #10150d; position: relative; overflow: hidden; z-index: 0; }
   #occurrence-map .leaflet-container { position: absolute; inset: 0; }
 
-  .upload-bar {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 16px;
-    align-items: center;
-    padding: 20px 26px;
-    border-top: 1px solid var(--line);
-    background: rgba(76, 122, 52, 0.14);
-  }
-  .upload-copy { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.55; }
-  .upload-copy strong { color: var(--ink); }
-  .upload-copy code { font-family: 'IBM Plex Mono', monospace; background: rgba(0,0,0,0.3); padding: 2px 6px; border: 1px solid var(--line); color: var(--ink); }
-
-  .upload-control { display: flex; align-items: center; gap: 10px; }
-  .upload-button {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 12px 18px;
-    background: var(--moss-deep); color: var(--ink);
-    font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
-    cursor: pointer; border: 1px solid var(--moss); white-space: nowrap;
-    transition: background .2s ease;
-  }
-  .upload-button:hover { background: var(--moss); color: #0e130d; }
-  #csv-input { display: none; }
-  .upload-status { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--moss); min-width: 140px; }
-
-  .answer-card { margin-top: 20px; padding: clamp(28px, 4vw, 40px); }
-  .answer-card .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--moss); margin-bottom: 10px; }
-  .answer-card h2 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.5rem; margin-bottom: 12px; color: var(--ink); }
-  .answer-card p { color: var(--ink-soft); line-height: 1.7; margin-bottom: 14px; }
-  .csv-sample {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.82rem;
-    background: rgba(0,0,0,0.35);
-    border: 1px solid var(--line);
-    padding: 14px 16px;
-    overflow-x: auto;
-    color: var(--ink);
-    line-height: 1.6;
-  }
-
   .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--panel); color: var(--ink); border-radius: 0; }
   .leaflet-popup-tip { box-shadow: none; }
   .occurrence-popup { font-family: 'Inter', sans-serif; font-size: 0.86rem; line-height: 1.5; }
@@ -171,7 +130,7 @@
     .brand { justify-self: center; }
     .header-spacer { display: none; }
     .main-nav ul { flex-wrap: wrap; justify-content: center; gap: 10px 18px; }
-    .map-toolbar, .upload-bar { grid-template-columns: 1fr; }
+    .map-toolbar { grid-template-columns: 1fr; }
     .basemap-toggle { justify-self: start; }
   }
 </style>
@@ -201,7 +160,7 @@
       <h1><em>Paspalum guenoarum</em></h1>
       <p class="subtitle">Occurrence Map</p>
       <hr class="hero-rule">
-      <p class="lead">Reference satellite view and field-recorded occurrence points. Scroll to the bar below the map to upload your own occurrence file.</p>
+      <p class="lead">Satellite reference view with field-recorded occurrence points for the species.</p>
     </section>
 
     <section class="map-card specimen">
@@ -218,24 +177,6 @@
       </div>
 
       <div id="occurrence-map" role="region" aria-label="Occurrence map for Paspalum guenoarum"></div>
-
-      <div class="upload-bar">
-        <p class="upload-copy"><strong>Upload your occurrences here.</strong> Use a <strong>CSV</strong> file with the columns <code>scientific_name</code>, <code>longitude</code>, <code>latitude</code>. The points currently on the map are replaced automatically by yours as soon as the file loads.</p>
-        <div class="upload-control">
-          <span class="upload-status" id="upload-status">124 occurrence records</span>
-          <label class="upload-button" for="csv-input">Upload CSV</label>
-          <input type="file" id="csv-input" accept=".csv">
-        </div>
-      </div>
-    </section>
-
-    <section class="answer-card specimen">
-      <span class="tick-br"></span>
-      <p class="eyebrow">File format</p>
-      <h2>How the CSV should look</h2>
-      <p>The map reads a comma-separated file with a header row and one row per occurrence. Column order doesn't matter, but the names do:</p>
-      <div class="csv-sample">scientific_name,longitude,latitude<br>Paspalum guenoarum,-57.95,-30.90<br>Paspalum guenoarum,-58.15,-31.75<br>Paspalum guenoarum,-56.35,-32.85</div>
-      <p style="margin-top:14px;">If your data comes from Google Earth as KML/KMZ, or as a shapefile (.shp + .shx + .dbf + .prj zipped together), send it over and I'll convert it to this same format before you upload it here.</p>
     </section>
 
   </main>
@@ -413,9 +354,8 @@
     });
 
     const occurrenceGroup = L.layerGroup().addTo(map);
-    const uploadStatus = document.getElementById('upload-status');
 
-    function renderOccurrences(list, statusLabel) {
+    function renderOccurrences(list) {
       occurrenceGroup.clearLayers();
       const bounds = [];
 
@@ -435,50 +375,9 @@
       });
 
       if (bounds.length) map.fitBounds(bounds, { padding: [46, 46], maxZoom: 8 });
-      uploadStatus.textContent = statusLabel;
     }
 
-    function parseCSV(text) {
-      const lines = text.trim().split(/\r?\n/).filter(Boolean);
-      if (!lines.length) return [];
-
-      const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
-      const idxName = headers.indexOf('scientific_name');
-      const idxLon = headers.indexOf('longitude');
-      const idxLat = headers.indexOf('latitude');
-
-      if (idxLon === -1 || idxLat === -1) {
-        throw new Error('The CSV needs longitude and latitude columns.');
-      }
-
-      return lines.slice(1).map(line => {
-        const cols = line.split(',').map(c => c.trim());
-        return {
-          scientific_name: idxName !== -1 ? cols[idxName] : SPECIES,
-          longitude: parseFloat(cols[idxLon]),
-          latitude: parseFloat(cols[idxLat])
-        };
-      }).filter(row => !Number.isNaN(row.longitude) && !Number.isNaN(row.latitude));
-    }
-
-    document.getElementById('csv-input').addEventListener('change', (event) => {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        try {
-          const rows = parseCSV(reader.result);
-          if (!rows.length) throw new Error('No valid rows found.');
-          renderOccurrences(rows, `${rows.length} records loaded`);
-        } catch (err) {
-          uploadStatus.textContent = 'Error: check the CSV format';
-        }
-      };
-      reader.readAsText(file);
-    });
-
-    renderOccurrences(exampleOccurrences, '124 occurrence records');
+    renderOccurrences(exampleOccurrences);
   </script>
 </body>
 </html>
