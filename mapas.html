@@ -212,6 +212,20 @@
 
   .cloud-icon { width: 20px; height: 20px; fill: var(--moss); margin-bottom: 10px; }
 
+  .cloud-tag {
+    display: inline-block;
+    margin-bottom: 12px;
+    padding: 4px 10px;
+    border: 1px solid var(--moss-deep);
+    border-radius: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--moss);
+    background: rgba(76, 122, 52, 0.12);
+  }
+
   .cloud p.cloud-text {
     font-size: 0.92rem;
     line-height: 1.65;
@@ -232,11 +246,13 @@
   .download-panel {
     margin-top: 32px;
     padding: 26px 28px;
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
   }
+  .download-panel .dl-text { flex: 1 1 360px; min-width: 260px; }
   .download-panel .dl-text span.dl-eyebrow {
     display: block;
     font-family: 'IBM Plex Mono', monospace;
@@ -281,8 +297,8 @@
   .dl-button svg { width: 15px; height: 15px; fill: currentColor; }
 
   @media (max-width: 700px) {
-    .download-panel { grid-template-columns: 1fr; text-align: left; }
-    .dl-button { justify-self: start; }
+    .download-panel { flex-direction: column; align-items: stretch; text-align: left; }
+    .dl-button { align-self: flex-start; }
   }
 
   footer { text-align: center; padding: 30px 0 10px; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; }
@@ -355,36 +371,42 @@
 
       <div class="cloud">
         <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+        <span class="cloud-tag">Distribución</span>
         <p class="cloud-text">Ensemble models place the potential distribution of the species mainly in southern Brazil, eastern Paraguay, northeastern Argentina, and northern Uruguay — a tighter core area than the one suggested by raw herbarium records.</p>
         <p class="cloud-cite">— (Luna et al., 2026)</p>
       </div>
 
       <div class="cloud">
         <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+        <span class="cloud-tag">Taxonomía</span>
         <p class="cloud-text">Records from tropical latitudes that fall outside this core likely reflect cultivated populations or misidentifications within the taxonomically difficult Plicatula group, rather than a true extension of the natural range.</p>
         <p class="cloud-cite">— (Luna et al., 2026)</p>
       </div>
 
       <div class="cloud">
         <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+        <span class="cloud-tag">Precipitación</span>
         <p class="cloud-text">Precipitation was the strongest driver of the species' ecological niche: suitability falls sharply once the wettest month exceeds roughly 200 mm, which also explains why tropical, high-rainfall areas are poorly suited to the species.</p>
         <p class="cloud-cite">— (Luna et al., 2026)</p>
       </div>
 
       <div class="cloud">
         <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+        <span class="cloud-tag">Temperatura</span>
         <p class="cloud-text">Mean diurnal temperature range was another key predictor, pointing to a preference for temperate climates with wide daily thermal swings — consistent with the species' cold tolerance and year-round forage production.</p>
         <p class="cloud-cite">— (Luna et al., 2026)</p>
       </div>
 
       <div class="cloud">
         <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+        <span class="cloud-tag">Suelo y altitud</span>
         <p class="cloud-text">Soil and elevation played only a secondary role. The species tends toward acidic-to-neutral, moisture-retentive soils, but tolerates a fairly wide range of elevations and soil fertility levels.</p>
         <p class="cloud-cite">— (Luna et al., 2026)</p>
       </div>
 
       <div class="cloud">
         <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+        <span class="cloud-tag">Genética y conservación</span>
         <p class="cloud-text">Its thermal and precipitation tolerance points to real adaptive genetic variability — valuable for breeding and conservation efforts under future climate scenarios — while new collection missions in southern Brazil could help clarify the taxonomy of the group.</p>
         <p class="cloud-cite">— (Luna et al., 2026)</p>
       </div>
