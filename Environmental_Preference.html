@@ -1,192 +1,138 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paspalum guenoarum · Environmental Preferences</title>
-<meta name="description" content="Environmental preferences of Paspalum guenoarum based on species distribution modeling.">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+<!-- ============================================================ -->
+<!-- 1) ADD THIS CSS inside your existing <style> block (anywhere) -->
+<!-- ============================================================ -->
 <style>
-  :root {
-    --bg: #0e130d;
-    --panel: #171d13;
-    --panel-hover: #1f2718;
-    --ink: #eef1e6;
-    --ink-soft: #9caa8b;
-    --moss: #85b25c;
-    --moss-deep: #4c7a34;
-    --line: #2a3323;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    background-color: var(--bg);
-    background-image:
-      linear-gradient(180deg, rgba(10, 14, 9, 0.88), rgba(10, 14, 9, 0.94)),
-      url('palmar.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    color: var(--ink);
-    font-family: 'Inter', sans-serif;
-    padding-top: 84px;
-  }
-
-  @media (max-width: 900px) {
-    body { background-attachment: scroll; }
-  }
-
-  a { color: inherit; }
-  em { font-style: italic; }
-
-  ::selection { background: var(--moss-deep); color: var(--ink); }
-
-  .specimen {
-    position: relative;
-    background: rgba(23, 29, 19, 0.72);
-    backdrop-filter: blur(6px);
-    border: 1px solid var(--line);
-  }
-  .specimen::before, .specimen::after,
-  .specimen > .tick-br::before, .specimen > .tick-br::after { content: ''; position: absolute; width: 14px; height: 14px; }
-  .specimen::before { top: -1px; left: -1px; border-top: 2px solid var(--moss); border-left: 2px solid var(--moss); }
-  .specimen::after { top: -1px; right: -1px; border-top: 2px solid var(--moss); border-right: 2px solid var(--moss); }
-  .specimen .tick-br::before { bottom: -1px; left: -1px; border-bottom: 2px solid var(--moss); border-left: 2px solid var(--moss); }
-  .specimen .tick-br::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--moss); border-right: 2px solid var(--moss); }
-
-  .site-header {
-    position: fixed; top: 0; left: 0; width: 100%;
-    display: grid; grid-template-columns: 1fr auto 1fr;
-    align-items: center; gap: 16px;
-    padding: 18px clamp(20px, 5vw, 56px);
-    background: rgba(10, 14, 9, 0.75);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-    z-index: 1000;
-  }
-  .brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font-family: 'Fraunces', serif; font-style: italic; font-size: 1.15rem; font-weight: 600; color: var(--ink); }
-  .brand svg { width: 18px; height: 18px; fill: var(--moss); }
-  .main-nav ul { display: flex; justify-content: center; gap: clamp(16px, 3vw, 36px); list-style: none; }
-  .main-nav a { text-decoration: none; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: color .2s ease, border-color .2s ease; }
-  .main-nav a:hover, .main-nav a.active { color: var(--moss); border-bottom-color: var(--moss); }
-  .header-spacer { justify-self: end; }
-
-  .maps-page { width: min(1180px, calc(100% - 40px)); margin: 0 auto; padding-bottom: 40px; }
-
-  .maps-hero { margin-top: 32px; padding: clamp(40px, 6vw, 64px) clamp(24px, 6vw, 64px); }
-  h1 { font-family: 'Fraunces', serif; font-style: italic; font-weight: 500; font-size: clamp(2.4rem, 5.5vw, 4rem); line-height: 1.05; color: var(--ink); }
-  .subtitle { margin-top: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--moss); }
-  .hero-rule { margin: 24px 0; border: none; border-top: 1px dashed var(--line); max-width: 420px; }
-  .lead { max-width: 640px; color: var(--ink-soft); line-height: 1.75; font-size: 1rem; }
-
-  .map-card { margin-top: 20px; overflow: hidden; }
-
-  .map-toolbar {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 20px;
-    align-items: center;
-    padding: 22px 26px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .toolbar-title { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
-  .toolbar-title strong { color: var(--ink); display: block; font-family: 'Fraunces', serif; font-style: italic; font-size: 1.05rem; font-weight: 500; text-transform: none; letter-spacing: 0; margin-top: 2px; }
-
   .figure-frame {
-    width: 100%;
+    position: relative;
+  }
+
+  .figure-frame .env-grid {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .env-zone {
+    position: relative;
+    cursor: help;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+  }
+  .env-zone:hover {
+    background: rgba(133, 178, 92, 0.12);
+    outline: 1px dashed var(--moss);
+  }
+
+  .env-tooltip {
+    display: none;
+    position: absolute;
+    z-index: 20;
+    width: 280px;
+    max-width: 70vw;
+    padding: 14px 16px;
     background: #10150d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-  .figure-frame img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  .citation {
-    margin-top: 18px;
-    padding: 16px 20px;
-    border-left: 2px solid var(--moss);
-    background: rgba(76, 122, 52, 0.1);
+    border: 1px solid var(--moss);
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    font-family: 'Inter', sans-serif;
     font-size: 0.82rem;
-    line-height: 1.6;
-    color: var(--ink-soft);
+    line-height: 1.55;
+    color: var(--ink);
+    pointer-events: none;
   }
-  .citation strong { color: var(--moss); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; }
-  .citation a { color: var(--moss); text-decoration: underline; text-decoration-color: var(--line); }
-  .citation a:hover { text-decoration-color: var(--moss); }
+  .env-tooltip strong {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 6px;
+  }
+  .env-zone:hover .env-tooltip { display: block; }
 
-  footer { text-align: center; padding: 30px 0 10px; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; }
+  /* Tooltip positioning per row so it doesn't overflow the figure */
+  .env-row-top .env-tooltip { top: 100%; margin-top: 8px; }
+  .env-row-bottom .env-tooltip { bottom: 100%; margin-bottom: 8px; }
+
+  .env-col-1 .env-tooltip, .env-col-2 .env-tooltip { left: 0; }
+  .env-col-3 .env-tooltip, .env-col-4 .env-tooltip { right: 0; }
 
   @media (max-width: 900px) {
-    body { padding-top: 132px; }
-    .site-header { grid-template-columns: 1fr; position: absolute; padding: 16px 20px; }
-    .brand { justify-self: center; }
-    .header-spacer { display: none; }
-    .main-nav ul { flex-wrap: wrap; justify-content: center; gap: 10px 18px; }
-    .map-toolbar { grid-template-columns: 1fr; }
+    .env-tooltip { width: 220px; font-size: 0.78rem; }
   }
 </style>
-</head>
-<body>
 
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Paspalum blog home">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2C11.33,3.27 10.66,4.54 10,5.82C10.9,6.5 12,7 12,7C12,7 13.1,6.5 14,5.82C13.34,4.54 12.67,3.27 12,2M12,8C10,9.5 7,12 7,15A5,5 0 0,0 12,20A5,5 0 0,0 17,15C17,12 14,9.5 12,8M12,11A3,3 0 0,1 15,14C15,15.5 13.5,17 12,18.5C10.5,17 9,15.5 9,14A3,3 0 0,1 12,11Z"/></svg>
-      <span>Paspalum</span>
-    </a>
-    <nav class="main-nav" aria-label="Main navigation">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="mapas.html">Maps</a></li>
-        <li><a class="active" href="Preferencias_ambientales.html">Environmental Preferences</a></li>
-        <li><a href="index.html#photos">Photos</a></li>
-      </ul>
-    </nav>
-    <span class="header-spacer" aria-hidden="true"></span>
-  </header>
+<!-- ============================================================ -->
+<!-- 2) REPLACE your existing figure-frame div with this one       -->
+<!-- ============================================================ -->
+<div class="figure-frame">
+  <img src="Environmental_Preferences.jpg" alt="Environmental preferences of Paspalum guenoarum">
 
-  <main class="maps-page">
+  <div class="env-grid">
 
-    <section class="maps-hero specimen">
-      <span class="tick-br"></span>
-      <h1><em>Paspalum guenoarum</em></h1>
-      <p class="subtitle">Environmental Preferences</p>
-      <hr class="hero-rule">
-      <p class="lead">Environmental variable response curves from the species distribution model.</p>
-    </section>
-
-    <section class="map-card specimen">
-      <span class="tick-br"></span>
-      <div class="map-toolbar">
-        <div class="toolbar-title">
-          Species in view
-          <strong>Paspalum guenoarum</strong>
-        </div>
+    <!-- Row 1 -->
+    <div class="env-zone env-row-top env-col-1">
+      <div class="env-tooltip">
+        <strong>Precipitation of Wettest Month</strong>
+        Suitability is high when the wettest month receives roughly 100–200 mm, dropping sharply above 250–300 mm and staying low above 350–400 mm. The species appears to favor a humid — but not extremely rainy — wettest month; excess rainfall during that month may limit its distribution.
       </div>
+    </div>
 
-      <div class="figure-frame">
-        <img src="Enviromental_Preferences.jpg" alt="Environmental preferences of Paspalum guenoarum">
+    <div class="env-zone env-row-top env-col-2">
+      <div class="env-tooltip">
+        <strong>Mean Diurnal Range</strong>
+        Suitability rises notably once the daily temperature range exceeds about 7 °C, peaking between 9 and 12 °C. The species is associated with environments showing a moderate-to-high difference between daily maximum and minimum temperatures.
       </div>
-    </section>
+    </div>
 
-    <p class="citation">
-      <strong>PLEASE CITE:</strong> Luna, F. M., Marcón, F., Silveira, D. C., Dall’Agnol, M., &amp; Acuña, C. A. (2026). Predicción de la distribución de <em>Paspalum guenoarum</em> (Poaceae) utilizando variables ambientales y modelos de distribución ensamblados. <em>Bonplandia</em>, 35(2), 1–11. <a href="https://doi.org/10.30972/bon.3529466" target="_blank" rel="noopener">https://doi.org/10.30972/bon.3529466</a>
-    </p>
+    <div class="env-zone env-row-top env-col-3">
+      <div class="env-tooltip">
+        <strong>Annual Precipitation</strong>
+        Suitability is low below 800–1000 mm/year, rises quickly to a peak around 1400–1800 mm/year, then gradually declines above 2000–2500 mm/year. The species prefers humid environments with intermediate-to-high annual rainfall, avoiding both dry and extremely wet regions.
+      </div>
+    </div>
 
-  </main>
+    <div class="env-zone env-row-top env-col-4">
+      <div class="env-tooltip">
+        <strong>Precipitation of Warmest Quarter</strong>
+        Suitability increases up to roughly 400–600 mm during the warmest quarter, then slowly declines at higher values. Growth seems to be favored when the warm season has abundant water available, though excess rainfall reduces suitability.
+      </div>
+    </div>
 
-  <footer>Paspalum blog — CONICET / FCA-UNNE</footer>
+    <!-- Row 2 -->
+    <div class="env-zone env-row-bottom env-col-1">
+      <div class="env-tooltip">
+        <strong>Soil pH</strong>
+        The highest suitability occurs between pH 5.2 and 5.8, decreasing progressively above pH 6. The species shows a preference for slightly acidic soils and is less common in near-neutral soils.
+      </div>
+    </div>
 
-</body>
-</html>
+    <div class="env-zone env-row-bottom env-col-2">
+      <div class="env-tooltip">
+        <strong>Cation Exchange Capacity (CEC)</strong>
+        Peak suitability occurs at roughly 10–15 cmol(+)/kg, decreasing at values above 20–25 cmol(+)/kg. The species appears to favor soils of moderate fertility, avoiding soils with very high exchange capacities.
+      </div>
+    </div>
+
+    <div class="env-zone env-row-bottom env-col-3">
+      <div class="env-tooltip">
+        <strong>Available Water Storage Capacity</strong>
+        Suitability peaks around 40–44 mm and gradually decreases once capacity exceeds roughly 45–46 mm. The species prefers soils with intermediate water-holding capacity, avoiding both very dry soils and those with excessive retention.
+      </div>
+    </div>
+
+    <div class="env-zone env-row-bottom env-col-4">
+      <div class="env-tooltip">
+        <strong>Elevation</strong>
+        Suitability increases from sea level up to about 800–1200 m, then progressively declines above 1500–2000 m, becoming low beyond 3000 m. The species shows greater affinity for lowlands and mid-elevation areas, being poorly suited to high-mountain environments.
+      </div>
+    </div>
+
+  </div>
+</div>
