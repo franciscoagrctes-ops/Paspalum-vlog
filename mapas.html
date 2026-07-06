@@ -135,6 +135,98 @@
   .leaflet-control-attribution { background: rgba(14,19,13,0.7) !important; color: var(--ink-soft) !important; }
   .leaflet-control-attribution a { color: var(--moss) !important; }
 
+  /* ---------------------------------------------- */
+  /* Classification "conversation bubble" cards      */
+  /* ---------------------------------------------- */
+  .class-bubbles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 28px;
+  }
+
+  @media (max-width: 800px) {
+    .class-bubbles { grid-template-columns: 1fr; }
+  }
+
+  .bubble {
+    position: relative;
+    background: rgba(23, 29, 19, 0.72);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--line);
+    border-radius: 18px 18px 18px 4px;
+    padding: 22px 24px 24px;
+  }
+
+  /* speech-bubble "tail" pointing back up toward the map */
+  .bubble::after {
+    content: '';
+    position: absolute;
+    top: -9px;
+    left: 28px;
+    width: 18px;
+    height: 18px;
+    background: inherit;
+    border-left: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+    border-radius: 4px 0 0 0;
+    transform: rotate(45deg);
+    backdrop-filter: blur(6px);
+  }
+
+  .bubble-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .bubble-head svg { width: 16px; height: 16px; fill: var(--moss); flex-shrink: 0; }
+  .bubble-head span.bubble-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--moss);
+    display: block;
+  }
+  .bubble-head strong {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin-top: 2px;
+  }
+
+  .bubble-item + .bubble-item { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+
+  .bubble-item-title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+  .bubble-item-title .pct {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--moss);
+    white-space: nowrap;
+  }
+
+  .bubble-item p {
+    margin-top: 6px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
   footer { text-align: center; padding: 30px 0 10px; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; }
 
   @media (max-width: 900px) {
@@ -195,6 +287,58 @@
     <p class="citation">
       <strong>PLEASE CITE:</strong> Luna, F. M., Marcón, F., Silveira, D. C., Dall’Agnol, M., &amp; Acuña, C. A. (2026). Predicting the distribution of Paspalum guenoarum (Poaceae) using environmental variables and ensemble species distribution models. <em>Bonplandia</em>, 35(2), 1–11. <a href="https://doi.org/10.30972/bon.3529466" target="_blank" rel="noopener">https://doi.org/10.30972/bon.3529466</a>
     </p>
+
+    <div class="class-bubbles">
+
+      <!-- Ecoregions bubble -->
+      <div class="bubble">
+        <div class="bubble-head">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2C11.33,3.27 10.66,4.54 10,5.82C10.9,6.5 12,7 12,7C12,7 13.1,6.5 14,5.82C13.34,4.54 12.67,3.27 12,2M12,8C10,9.5 7,12 7,15A5,5 0 0,0 12,20A5,5 0 0,0 17,15C17,12 14,9.5 12,8M12,11A3,3 0 0,1 15,14C15,15.5 13.5,17 12,18.5C10.5,17 9,15.5 9,14A3,3 0 0,1 12,11Z"/></svg>
+          <div>
+            <span class="bubble-eyebrow">Occurrence points fall mainly within</span>
+            <strong>Ecoregions</strong>
+          </div>
+        </div>
+
+        <div class="bubble-item">
+          <div class="bubble-item-title">Araucaria moist forests <span class="pct">23.61%</span></div>
+          <p>A subtropical highland forest dominated by <em>Araucaria angustifolia</em>, typical of cooler, humid uplands in southern Brazil and Misiones. Its presence here points to a tolerance for mild, temperate‑leaning mesic environments outside the strictly tropical lowlands.</p>
+        </div>
+        <div class="bubble-item">
+          <div class="bubble-item-title">Alto Paraná Atlantic forests <span class="pct">18.93%</span></div>
+          <p>Part of the Atlantic Forest biome, this ecoregion combines high humidity, dense canopy cover, and rich soils. Association with it suggests the species can persist in humid subtropical forest margins and forest–grassland transitions.</p>
+        </div>
+        <div class="bubble-item">
+          <div class="bubble-item-title">Cerrado <span class="pct">17.30%</span></div>
+          <p>A fire‑adapted tropical savanna mosaic of grassland and woodland with a marked dry season. Its share here reflects the species' ability to withstand seasonal water stress and open, sun‑exposed habitats.</p>
+        </div>
+      </div>
+
+      <!-- Climate bubble -->
+      <div class="bubble">
+        <div class="bubble-head">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2C11.33,3.27 10.66,4.54 10,5.82C10.9,6.5 12,7 12,7C12,7 13.1,6.5 14,5.82C13.34,4.54 12.67,3.27 12,2M12,8C10,9.5 7,12 7,15A5,5 0 0,0 12,20A5,5 0 0,0 17,15C17,12 14,9.5 12,8M12,11A3,3 0 0,1 15,14C15,15.5 13.5,17 12,18.5C10.5,17 9,15.5 9,14A3,3 0 0,1 12,11Z"/></svg>
+          <div>
+            <span class="bubble-eyebrow">Occurrence points fall mainly within</span>
+            <strong>Climate classes</strong>
+          </div>
+        </div>
+
+        <div class="bubble-item">
+          <div class="bubble-item-title">Tropical, savanna <span class="pct">40.98%</span></div>
+          <p>Köppen's Aw class: warm temperatures year‑round with a pronounced dry season. Its dominance here aligns with the strong Cerrado signal and indicates good tolerance to seasonal drought under otherwise warm conditions.</p>
+        </div>
+        <div class="bubble-item">
+          <div class="bubble-item-title">Temperate, no dry season, hot summer <span class="pct">34.43%</span></div>
+          <p>Köppen's Cfa class (humid subtropical): rainfall spread evenly through the year with hot summers. This matches the Atlantic Forest lowlands and suggests the species also does well where moisture is constant rather than seasonal.</p>
+        </div>
+        <div class="bubble-item">
+          <div class="bubble-item-title">Temperate, no dry season, warm summer <span class="pct">14.75%</span></div>
+          <p>Köppen's Cfb class (oceanic/humid subtropical highland): cooler, evenly humid conditions typical of higher elevations. Its presence mirrors the Araucaria forest association, marking the cooler edge of the species' climatic range.</p>
+        </div>
+      </div>
+
+    </div>
 
   </main>
 
