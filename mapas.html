@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paspalum guenoarum · Occurrence Map</title>
-<meta name="description" content="Occurrence map for Paspalum guenoarum, with satellite view and your own CSV data upload.">
+<meta name="description" content="Occurrence map for Paspalum guenoarum, with satellite view and downloadable occurrence data.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -136,95 +136,153 @@
   .leaflet-control-attribution a { color: var(--moss) !important; }
 
   /* ---------------------------------------------- */
-  /* Classification "conversation bubble" cards      */
+  /* Findings section header                         */
   /* ---------------------------------------------- */
-  .class-bubbles {
+  .findings-heading {
+    margin-top: 36px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .findings-heading h2 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: var(--ink);
+  }
+  .findings-heading span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+
+  /* ---------------------------------------------- */
+  /* "Cloud" summary cards                           */
+  /* ---------------------------------------------- */
+  .insight-clouds {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-top: 28px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 24px;
+    margin-top: 18px;
   }
 
   @media (max-width: 800px) {
-    .class-bubbles { grid-template-columns: 1fr; }
+    .insight-clouds { grid-template-columns: 1fr; }
   }
 
-  .bubble {
+  .cloud {
     position: relative;
     background: rgba(23, 29, 19, 0.72);
     backdrop-filter: blur(6px);
     border: 1px solid var(--line);
-    border-radius: 18px 18px 18px 4px;
-    padding: 22px 24px 24px;
+    border-radius: 34px;
+    padding: 26px 28px 22px;
   }
 
-  /* speech-bubble "tail" pointing back up toward the map */
-  .bubble::after {
+  /* small cloud "puffs" along the top edge for a cloud silhouette feel */
+  .cloud::before {
     content: '';
     position: absolute;
-    top: -9px;
-    left: 28px;
-    width: 18px;
-    height: 18px;
-    background: inherit;
-    border-left: 1px solid var(--line);
-    border-top: 1px solid var(--line);
-    border-radius: 4px 0 0 0;
-    transform: rotate(45deg);
+    top: -14px;
+    left: 32px;
+    width: 30px;
+    height: 30px;
+    background: rgba(23, 29, 19, 0.72);
+    border: 1px solid var(--line);
+    border-radius: 50%;
     backdrop-filter: blur(6px);
+    z-index: -1;
+  }
+  .cloud::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 58px;
+    width: 20px;
+    height: 20px;
+    background: rgba(23, 29, 19, 0.72);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    backdrop-filter: blur(6px);
+    z-index: -1;
   }
 
-  .bubble-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px dashed var(--line);
+  .cloud-icon { width: 20px; height: 20px; fill: var(--moss); margin-bottom: 10px; }
+
+  .cloud p.cloud-text {
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: var(--ink);
   }
-  .bubble-head svg { width: 16px; height: 16px; fill: var(--moss); flex-shrink: 0; }
-  .bubble-head span.bubble-eyebrow {
+
+  .cloud p.cloud-cite {
+    margin-top: 14px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.68rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--moss);
+  }
+
+  /* ---------------------------------------------- */
+  /* Download data section                           */
+  /* ---------------------------------------------- */
+  .download-panel {
+    margin-top: 32px;
+    padding: 26px 28px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 20px;
+  }
+  .download-panel .dl-text span.dl-eyebrow {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--moss);
-    display: block;
+    margin-bottom: 4px;
   }
-  .bubble-head strong {
+  .download-panel .dl-text strong {
     display: block;
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-weight: 500;
-    font-size: 1.15rem;
-    color: var(--ink);
-    margin-top: 2px;
-  }
-
-  .bubble-item + .bubble-item { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
-
-  .bubble-item-title {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 10px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     color: var(--ink);
   }
-  .bubble-item-title .pct {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--moss);
-    white-space: nowrap;
-  }
-
-  .bubble-item p {
+  .download-panel .dl-text p {
     margin-top: 6px;
     font-size: 0.85rem;
-    line-height: 1.6;
     color: var(--ink-soft);
+    max-width: 520px;
+  }
+
+  .dl-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    background: var(--moss);
+    color: #0e130d;
+    border: none;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+  }
+  .dl-button:hover { background: var(--moss-deep); color: var(--ink); }
+  .dl-button svg { width: 15px; height: 15px; fill: currentColor; }
+
+  @media (max-width: 700px) {
+    .download-panel { grid-template-columns: 1fr; text-align: left; }
+    .dl-button { justify-self: start; }
   }
 
   footer { text-align: center; padding: 30px 0 10px; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; }
@@ -288,56 +346,62 @@
       <strong>PLEASE CITE:</strong> Luna, F. M., Marcón, F., Silveira, D. C., Dall’Agnol, M., &amp; Acuña, C. A. (2026). Predicting the distribution of Paspalum guenoarum (Poaceae) using environmental variables and ensemble species distribution models. <em>Bonplandia</em>, 35(2), 1–11. <a href="https://doi.org/10.30972/bon.3529466" target="_blank" rel="noopener">https://doi.org/10.30972/bon.3529466</a>
     </p>
 
-    <div class="class-bubbles">
+    <div class="findings-heading">
+      <h2>Main conclusions</h2>
+      <span>From the discussion of the study</span>
+    </div>
 
-      <!-- Ecoregions bubble -->
-      <div class="bubble">
-        <div class="bubble-head">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2C11.33,3.27 10.66,4.54 10,5.82C10.9,6.5 12,7 12,7C12,7 13.1,6.5 14,5.82C13.34,4.54 12.67,3.27 12,2M12,8C10,9.5 7,12 7,15A5,5 0 0,0 12,20A5,5 0 0,0 17,15C17,12 14,9.5 12,8M12,11A3,3 0 0,1 15,14C15,15.5 13.5,17 12,18.5C10.5,17 9,15.5 9,14A3,3 0 0,1 12,11Z"/></svg>
-          <div>
-            <span class="bubble-eyebrow">Occurrence points fall mainly within</span>
-            <strong>Ecoregions</strong>
-          </div>
-        </div>
+    <div class="insight-clouds">
 
-        <div class="bubble-item">
-          <div class="bubble-item-title">Araucaria moist forests <span class="pct">23.61%</span></div>
-          <p>A subtropical highland forest dominated by <em>Araucaria angustifolia</em>, typical of cooler, humid uplands in southern Brazil and Misiones. Its presence here points to a tolerance for mild, temperate‑leaning mesic environments outside the strictly tropical lowlands.</p>
-        </div>
-        <div class="bubble-item">
-          <div class="bubble-item-title">Alto Paraná Atlantic forests <span class="pct">18.93%</span></div>
-          <p>Part of the Atlantic Forest biome, this ecoregion combines high humidity, dense canopy cover, and rich soils. Association with it suggests the species can persist in humid subtropical forest margins and forest–grassland transitions.</p>
-        </div>
-        <div class="bubble-item">
-          <div class="bubble-item-title">Cerrado <span class="pct">17.30%</span></div>
-          <p>A fire‑adapted tropical savanna mosaic of grassland and woodland with a marked dry season. Its share here reflects the species' ability to withstand seasonal water stress and open, sun‑exposed habitats.</p>
-        </div>
+      <div class="cloud">
+        <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+        <p class="cloud-text">Ensemble models place the potential distribution of the species mainly in southern Brazil, eastern Paraguay, northeastern Argentina, and northern Uruguay — a tighter core area than the one suggested by raw herbarium records.</p>
+        <p class="cloud-cite">— (Luna et al., 2026)</p>
       </div>
 
-      <!-- Climate bubble -->
-      <div class="bubble">
-        <div class="bubble-head">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2C11.33,3.27 10.66,4.54 10,5.82C10.9,6.5 12,7 12,7C12,7 13.1,6.5 14,5.82C13.34,4.54 12.67,3.27 12,2M12,8C10,9.5 7,12 7,15A5,5 0 0,0 12,20A5,5 0 0,0 17,15C17,12 14,9.5 12,8M12,11A3,3 0 0,1 15,14C15,15.5 13.5,17 12,18.5C10.5,17 9,15.5 9,14A3,3 0 0,1 12,11Z"/></svg>
-          <div>
-            <span class="bubble-eyebrow">Occurrence points fall mainly within</span>
-            <strong>Climate classes</strong>
-          </div>
-        </div>
-
-        <div class="bubble-item">
-          <div class="bubble-item-title">Tropical, savanna <span class="pct">40.98%</span></div>
-          <p>Köppen's Aw class: warm temperatures year‑round with a pronounced dry season. Its dominance here aligns with the strong Cerrado signal and indicates good tolerance to seasonal drought under otherwise warm conditions.</p>
-        </div>
-        <div class="bubble-item">
-          <div class="bubble-item-title">Temperate, no dry season, hot summer <span class="pct">34.43%</span></div>
-          <p>Köppen's Cfa class (humid subtropical): rainfall spread evenly through the year with hot summers. This matches the Atlantic Forest lowlands and suggests the species also does well where moisture is constant rather than seasonal.</p>
-        </div>
-        <div class="bubble-item">
-          <div class="bubble-item-title">Temperate, no dry season, warm summer <span class="pct">14.75%</span></div>
-          <p>Köppen's Cfb class (oceanic/humid subtropical highland): cooler, evenly humid conditions typical of higher elevations. Its presence mirrors the Araucaria forest association, marking the cooler edge of the species' climatic range.</p>
-        </div>
+      <div class="cloud">
+        <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+        <p class="cloud-text">Records from tropical latitudes that fall outside this core likely reflect cultivated populations or misidentifications within the taxonomically difficult Plicatula group, rather than a true extension of the natural range.</p>
+        <p class="cloud-cite">— (Luna et al., 2026)</p>
       </div>
 
+      <div class="cloud">
+        <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+        <p class="cloud-text">Precipitation was the strongest driver of the species' ecological niche: suitability falls sharply once the wettest month exceeds roughly 200 mm, which also explains why tropical, high-rainfall areas are poorly suited to the species.</p>
+        <p class="cloud-cite">— (Luna et al., 2026)</p>
+      </div>
+
+      <div class="cloud">
+        <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+        <p class="cloud-text">Mean diurnal temperature range was another key predictor, pointing to a preference for temperate climates with wide daily thermal swings — consistent with the species' cold tolerance and year-round forage production.</p>
+        <p class="cloud-cite">— (Luna et al., 2026)</p>
+      </div>
+
+      <div class="cloud">
+        <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+        <p class="cloud-text">Soil and elevation played only a secondary role. The species tends toward acidic-to-neutral, moisture-retentive soils, but tolerates a fairly wide range of elevations and soil fertility levels.</p>
+        <p class="cloud-cite">— (Luna et al., 2026)</p>
+      </div>
+
+      <div class="cloud">
+        <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+        <p class="cloud-text">Its thermal and precipitation tolerance points to real adaptive genetic variability — valuable for breeding and conservation efforts under future climate scenarios — while new collection missions in southern Brazil could help clarify the taxonomy of the group.</p>
+        <p class="cloud-cite">— (Luna et al., 2026)</p>
+      </div>
+
+    </div>
+
+    <div class="download-panel specimen">
+      <span class="tick-br"></span>
+      <div class="dl-text">
+        <span class="dl-eyebrow">Occurrence dataset</span>
+        <strong>Download the mapped points</strong>
+        <p>Get the exact occurrence records shown on the map above as a CSV file (scientific name, latitude, longitude) — ready to open in any spreadsheet or GIS software.</p>
+      </div>
+      <button type="button" id="btn-download-csv" class="dl-button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/></svg>
+        Download CSV
+      </button>
     </div>
 
   </main>
@@ -539,6 +603,30 @@
     }
 
     renderOccurrences(exampleOccurrences);
+
+    // ---- CSV download of the occurrence dataset ----
+    function occurrencesToCSV(list) {
+      const header = ['scientific_name', 'latitude', 'longitude'];
+      const rows = list.map(o => [
+        `"${(o.scientific_name || SPECIES).replace(/"/g, '""')}"`,
+        o.latitude,
+        o.longitude
+      ].join(','));
+      return [header.join(','), ...rows].join('\n');
+    }
+
+    document.getElementById('btn-download-csv').addEventListener('click', () => {
+      const csv = occurrencesToCSV(exampleOccurrences);
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'paspalum_guenoarum_occurrences.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
   </script>
 </body>
 </html>
