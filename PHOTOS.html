@@ -1,1 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photos · Paspalum Botanical Blog</title>
+<meta name="description" content="Photographic records of the genus Paspalum: type specimen and field cultivation.">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0e130d;
+    --panel: #171d13;
+    --panel-hover: #1f2718;
+    --ink: #eef1e6;
+    --ink-soft: #9caa8b;
+    --moss: #85b25c;
+    --moss-deep: #4c7a34;
+    --line: #2a3323;
+    --radius: 4px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(180deg, rgba(10, 14, 9, 0.88), rgba(10, 14, 9, 0.94)),
+      url('palmar.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    padding-top: 84px;
+  }
+
+  @media (max-width: 900px) {
+    body { background-attachment: scroll; }
+  }
+
+  a { color: inherit; }
+  em { font-style: italic; }
+
+  ::selection { background: var(--moss-deep); color: var(--ink); }
+
+  /* --- corner ticks: signature herbarium-specimen mark --- */
+  .specimen {
+    position: relative;
+    background: rgba(23, 29, 19, 0.72);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--line);
+  }
+  .specimen::before,
+  .specimen::after,
+  .specimen > .tick-br::before,
+  .specimen > .tick-br::after { content: ''; position: absolute; width: 14px; height: 14px; transition: border-color .25s ease; }
+  .specimen::before { top: -1px; left: -1px; border-top: 2px solid var(--moss); border-left: 2px solid var(--moss); }
+  .specimen::after { top: -1px; right: -1px; border-top: 2px solid var(--moss); border-right: 2px solid var(--moss); }
+  .specimen .tick-br::before { bottom: -1px; left: -1px; border-bottom: 2px solid var(--moss); border-left: 2px solid var(--moss); }
+  .specimen .tick-br::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--moss); border-right: 2px solid var(--moss); }
+
+  /* --- header --- */
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+    padding: 18px clamp(20px, 5vw, 56px);
+    background: rgba(10, 14, 9, 0.75);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    z-index: 100;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .brand svg { width: 19px; height: 19px; fill: var(--moss); }
+
+  .main-nav ul {
+    display: flex;
+    justify-content: center;
+    gap: clamp(16px, 3vw, 36px);
+    list-style: none;
+  }
+  .main-nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .main-nav a:hover, .main-nav a.active { color: var(--moss); border-bottom-color: var(--moss); }
+
+  .header-spacer { justify-self: end; }
+
+  main { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+
+  /* --- page hero --- */
+  .hero-panel {
+    position: relative;
+    margin-top: 32px;
+    padding: clamp(40px, 6vw, 64px) clamp(24px, 6vw, 72px);
+    text-align: left;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .subtitle {
+    margin-top: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--moss);
+  }
+
+  .hero-rule {
+    margin: 24px 0 0;
+    border: none;
+    border-top: 1px dashed var(--line);
+    max-width: 420px;
+  }
+
+  /* --- photo gallery --- */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(24px, 4vw, 48px);
+    margin: 40px 0 64px;
+  }
+
+  .photo-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 26px 34px;
+  }
+
+  .photo-frame {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #0a0d08;
+  }
+  .photo-frame img {
+    display: block;
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    filter: saturate(0.92) contrast(1.02);
+  }
+
+  .photo-title {
+    margin-top: 22px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--ink);
+    text-align: center;
+  }
+
+  /* --- cloud caption (credit) --- */
+  .cloud {
+    position: relative;
+    margin-top: 22px;
+    padding: 14px 20px;
+    max-width: 92%;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    text-align: center;
+  }
+  .cloud::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 14px;
+    height: 14px;
+    background: var(--panel);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .cloud::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-70%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    box-shadow: -14px 6px 0 -1px var(--panel);
+  }
+  .cloud p {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .cloud .credit-name {
+    color: var(--moss);
+  }
+
+  footer {
+    text-align: center;
+    padding: 30px 0 10px;
+    color: var(--ink-soft);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--moss);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 900px) {
+    body { padding-top: 132px; }
+    .site-header { grid-template-columns: 1fr; position: absolute; padding: 16px 20px; }
+    .brand { justify-self: center; }
+    .header-spacer { display: none; }
+    .main-nav ul { flex-wrap: wrap; justify-content: center; gap: 10px 18px; }
+    .gallery { grid-template-columns: 1fr; }
+    .photo-frame img { height: 260px; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Paspalum blog home">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2C11.33,3.27 10.66,4.54 10,5.82C10.9,6.5 12,7 12,7C12,7 13.1,6.5 14,5.82C13.34,4.54 12.67,3.27 12,2M12,8C10,9.5 7,12 7,15A5,5 0 0,0 12,20A5,5 0 0,0 17,15C17,12 14,9.5 12,8M12,11A3,3 0 0,1 15,14C15,15.5 13.5,17 12,18.5C10.5,17 9,15.5 9,14A3,3 0 0,1 12,11Z"/></svg>
+      <span>Paspalum</span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="mapas.html">Maps</a></li>
+        <li><a href="Environmental_Preference.html">Environmental Preferences</a></li>
+        <li><a class="active" href="PHOTOS.html">Photos</a></li>
+      </ul>
+    </nav>
+    <span class="header-spacer" aria-hidden="true"></span>
+  </header>
+
+  <main>
+
+    <section class="hero-panel specimen" id="inicio">
+      <span class="tick-br"></span>
+      <h1>Photos</h1>
+      <p class="subtitle">Visual records</p>
+      <hr class="hero-rule">
+    </section>
+
+    <section class="gallery" aria-label="Photographic records">
+
+      <article class="photo-card specimen">
+        <span class="tick-br"></span>
+        <div class="photo-frame">
+          <img src="2.png" alt="Type specimen deposited in the Herbarium of the Natural History Museum of Montevideo">
+        </div>
+        <p class="photo-title">Ejemplar tipo depositado en el Herbario del Museo de Historia Natural de Montevideo</p>
+        <div class="cloud">
+          <p>Gentileza de <span class="credit-name">Ing. Agr. Andrés González</span></p>
+        </div>
+      </article>
+
+      <article class="photo-card specimen">
+        <span class="tick-br"></span>
+        <div class="photo-frame">
+          <img src="1.png" alt="Cultivation field in Rio Grande do Sul">
+        </div>
+        <p class="photo-title">Cultivo en Rio Grande do Sul</p>
+        <div class="cloud">
+          <p>Gentileza de <span class="credit-name">Dr. Diógenes Silveira, PhD</span></p>
+        </div>
+      </article>
+
+    </section>
+
+  </main>
+
+  <footer>Paspalum blog</footer>
+
+</body>
+</html>
