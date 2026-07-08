@@ -286,42 +286,53 @@
   /* --- featured species + stat --- */
   .feature-stat-grid {
     display: grid;
-    grid-template-columns: 1.4fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 16px;
-    margin: 0 0 56px;
+    margin: 32px 0 56px;
   }
 
   .featured-species {
     position: relative;
-    display: grid;
-    grid-template-columns: 150px 1fr;
-    gap: 22px;
-    padding: 26px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 26px;
   }
-  .featured-species .thumb {
-    width: 150px;
-    height: 150px;
+
+  .species-carousel {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 1.9em;
+    margin-top: 10px;
     overflow: hidden;
-    border: 1px solid var(--line);
   }
-  .featured-species .thumb img {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(30%) brightness(0.9);
-  }
-  .featured-species h3 {
+  .species-carousel span {
+    position: absolute;
+    left: 0; right: 0;
     font-family: 'Fraunces', serif;
     font-style: italic;
     font-weight: 500;
-    font-size: 1.6rem;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
     color: var(--ink);
+    opacity: 0;
+    animation: species-fade 12s infinite;
   }
-  .featured-species p {
-    margin-top: 8px;
-    color: var(--ink-soft);
-    font-size: 0.92rem;
-    line-height: 1.65;
-    max-width: 46ch;
+  .species-carousel span:nth-child(1) { animation-delay: 0s; }
+  .species-carousel span:nth-child(2) { animation-delay: 3s; }
+  .species-carousel span:nth-child(3) { animation-delay: 6s; }
+  .species-carousel span:nth-child(4) { animation-delay: 9s; }
+
+  @keyframes species-fade {
+    0%, 3%   { opacity: 0; transform: translateY(6px); }
+    8%, 20%  { opacity: 1; transform: translateY(0); }
+    25%, 100% { opacity: 0; transform: translateY(-6px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .species-carousel span { animation: none; opacity: 0; }
+    .species-carousel span:first-child { opacity: 1; }
   }
 
   .stat-panel {
@@ -339,6 +350,7 @@
     font-size: clamp(3rem, 6vw, 4.2rem);
     color: var(--moss);
     line-height: 1;
+    animation: stat-glow 2.6s ease-in-out infinite;
   }
   .stat-panel .stat-label {
     margin-top: 10px;
@@ -347,6 +359,26 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink-soft);
+  }
+
+  /* --- blinking neon-reflection glow for the stat number --- */
+  @keyframes stat-glow {
+    0%, 100% {
+      color: var(--moss);
+      text-shadow:
+        0 0 6px rgba(133, 178, 92, 0.35),
+        0 0 16px rgba(133, 178, 92, 0.18);
+    }
+    50% {
+      color: #c3ecA0;
+      text-shadow:
+        0 0 12px rgba(169, 214, 133, 0.85),
+        0 0 32px rgba(133, 178, 92, 0.55),
+        0 0 60px rgba(133, 178, 92, 0.3);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stat-panel .stat-number { animation: none; }
   }
 
   @media (max-width: 700px) {
@@ -407,6 +439,24 @@
 
   <main>
 
+    <section class="feature-stat-grid" aria-label="Featured species and record count">
+      <div class="featured-species specimen reveal">
+        <span class="tick-br"></span>
+        <span class="stat-label">Species documentadas</span>
+        <span class="species-carousel">
+          <span><em>Paspalum guenoarum</em></span>
+          <span><em>Paspalum notatum</em></span>
+          <span><em>Paspalum dilatatum</em></span>
+          <span><em>Paspalum urvillei</em></span>
+        </span>
+      </div>
+      <div class="stat-panel specimen reveal">
+        <span class="tick-br"></span>
+        <span class="stat-number">124</span>
+        <span class="stat-label">Occurrences documented</span>
+      </div>
+    </section>
+
     <section class="hero-panel specimen" id="inicio">
       <span class="tick-br"></span>
       <h1>Paspalum</h1>
@@ -443,23 +493,6 @@
           <figure><img src="2.png" alt="Paspalum field record 2" aria-hidden="true"><figcaption>Record 02</figcaption></figure>
           <figure><img src="3.jpg" alt="Paspalum field record 3" aria-hidden="true"><figcaption>Record 03</figcaption></figure>
         </div>
-      </div>
-    </section>
-
-    <section class="feature-stat-grid" aria-label="Featured species and record count">
-      <div class="featured-species specimen reveal">
-        <span class="tick-br"></span>
-        <div class="thumb"><img src="1.png" alt="Featured species photo"></div>
-        <div>
-          <p class="section-label" style="margin-bottom:6px;">Featured Species</p>
-          <h3><em>Paspalum notatum</em></h3>
-          <p>A widely distributed forage grass across South America, valued for its drought tolerance and adaptability to diverse soils.</p>
-        </div>
-      </div>
-      <div class="stat-panel specimen reveal">
-        <span class="tick-br"></span>
-        <span class="stat-number">124</span>
-        <span class="stat-label">Occurrences documented</span>
       </div>
     </section>
 
