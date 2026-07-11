@@ -192,6 +192,94 @@
 
   footer { text-align: center; padding: 30px 0 10px; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; }
 
+  /* ---------------------------------------------- */
+  /* Species accordion                               */
+  /* ---------------------------------------------- */
+  .species-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .accordion-item { overflow: hidden; }
+
+  .accordion-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 26px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .accordion-header:hover .accordion-title { color: var(--moss); }
+
+  .accordion-title {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: var(--ink);
+    transition: color .2s ease;
+  }
+
+  .accordion-chevron {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: var(--moss);
+    stroke-width: 2;
+    transition: transform .35s ease;
+  }
+  .accordion-header[aria-expanded="true"] .accordion-chevron { transform: rotate(180deg); }
+
+  .accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .45s ease;
+  }
+  .accordion-panel-inner { padding: 0 26px 26px; }
+
+  .accordion-header.locked-header {
+    cursor: default;
+  }
+  .accordion-header.locked-header .accordion-title { opacity: 0.6; }
+
+  .coming-soon-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 1px solid var(--moss-deep);
+    border-radius: 20px;
+    color: var(--moss);
+    animation: coming-soon-glow 2.6s ease-in-out infinite;
+  }
+  @keyframes coming-soon-glow {
+    0%, 100% {
+      color: var(--moss);
+      border-color: var(--moss-deep);
+      box-shadow: 0 0 6px rgba(133, 178, 92, 0.15);
+    }
+    50% {
+      color: #c3ecA0;
+      border-color: var(--moss);
+      box-shadow: 0 0 14px rgba(133, 178, 92, 0.55);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .coming-soon-badge { animation: none; }
+    .accordion-panel, .accordion-chevron { transition: none; }
+  }
+
   @media (max-width: 900px) {
     body { padding-top: 132px; }
     .site-header { grid-template-columns: 1fr; position: absolute; padding: 16px 20px; }
@@ -229,37 +317,92 @@
       <hr class="hero-rule">
     </section>
 
-    <section class="gallery" aria-label="Photographic records">
+    <section class="species-accordion" aria-label="Species records">
 
-      <article class="photo-card specimen">
+      <div class="accordion-item specimen">
         <span class="tick-br"></span>
-        <div class="photo-frame">
-          <img src="2.png" alt="Type specimen deposited in the Herbarium of the Natural History Museum of Montevideo">
-        </div>
-        <p class="photo-title">Type specimen deposited in the Herbarium of the Natural History Museum of Montevideo</p>
-        <div class="cloud">
-          <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
-          <p class="cloud-text">Courtesy of Ing. Agr. Andrés González</p>
-        </div>
-      </article>
+        <button class="accordion-header" type="button" aria-expanded="true" aria-controls="acc-panel-guenoarum">
+          <span class="accordion-title"><em>Paspalum guenoarum</em></span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-panel" id="acc-panel-guenoarum">
+          <div class="accordion-panel-inner">
 
-      <article class="photo-card specimen">
+            <div class="gallery" style="margin-top:0; padding-top:20px; border-top:1px solid var(--line);" aria-label="Photographic records">
+
+              <article class="photo-card specimen">
+                <span class="tick-br"></span>
+                <div class="photo-frame">
+                  <img src="2.png" alt="Type specimen deposited in the Herbarium of the Natural History Museum of Montevideo">
+                </div>
+                <p class="photo-title">Type specimen deposited in the Herbarium of the Natural History Museum of Montevideo</p>
+                <div class="cloud">
+                  <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+                  <p class="cloud-text">Courtesy of Ing. Agr. Andrés González</p>
+                </div>
+              </article>
+
+              <article class="photo-card specimen">
+                <span class="tick-br"></span>
+                <div class="photo-frame">
+                  <img src="1.png" alt="Cultivation field in Rio Grande do Sul">
+                </div>
+                <p class="photo-title">Cultivation in Rio Grande do Sul</p>
+                <div class="cloud">
+                  <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+                  <p class="cloud-text">Courtesy of Dr. Diógenes Silveira</p>
+                </div>
+              </article>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item specimen">
         <span class="tick-br"></span>
-        <div class="photo-frame">
-          <img src="1.png" alt="Cultivation field in Rio Grande do Sul">
+        <div class="accordion-header locked-header">
+          <span class="accordion-title"><em>Paspalum notatum</em></span>
+          <span class="coming-soon-badge">Coming soon</span>
         </div>
-        <p class="photo-title">Cultivation in Rio Grande do Sul</p>
-        <div class="cloud">
-          <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
-          <p class="cloud-text">Courtesy of Dr. Diógenes Silveira</p>
+      </div>
+
+      <div class="accordion-item specimen">
+        <span class="tick-br"></span>
+        <div class="accordion-header locked-header">
+          <span class="accordion-title"><em>Paspalum simplex</em></span>
+          <span class="coming-soon-badge">Coming soon</span>
         </div>
-      </article>
+      </div>
 
     </section>
 
   </main>
 
   <footer>Paspalum blog</footer>
+
+  <script>
+    (function () {
+      const headers = document.querySelectorAll('.accordion-header:not(.locked-header)');
+      headers.forEach((header) => {
+        const panel = header.nextElementSibling;
+        function setOpen(isOpen) {
+          header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          panel.style.maxHeight = isOpen ? panel.scrollHeight + 'px' : '0px';
+        }
+        setOpen(header.getAttribute('aria-expanded') === 'true');
+        header.addEventListener('click', () => {
+          setOpen(header.getAttribute('aria-expanded') !== 'true');
+        });
+        window.addEventListener('resize', () => {
+          if (header.getAttribute('aria-expanded') === 'true') {
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+          }
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>
