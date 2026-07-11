@@ -303,6 +303,94 @@
 
   footer { text-align: center; padding: 30px 0 10px; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; }
 
+  /* ---------------------------------------------- */
+  /* Species accordion                               */
+  /* ---------------------------------------------- */
+  .species-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .accordion-item { overflow: hidden; }
+
+  .accordion-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 26px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .accordion-header:hover .accordion-title { color: var(--moss); }
+
+  .accordion-title {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: var(--ink);
+    transition: color .2s ease;
+  }
+
+  .accordion-chevron {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: var(--moss);
+    stroke-width: 2;
+    transition: transform .35s ease;
+  }
+  .accordion-header[aria-expanded="true"] .accordion-chevron { transform: rotate(180deg); }
+
+  .accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .45s ease;
+  }
+  .accordion-panel-inner { padding: 0 26px 26px; }
+
+  .accordion-header.locked-header {
+    cursor: default;
+  }
+  .accordion-header.locked-header .accordion-title { opacity: 0.6; }
+
+  .coming-soon-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 1px solid var(--moss-deep);
+    border-radius: 20px;
+    color: var(--moss);
+    animation: coming-soon-glow 2.6s ease-in-out infinite;
+  }
+  @keyframes coming-soon-glow {
+    0%, 100% {
+      color: var(--moss);
+      border-color: var(--moss-deep);
+      box-shadow: 0 0 6px rgba(133, 178, 92, 0.15);
+    }
+    50% {
+      color: #c3ecA0;
+      border-color: var(--moss);
+      box-shadow: 0 0 14px rgba(133, 178, 92, 0.55);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .coming-soon-badge { animation: none; }
+    .accordion-panel, .accordion-chevron { transition: none; }
+  }
+
   @media (max-width: 900px) {
     body { padding-top: 132px; }
     .site-header { grid-template-columns: 1fr; position: absolute; padding: 16px 20px; }
@@ -342,95 +430,141 @@
       <p class="lead">Satellite reference view with field-recorded occurrence points for the species.</p>
     </section>
 
-    <section class="map-card specimen">
-      <span class="tick-br"></span>
-      <div class="map-toolbar">
-        <div class="toolbar-title">
-          Species in view
-          <strong>Paspalum guenoarum</strong>
-        </div>
-        <div class="basemap-toggle" role="group" aria-label="Map view type">
-          <button type="button" id="btn-satellite" class="active">Satellite</button>
-          <button type="button" id="btn-street">Map</button>
+    <section class="species-accordion" aria-label="Species records">
+
+      <div class="accordion-item specimen">
+        <span class="tick-br"></span>
+        <button class="accordion-header" type="button" aria-expanded="true" aria-controls="acc-panel-guenoarum">
+          <span class="accordion-title"><em>Paspalum guenoarum</em></span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-panel" id="acc-panel-guenoarum">
+          <div class="accordion-panel-inner">
+
+            <div class="map-toolbar" style="border-top:1px solid var(--line); border-bottom:none; padding:0 0 20px;">
+              <div class="basemap-toggle" role="group" aria-label="Map view type">
+                <button type="button" id="btn-satellite" class="active">Satellite</button>
+                <button type="button" id="btn-street">Map</button>
+              </div>
+            </div>
+
+            <div id="occurrence-map" role="region" aria-label="Occurrence map for Paspalum guenoarum"></div>
+
+            <p class="citation">
+              <strong>PLEASE CITE:</strong> Luna, F. M., Marcón, F., Silveira, D. C., Dall’Agnol, M., &amp; Acuña, C. A. (2026). Predicting the distribution of Paspalum guenoarum (Poaceae) using environmental variables and ensemble species distribution models. <em>Bonplandia</em>, 35(2), 1–11. <a href="https://doi.org/10.30972/bon.3529466" target="_blank" rel="noopener">https://doi.org/10.30972/bon.3529466</a>
+            </p>
+
+            <div class="findings-heading">
+              <h2>Main conclusions</h2>
+              <span>of the study</span>
+            </div>
+
+            <div class="insight-clouds">
+
+              <div class="cloud">
+                <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+                <span class="cloud-tag">Distribution</span>
+                <p class="cloud-text">Ensemble models place the potential distribution of the species mainly in southern Brazil, eastern Paraguay, northeastern Argentina, and northern Uruguay — a tighter core area than the one suggested by raw herbarium records.</p>
+                <p class="cloud-cite">— (Luna et al., 2026)</p>
+              </div>
+
+              <div class="cloud">
+                <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+                <span class="cloud-tag">Taxonomy</span>
+                <p class="cloud-text">Records from tropical latitudes that fall outside this core likely reflect cultivated populations or misidentifications within the taxonomically difficult Plicatula group, rather than a true extension of the natural range.</p>
+                <p class="cloud-cite">— (Luna et al., 2026)</p>
+              </div>
+
+              <div class="cloud">
+                <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+                <span class="cloud-tag">Precipitation</span>
+                <p class="cloud-text">Precipitation was the strongest driver of the species' ecological niche: suitability falls sharply once the wettest month exceeds roughly 200 mm, which also explains why tropical, high-rainfall areas are poorly suited to the species.</p>
+                <p class="cloud-cite">— (Luna et al., 2026)</p>
+              </div>
+
+              <div class="cloud">
+                <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+                <span class="cloud-tag">Temperature</span>
+                <p class="cloud-text">Mean diurnal temperature range was another key predictor, pointing to a preference for temperate climates with wide daily thermal swings — consistent with the species' cold tolerance and year-round forage production.</p>
+                <p class="cloud-cite">— (Luna et al., 2026)</p>
+              </div>
+
+              <div class="cloud">
+                <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+                <span class="cloud-tag">Soil and Elevation</span>
+                <p class="cloud-text">Soil and elevation played only a secondary role. The species tends toward acidic-to-neutral, moisture-retentive soils, but tolerates a fairly wide range of elevations and soil fertility levels.</p>
+                <p class="cloud-cite">— (Luna et al., 2026)</p>
+              </div>
+
+              <div class="cloud">
+                <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
+                <span class="cloud-tag">Conservation</span>
+                <p class="cloud-text">The study highlights the need to increase collection efforts in the Brazilian states of Paraná and Rio Grande do Sul.</p>
+                <p class="cloud-cite">— (Luna et al., 2026)</p>
+              </div>
+
+            </div>
+
+            <div class="download-panel">
+              <div class="dl-text">
+                <span class="dl-eyebrow">Occurrence dataset</span>
+                <strong>Download the mapped points</strong>
+                <p>Get the exact occurrence records shown on the map above as a CSV file (scientific name, latitude, longitude) — ready to open in any spreadsheet or GIS software.</p>
+              </div>
+              <button type="button" id="btn-download-csv" class="dl-button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/></svg>
+                Download CSV
+              </button>
+            </div>
+
+          </div>
         </div>
       </div>
 
-      <div id="occurrence-map" role="region" aria-label="Occurrence map for Paspalum guenoarum"></div>
+      <div class="accordion-item specimen">
+        <span class="tick-br"></span>
+        <div class="accordion-header locked-header">
+          <span class="accordion-title"><em>Paspalum notatum</em></span>
+          <span class="coming-soon-badge">Coming soon</span>
+        </div>
+      </div>
+
+      <div class="accordion-item specimen">
+        <span class="tick-br"></span>
+        <div class="accordion-header locked-header">
+          <span class="accordion-title"><em>Paspalum simplex</em></span>
+          <span class="coming-soon-badge">Coming soon</span>
+        </div>
+      </div>
+
     </section>
-
-    <p class="citation">
-      <strong>PLEASE CITE:</strong> Luna, F. M., Marcón, F., Silveira, D. C., Dall’Agnol, M., &amp; Acuña, C. A. (2026). Predicting the distribution of Paspalum guenoarum (Poaceae) using environmental variables and ensemble species distribution models. <em>Bonplandia</em>, 35(2), 1–11. <a href="https://doi.org/10.30972/bon.3529466" target="_blank" rel="noopener">https://doi.org/10.30972/bon.3529466</a>
-    </p>
-
-    <div class="findings-heading">
-      <h2>Main conclusions</h2>
-      <span>of the study</span>
-    </div>
-
-    <div class="insight-clouds">
-
-      <div class="cloud">
-        <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
-        <span class="cloud-tag">Distribution</span>
-        <p class="cloud-text">Ensemble models place the potential distribution of the species mainly in southern Brazil, eastern Paraguay, northeastern Argentina, and northern Uruguay — a tighter core area than the one suggested by raw herbarium records.</p>
-        <p class="cloud-cite">— (Luna et al., 2026)</p>
-      </div>
-
-      <div class="cloud">
-        <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
-        <span class="cloud-tag">Taxonomy</span>
-        <p class="cloud-text">Records from tropical latitudes that fall outside this core likely reflect cultivated populations or misidentifications within the taxonomically difficult Plicatula group, rather than a true extension of the natural range.</p>
-        <p class="cloud-cite">— (Luna et al., 2026)</p>
-      </div>
-
-      <div class="cloud">
-        <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
-        <span class="cloud-tag">Precipitation</span>
-        <p class="cloud-text">Precipitation was the strongest driver of the species' ecological niche: suitability falls sharply once the wettest month exceeds roughly 200 mm, which also explains why tropical, high-rainfall areas are poorly suited to the species.</p>
-        <p class="cloud-cite">— (Luna et al., 2026)</p>
-      </div>
-
-      <div class="cloud">
-        <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
-        <span class="cloud-tag">Temperature</span>
-        <p class="cloud-text">Mean diurnal temperature range was another key predictor, pointing to a preference for temperate climates with wide daily thermal swings — consistent with the species' cold tolerance and year-round forage production.</p>
-        <p class="cloud-cite">— (Luna et al., 2026)</p>
-      </div>
-
-      <div class="cloud">
-        <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
-        <span class="cloud-tag">Soil and Elevation</span>
-        <p class="cloud-text">Soil and elevation played only a secondary role. The species tends toward acidic-to-neutral, moisture-retentive soils, but tolerates a fairly wide range of elevations and soil fertility levels.</p>
-        <p class="cloud-cite">— (Luna et al., 2026)</p>
-      </div>
-
-      <div class="cloud">
-        <svg class="cloud-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6,19A5,5 0 0,1 1,14C1,11.5 2.7,9.4 5,8.8C5.6,6 8.1,4 11,4C14.3,4 17,6.7 17,10C17,10.1 17,10.3 17,10.4C19.3,10.9 21,12.8 21,15A4,4 0 0,1 17,19H6Z"/></svg>
-        <span class="cloud-tag">Conservation</span>
-        <p class="cloud-text">The study highlights the need to increase collection efforts in the Brazilian states of Paraná and Rio Grande do Sul.</p>
-        <p class="cloud-cite">— (Luna et al., 2026)</p>
-      </div>
-
-    </div>
-
-    <div class="download-panel specimen">
-      <span class="tick-br"></span>
-      <div class="dl-text">
-        <span class="dl-eyebrow">Occurrence dataset</span>
-        <strong>Download the mapped points</strong>
-        <p>Get the exact occurrence records shown on the map above as a CSV file (scientific name, latitude, longitude) — ready to open in any spreadsheet or GIS software.</p>
-      </div>
-      <button type="button" id="btn-download-csv" class="dl-button">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/></svg>
-        Download CSV
-      </button>
-    </div>
 
   </main>
 
   <footer>Paspalum blog</footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      const headers = document.querySelectorAll('.accordion-header:not(.locked-header)');
+      headers.forEach((header) => {
+        const panel = header.nextElementSibling;
+        function setOpen(isOpen) {
+          header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          panel.style.maxHeight = isOpen ? panel.scrollHeight + 'px' : '0px';
+        }
+        setOpen(header.getAttribute('aria-expanded') === 'true');
+        header.addEventListener('click', () => {
+          setOpen(header.getAttribute('aria-expanded') !== 'true');
+        });
+        window.addEventListener('resize', () => {
+          if (header.getAttribute('aria-expanded') === 'true') {
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+          }
+        });
+      });
+    })();
+  </script>
   <script>
     const SPECIES = 'Paspalum guenoarum';
 
