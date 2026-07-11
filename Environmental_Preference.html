@@ -191,6 +191,94 @@
 
   footer { text-align: center; padding: 30px 0 10px; color: var(--ink-soft); font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; }
 
+  /* ---------------------------------------------- */
+  /* Species accordion                               */
+  /* ---------------------------------------------- */
+  .species-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .accordion-item { overflow: hidden; }
+
+  .accordion-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 22px 26px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .accordion-header:hover .accordion-title { color: var(--moss); }
+
+  .accordion-title {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: var(--ink);
+    transition: color .2s ease;
+  }
+
+  .accordion-chevron {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: var(--moss);
+    stroke-width: 2;
+    transition: transform .35s ease;
+  }
+  .accordion-header[aria-expanded="true"] .accordion-chevron { transform: rotate(180deg); }
+
+  .accordion-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .45s ease;
+  }
+  .accordion-panel-inner { padding: 0 26px 26px; }
+
+  .accordion-header.locked-header {
+    cursor: default;
+  }
+  .accordion-header.locked-header .accordion-title { opacity: 0.6; }
+
+  .coming-soon-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 1px solid var(--moss-deep);
+    border-radius: 20px;
+    color: var(--moss);
+    animation: coming-soon-glow 2.6s ease-in-out infinite;
+  }
+  @keyframes coming-soon-glow {
+    0%, 100% {
+      color: var(--moss);
+      border-color: var(--moss-deep);
+      box-shadow: 0 0 6px rgba(133, 178, 92, 0.15);
+    }
+    50% {
+      color: #c3ecA0;
+      border-color: var(--moss);
+      box-shadow: 0 0 14px rgba(133, 178, 92, 0.55);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .coming-soon-badge { animation: none; }
+    .accordion-panel, .accordion-chevron { transition: none; }
+  }
+
   @media (max-width: 900px) {
     body { padding-top: 132px; }
     .site-header { grid-template-columns: 1fr; position: absolute; padding: 16px 20px; }
@@ -212,8 +300,8 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="mapas.html">Maps</a></li>
-        <li><a class="active" href="Preferencias_ambientales.html">Environmental Preferences</a></li>
-        <li><a href="index.html#photos">Photos</a></li>
+        <li><a class="active" href="Environmental_Preference.html">Environmental Preferences</a></li>
+        <li><a href="PHOTOS.html">Photos</a></li>
       </ul>
     </nav>
     <span class="header-spacer" aria-hidden="true"></span>
@@ -229,89 +317,134 @@
       <p class="lead">Environmental variable response curves from the species distribution model. Hover over each panel to see its interpretation.</p>
     </section>
 
-    <section class="map-card specimen">
-      <span class="tick-br"></span>
-      <div class="map-toolbar">
-        <div class="toolbar-title">
-          Species in view
-          <strong>Paspalum guenoarum</strong>
+    <section class="species-accordion" aria-label="Species records">
+
+      <div class="accordion-item specimen">
+        <span class="tick-br"></span>
+        <button class="accordion-header" type="button" aria-expanded="true" aria-controls="acc-panel-guenoarum">
+          <span class="accordion-title"><em>Paspalum guenoarum</em></span>
+          <svg class="accordion-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="accordion-panel" id="acc-panel-guenoarum">
+          <div class="accordion-panel-inner">
+
+            <div class="figure-frame" style="border-top:1px solid var(--line);">
+              <img src="Enviromental_Preferences.jpg" alt="Environmental preferences of Paspalum guenoarum">
+
+              <div class="env-grid">
+
+                <!-- Row 1 -->
+                <div class="env-zone env-row-top env-col-1">
+                  <div class="env-tooltip">
+                    <strong>Precipitation of Wettest Month</strong>
+                    Suitability is high when the wettest month receives roughly 100–200 mm, dropping sharply above 250–300 mm and staying low above 350–400 mm. The species appears to favor a humid — but not extremely rainy — wettest month; excess rainfall during that month may limit its distribution.
+                  </div>
+                </div>
+
+                <div class="env-zone env-row-top env-col-2">
+                  <div class="env-tooltip">
+                    <strong>Mean Diurnal Range</strong>
+                    Suitability rises notably once the daily temperature range exceeds about 7 °C, peaking between 9 and 12 °C. The species is associated with environments showing a moderate-to-high difference between daily maximum and minimum temperatures.
+                  </div>
+                </div>
+
+                <div class="env-zone env-row-top env-col-3">
+                  <div class="env-tooltip">
+                    <strong>Annual Precipitation</strong>
+                    Suitability is low below 800–1000 mm/year, rises quickly to a peak around 1400–1800 mm/year, then gradually declines above 2000–2500 mm/year. The species prefers humid environments with intermediate-to-high annual rainfall, avoiding both dry and extremely wet regions.
+                  </div>
+                </div>
+
+                <div class="env-zone env-row-top env-col-4">
+                  <div class="env-tooltip">
+                    <strong>Precipitation of Warmest Quarter</strong>
+                    Suitability increases up to roughly 400–600 mm during the warmest quarter, then slowly declines at higher values. Growth seems to be favored when the warm season has abundant water available, though excess rainfall reduces suitability.
+                  </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="env-zone env-row-bottom env-col-1">
+                  <div class="env-tooltip">
+                    <strong>Soil pH</strong>
+                    The highest suitability occurs between pH 5.2 and 5.8, decreasing progressively above pH 6. The species shows a preference for slightly acidic soils and is less common in near-neutral soils.
+                  </div>
+                </div>
+
+                <div class="env-zone env-row-bottom env-col-2">
+                  <div class="env-tooltip">
+                    <strong>Cation Exchange Capacity (CEC)</strong>
+                    Peak suitability occurs at roughly 10–15 cmol(+)/kg, decreasing at values above 20–25 cmol(+)/kg. The species appears to favor soils of moderate fertility, avoiding soils with very high exchange capacities.
+                  </div>
+                </div>
+
+                <div class="env-zone env-row-bottom env-col-3">
+                  <div class="env-tooltip">
+                    <strong>Available Water Storage Capacity</strong>
+                    Suitability peaks around 40–44 mm and gradually decreases once capacity exceeds roughly 45–46 mm. The species prefers soils with intermediate water-holding capacity, avoiding both very dry soils and those with excessive retention.
+                  </div>
+                </div>
+
+                <div class="env-zone env-row-bottom env-col-4">
+                  <div class="env-tooltip">
+                    <strong>Elevation</strong>
+                    Suitability increases from sea level up to about 800–1200 m, then progressively declines above 1500–2000 m, becoming low beyond 3000 m. The species shows greater affinity for lowlands and mid-elevation areas, being poorly suited to high-mountain environments.
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <p class="citation">
+              <strong>PLEASE CITE:</strong> Luna, F. M., Marcón, F., Silveira, D. C., Dall’Agnol, M., &amp; Acuña, C. A. (2026). Predicción de la distribución de <em>Paspalum guenoarum</em> (Poaceae) utilizando variables ambientales y modelos de distribución ensamblados. <em>Bonplandia</em>, 35(2), 1–11. <a href="https://doi.org/10.30972/bon.3529466" target="_blank" rel="noopener">https://doi.org/10.30972/bon.3529466</a>
+            </p>
+
+          </div>
         </div>
       </div>
 
-      <div class="figure-frame">
-        <img src="Enviromental_Preferences.jpg" alt="Environmental preferences of Paspalum guenoarum">
-
-        <div class="env-grid">
-
-          <!-- Row 1 -->
-          <div class="env-zone env-row-top env-col-1">
-            <div class="env-tooltip">
-              <strong>Precipitation of Wettest Month</strong>
-              Suitability is high when the wettest month receives roughly 100–200 mm, dropping sharply above 250–300 mm and staying low above 350–400 mm. The species appears to favor a humid — but not extremely rainy — wettest month; excess rainfall during that month may limit its distribution.
-            </div>
-          </div>
-
-          <div class="env-zone env-row-top env-col-2">
-            <div class="env-tooltip">
-              <strong>Mean Diurnal Range</strong>
-              Suitability rises notably once the daily temperature range exceeds about 7 °C, peaking between 9 and 12 °C. The species is associated with environments showing a moderate-to-high difference between daily maximum and minimum temperatures.
-            </div>
-          </div>
-
-          <div class="env-zone env-row-top env-col-3">
-            <div class="env-tooltip">
-              <strong>Annual Precipitation</strong>
-              Suitability is low below 800–1000 mm/year, rises quickly to a peak around 1400–1800 mm/year, then gradually declines above 2000–2500 mm/year. The species prefers humid environments with intermediate-to-high annual rainfall, avoiding both dry and extremely wet regions.
-            </div>
-          </div>
-
-          <div class="env-zone env-row-top env-col-4">
-            <div class="env-tooltip">
-              <strong>Precipitation of Warmest Quarter</strong>
-              Suitability increases up to roughly 400–600 mm during the warmest quarter, then slowly declines at higher values. Growth seems to be favored when the warm season has abundant water available, though excess rainfall reduces suitability.
-            </div>
-          </div>
-
-          <!-- Row 2 -->
-          <div class="env-zone env-row-bottom env-col-1">
-            <div class="env-tooltip">
-              <strong>Soil pH</strong>
-              The highest suitability occurs between pH 5.2 and 5.8, decreasing progressively above pH 6. The species shows a preference for slightly acidic soils and is less common in near-neutral soils.
-            </div>
-          </div>
-
-          <div class="env-zone env-row-bottom env-col-2">
-            <div class="env-tooltip">
-              <strong>Cation Exchange Capacity (CEC)</strong>
-              Peak suitability occurs at roughly 10–15 cmol(+)/kg, decreasing at values above 20–25 cmol(+)/kg. The species appears to favor soils of moderate fertility, avoiding soils with very high exchange capacities.
-            </div>
-          </div>
-
-          <div class="env-zone env-row-bottom env-col-3">
-            <div class="env-tooltip">
-              <strong>Available Water Storage Capacity</strong>
-              Suitability peaks around 40–44 mm and gradually decreases once capacity exceeds roughly 45–46 mm. The species prefers soils with intermediate water-holding capacity, avoiding both very dry soils and those with excessive retention.
-            </div>
-          </div>
-
-          <div class="env-zone env-row-bottom env-col-4">
-            <div class="env-tooltip">
-              <strong>Elevation</strong>
-              Suitability increases from sea level up to about 800–1200 m, then progressively declines above 1500–2000 m, becoming low beyond 3000 m. The species shows greater affinity for lowlands and mid-elevation areas, being poorly suited to high-mountain environments.
-            </div>
-          </div>
-
+      <div class="accordion-item specimen">
+        <span class="tick-br"></span>
+        <div class="accordion-header locked-header">
+          <span class="accordion-title"><em>Paspalum notatum</em></span>
+          <span class="coming-soon-badge">Coming soon</span>
         </div>
       </div>
+
+      <div class="accordion-item specimen">
+        <span class="tick-br"></span>
+        <div class="accordion-header locked-header">
+          <span class="accordion-title"><em>Paspalum simplex</em></span>
+          <span class="coming-soon-badge">Coming soon</span>
+        </div>
+      </div>
+
     </section>
-
-    <p class="citation">
-      <strong>PLEASE CITE:</strong> Luna, F. M., Marcón, F., Silveira, D. C., Dall’Agnol, M., &amp; Acuña, C. A. (2026). Predicción de la distribución de <em>Paspalum guenoarum</em> (Poaceae) utilizando variables ambientales y modelos de distribución ensamblados. <em>Bonplandia</em>, 35(2), 1–11. <a href="https://doi.org/10.30972/bon.3529466" target="_blank" rel="noopener">https://doi.org/10.30972/bon.3529466</a>
-    </p>
 
   </main>
 
   <footer>Paspalum blog</footer>
+
+  <script>
+    (function () {
+      const headers = document.querySelectorAll('.accordion-header:not(.locked-header)');
+      headers.forEach((header) => {
+        const panel = header.nextElementSibling;
+        function setOpen(isOpen) {
+          header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          panel.style.maxHeight = isOpen ? panel.scrollHeight + 'px' : '0px';
+        }
+        setOpen(header.getAttribute('aria-expanded') === 'true');
+        header.addEventListener('click', () => {
+          setOpen(header.getAttribute('aria-expanded') !== 'true');
+        });
+        window.addEventListener('resize', () => {
+          if (header.getAttribute('aria-expanded') === 'true') {
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+          }
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>
